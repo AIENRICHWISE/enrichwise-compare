@@ -1,44 +1,52 @@
 # Deploy on the existing AWS Lightsail box (tools.enrichwise.co.in)
 
-This serves the comparison tool as a **static file** under the same nginx server
-block as the Kavach dashboard. **No extra AWS cost** — it rides on the Lightsail
-instance you already pay for. No PM2 / Node process needed (it's one HTML file).
+Serves the comparison tool as a **static file** under the same nginx server
+block as the other Enrichwise internal tools. **No extra AWS cost** — it rides
+on the Lightsail instance you already pay for, and needs no PM2 / Node process
+(it's one HTML file). It's internal-only (inherits the server's office-IP
+allowlist) and appears on the tools landing page under **Insurance Projects**.
 
-Final URL: **https://tools.enrichwise.co.in/kavach/compare/**
+**Live at: https://tools.enrichwise.co.in/insurance-compare/**
 
-## First-time install (run once on the box, via your Lightsail SSH)
+## Already deployed
+
+This was applied on 2026-06-02 via SSH (`ssh kavach`):
+
+1. **Files** cloned to `/var/www/enrichwise-tools/insurance-compare/`.
+2. **nginx** — `deploy/nginx-insurance-compare.conf` inserted into
+   `/etc/nginx/sites-available/enrichwise-tools` (before the `location ~ /\.`
+   line), then `sudo nginx -t && sudo systemctl reload nginx`.
+3. **Landing page** — an "Insurance Projects" section + card added to
+   `/var/www/enrichwise-tools/index.html`.
+
+Steps 2 & 3 are done by `deploy/apply_integration.py` (idempotent; backs up both
+files with a timestamped `.bak` first). Re-running is safe — it skips anything
+already present.
+
+## Updating later (after pushing a change to GitHub)
 
 ```bash
-# 1. Clone the repo to the web root
-sudo mkdir -p /var/www/enrichwise-compare
-sudo chown -R "$USER":"$USER" /var/www/enrichwise-compare
-git clone https://github.com/AIENRICHWISE/enrichwise-compare.git /var/www/enrichwise-compare
+ssh kavach 'cd /var/www/enrichwise-tools/insurance-compare && git pull'
+```
 
-# 2. Add the nginx location block into the tools.enrichwise.co.in server block.
-#    Open the site config (the one that already has /kavach/wa-tracking/):
-sudo nano /etc/nginx/sites-available/enrichwise-tools.conf
-#    → paste the contents of deploy/nginx-kavach-compare.conf INSIDE server { ... }
+Static files — the new version is live instantly (no build, no restart).
 
-# 3. Validate + reload
+## Reverting
+
+Each edit left a timestamped backup next to the original, e.g.:
+
+```bash
+# nginx
+sudo cp /etc/nginx/sites-available/enrichwise-tools.bak.<ts> /etc/nginx/sites-available/enrichwise-tools
 sudo nginx -t && sudo systemctl reload nginx
+# landing page
+sudo cp /var/www/enrichwise-tools/index.html.bak.<ts> /var/www/enrichwise-tools/index.html
 ```
-
-Then open https://tools.enrichwise.co.in/kavach/compare/ — done.
-
-## Updating later (after any change is pushed to GitHub)
-
-```bash
-cd /var/www/enrichwise-compare && git pull
-```
-
-That's it — static files, so the new version is live instantly (no build, no
-restart). Compare to the Next.js dashboard which needs `deploy/update.sh`.
 
 ## Notes
-- The tool stores all data in the visitor's browser (localStorage). Nothing is
-  written on the server, so no DB / persistence / backups to worry about.
-- Tailwind, html2canvas and Google Fonts load from public CDNs at runtime — the
-  box only serves the 68 KB HTML. (If you ever want zero external calls, we can
-  vendor those locally.)
-- To change the path (e.g. `/kavach/insurance-compare/`), edit both `location`
-  lines in `nginx-kavach-compare.conf` and the `alias` stays the same.
+- All data stays in the visitor's browser (localStorage) — nothing is written on
+  the server, so no DB / persistence / backups to manage.
+- Tailwind, html2canvas and Google Fonts load from public CDNs at runtime; the
+  box only serves the ~54 KB HTML.
+- Access is restricted to the office IP allowlist in the nginx server block
+  (same as Salesometer, FollowMeter, etc.).
