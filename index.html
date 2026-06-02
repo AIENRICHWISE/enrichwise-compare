@@ -130,7 +130,7 @@
      rows. Replace SAMPLE values with verified policy-wording data.
    ============================================================ */
 const SEED_DB = {
-  meta:{ updated:"2026-06-01", note:"SAMPLE/illustrative data seeded from uploaded images — verify against policy wordings." },
+  meta:{ updated:"2026-06-02", note:"Plan facts extracted from each insurer's official policy wording (room rent, co-pay, pre/post, restore, NCB, AYUSH, day-care, instant cover, add-ons). Claim-settlement ratios & network-hospital counts are NOT in policy wordings — verify those against IRDAI/insurer disclosures. '—' = to be sourced." },
 
   /* Standardised add-on categories. `aliases` = how each insurer names it. */
   addOnCatalog:{
@@ -157,72 +157,71 @@ const SEED_DB = {
   insurers:{
     care:{ name:"Care Health", logoText:"CARE", color:"#0E7C5A",
       plans:{ supreme:{ planName:"Care Supreme", brochureUrl:"https://www.google.com/search?q=Care+Supreme+brochure+pdf", networkUrl:"https://www.google.com/search?q=Care+Health+cashless+network+hospitals+list",
-        sumInsured:["7L","10L","25L","1Cr"],
-        networkHospitals:"11,400+", claimSettlementRatio:"90%", roomRent:"Any room", coPay:"No",
+        sumInsured:["5L","7L","10L","25L","1Cr"],
+        networkHospitals:"11,400+", claimSettlementRatio:"90%", roomRent:"No room-rent limit", coPay:"No",
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"unlimited-same-diff"},
-        ncbModel:{firstBonus:150,firstYears:3,thenBonus:100,capPct:600},
-        ncbText:"150% for first 3 yrs & 100% next 3 yrs (up to 600%, max 60L)",
-        instantCover:{available:true, name:"Instant Cover", conditions:["BP","Diabetes","Asthma","Cholesterol"]},
-        uniqueFeatures:["Unlimited Care — one-time unlimited cover for your selected claim"],
-        addOns:{ consumables:{available:true,alias:"Claim Shield"}, bonus:{available:true,alias:"NCB Super"}, opd:{available:true,alias:"OPD Care"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all adults"}, maternity:{available:true,alias:"Maternity Cover"}, instantCover:{available:true,alias:"Instant Cover"} }
+        ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100},
+        ncbText:"50% per claim-free year, up to 100% of SI (optional Cumulative Bonus Super: 100%/yr up to 500%)",
+        instantCover:{available:true, name:"Instant Cover", conditions:["Diabetes","Hypertension (BP)","Hyperlipidemia (Cholesterol)","Asthma"]},
+        uniqueFeatures:["Unlimited Automatic Recharge of base sum insured (unlimited times per year)","Unlimited Care (optional) — one claim with no annual SI limit, once in policy lifetime","Cumulative Bonus Super (optional) — up to 500% of SI"],
+        addOns:{ consumables:{available:true,alias:"Claim Shield"}, bonus:{available:true,alias:"Cumulative Bonus Super"}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"every policy year",forWhom:"each insured (age-based test set)"}, maternity:{available:false,alias:""}, instantCover:{available:true,alias:"Instant Cover (PED wait waiver)"} }
       }}},
 
     icici:{ name:"ICICI Lombard", logoText:"ICICI", color:"#A5161A",
       plans:{ elevate:{ planName:"ICICI Elevate", brochureUrl:"https://www.google.com/search?q=ICICI+Elevate+brochure+pdf", networkUrl:"https://www.google.com/search?q=ICICI+Lombard+cashless+network+hospitals+list",
         sumInsured:["10L","50L","1Cr","Unlimited"],
-        networkHospitals:"15,000+", claimSettlementRatio:"98.09%", roomRent:"Any room", coPay:"No",
+        networkHospitals:"15,000+", claimSettlementRatio:"98.09%", roomRent:"Single private AC room", coPay:"No",
         prePost:"90/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"unlimited-same-diff"},
-        ncbModel:{firstBonus:100,firstYears:99,thenBonus:100,capPct:99900},
-        ncbText:"100% sum insured carried forward every year irrespective of claim",
-        instantCover:{available:true, name:"Instant Cover (Jump Start)", conditions:["BP","Diabetes","Asthma","Cholesterol","Obesity"]},
-        uniqueFeatures:["Infinite Care — one-time infinite claim amount for your selected claim"],
-        addOns:{ consumables:{available:true,alias:"Claim Protector"}, bonus:{available:true,alias:"Power Booster"}, opd:{available:true,alias:"OPD Plus"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all members"}, maternity:{available:true,alias:"Maternity"}, instantCover:{available:true,alias:"Jump Start"} }
+        ncbModel:{firstBonus:20,firstYears:99,thenBonus:20,capPct:100},
+        ncbText:"Loyalty Bonus: 20% of SI every year, up to 100% (optional Power Booster: 100%/yr up to Unlimited SI)",
+        instantCover:{available:true, name:"Jumpstart", conditions:["Asthma","Diabetes","Hypertension (BP)","Hyperlipidemia (Cholesterol)","Obesity","Coronary Artery Disease"]},
+        uniqueFeatures:["Reset Benefit — 100% of SI reinstated, unlimited times for any illness","Power Booster + Unlimited Sum Insured option","Inflation Protector — SI grows with CPI at each renewal"],
+        addOns:{ consumables:{available:true,alias:"Claim Protector"}, bonus:{available:true,alias:"Power Booster"}, opd:{available:true,alias:"BeFit"}, healthCheckup:{available:true,type:"inbuilt",frequency:"once per policy year",forWhom:"adults 18+"}, maternity:{available:true,alias:"Maternity Benefit"}, instantCover:{available:true,alias:"Jumpstart"} }
       }}},
 
     niva:{ name:"Niva Bupa", logoText:"NIVA", color:"#E2761E",
       plans:{ reassure2:{ planName:"ReAssure 2.0", brochureUrl:"https://www.google.com/search?q=Niva+Bupa+ReAssure+2.0+brochure+pdf", networkUrl:"https://www.google.com/search?q=Niva+Bupa+cashless+network+hospitals+list",
-        sumInsured:["5L","25L","1Cr"],
-        networkHospitals:"10,000+", claimSettlementRatio:"91%", roomRent:"Any room", coPay:"No",
+        sumInsured:["5L","10L","25L","1Cr"],
+        networkHospitals:"10,000+", claimSettlementRatio:"91%", roomRent:"No room-rent cap (any room; ICU up to base SI)", coPay:"No",
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
-        restore:{kind:"unlimited-diff-only"},
+        restore:{kind:"unlimited-same-diff"},
         ncbModel:{firstBonus:0,firstYears:0,thenBonus:0,capPct:1000},
-        ncbText:"Available max up to 1000%",
-        instantCover:{available:true, name:"Instant Cover", conditions:["BP","Diabetes","Asthma","Cholesterol"]},
-        uniqueFeatures:["Age-Lock benefit — premium locked at entry age","No impact on premium if claim < ₹1,00,000"],
-        addOns:{ consumables:{available:true,alias:"Safeguard+"}, bonus:{available:true,alias:"Booster+"}, opd:{available:true,alias:"OPD Plus"}, healthCheckup:{available:true,type:"addon",frequency:"every year",forWhom:"all adults"}, maternity:{available:true,alias:"Maternity"}, instantCover:{available:true,alias:"Instant Cover"} }
+        ncbText:"Booster+ — unused base SI carries forward, accumulating up to 10× base SI (Titanium+ variant); no fixed annual NCB %",
+        instantCover:{available:false, name:"", conditions:[]},
+        uniqueFeatures:["Lock the Clock (Age-Lock) — premium locked at entry age until a claim is paid","ReAssure Forever — unlimited reinstatement for life after the first paid claim","Booster+ Safeguard+ — carried-forward SI unaffected if yearly claims ≤ ₹1,00,000"],
+        addOns:{ consumables:{available:true,alias:"Claim Safeguard / Safeguard+"}, bonus:{available:true,alias:"Booster+ (inbuilt carry-forward)"}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"once every policy year (from day 1)",forWhom:"each insured (cashless)"}, maternity:{available:false,alias:""}, instantCover:{available:false,alias:""} }
       }}},
 
     hdfc:{ name:"HDFC Ergo", logoText:"HDFC", color:"#C8102E",
-      plans:{ optimasecure:{ planName:"Optima Secure+", brochureUrl:"https://www.google.com/search?q=HDFC+Ergo+Optima+Secure+brochure+pdf", networkUrl:"https://www.google.com/search?q=HDFC+Ergo+cashless+network+hospitals+list",
-        sumInsured:["5L","10L","2Cr"],
-        networkHospitals:"13,000+", claimSettlementRatio:"98%", roomRent:"Any room", coPay:"No",
+      plans:{ optimasecure:{ planName:"Optima Secure", brochureUrl:"https://www.google.com/search?q=HDFC+Ergo+Optima+Secure+brochure+pdf", networkUrl:"https://www.google.com/search?q=HDFC+Ergo+cashless+network+hospitals+list",
+        sumInsured:["5L","10L","15L","25L","50L","1Cr","2Cr"],
+        networkHospitals:"13,000+", claimSettlementRatio:"98%", roomRent:"At actuals (no room-rent limit)", coPay:"No",
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"100pct"},
-        ncbModel:{firstBonus:10,firstYears:99,thenBonus:10,capPct:100},
-        ncbText:"Up to 10% every year, max up to 100%",
+        ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100},
+        ncbText:"Plus Benefit — 50% of base SI added every year, up to 100% (claim-independent; traditional NCB not covered)",
         instantCover:{available:false, name:"", conditions:[]},
-        uniqueFeatures:["In-built health check-up for HbA1C & blood pressure","Secure / Plus / Protect benefits (2x–4x cover)"],
-        addOns:{ consumables:{available:true,alias:"Safeguard / Safeguard+"}, bonus:{available:true,alias:"Plus Benefit"}, opd:{available:true,alias:"OPD"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all adults"}, maternity:{available:true,alias:"My Health Maternity"}, instantCover:{available:false,alias:""} }
+        uniqueFeatures:["Secure Benefit — instant 100% extra cover over base SI","Plus Benefit — 50%/yr bonus up to 100%, regardless of claims","Protect Benefit — covers listed non-medical / consumable items"],
+        addOns:{ consumables:{available:true,alias:"Protect Benefit (inbuilt)"}, bonus:{available:true,alias:"Plus Benefit (inbuilt)"}, opd:{available:true,alias:"Optima Wellbeing (add-on)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every policy year (after year 1)",forWhom:"insured covered the prior year"}, maternity:{available:true,alias:"Parenthood (add-on)"}, instantCover:{available:false,alias:""} }
       }}},
 
     adityabirla:{ name:"Aditya Birla", logoText:"ABHI", color:"#C8102E",
       plans:{ activonemax:{ planName:"Activ One MAX", brochureUrl:"https://www.google.com/search?q=Aditya+Birla+Activ+One+MAX+brochure+pdf", networkUrl:"https://www.google.com/search?q=Aditya+Birla+Health+cashless+network+hospitals+list",
-        sumInsured:["5L","25L","2Cr"],
-        networkHospitals:"12,000+", claimSettlementRatio:"96%", roomRent:"Any room", coPay:"No",
-        prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
+        sumInsured:["5L","10L","25L","50L","1Cr","2Cr"],
+        networkHospitals:"12,000+", claimSettlementRatio:"96%", roomRent:"Actuals up to SI (no room-rent cap)", coPay:"No",
+        prePost:"90/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"unlimited-same-diff"},
-        ncbModel:{firstBonus:0,firstYears:0,thenBonus:0,capPct:0},
-        ncbText:"Super Credit / health returns (verify)",
-        instantCover:{available:true, name:"Lifestyle (ABCD)", conditions:["Asthma","BP","Cholesterol","Diabetes","Obesity"]},
-        uniqueFeatures:["HealthReturns up to 100% premium back","Chronic Management Programme (Day-1 for ABCD)"],
-        addOns:{ consumables:{available:true,alias:"Safeguard"}, bonus:{available:true,alias:"Super Credit"}, opd:{available:true,alias:"OPD"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all members"}, maternity:{available:true,alias:"Maternity"}, instantCover:{available:true,alias:"Chronic Care Day-1"} }
+        ncbModel:{firstBonus:100,firstYears:99,thenBonus:100,capPct:500},
+        ncbText:"Super Credit — 100% of base SI every year (claim-independent), up to 500% of SI (max ₹3 Cr)",
+        instantCover:{available:true, name:"Chronic Care — Day-1 (optional)", conditions:["Asthma","Hypertension (BP)","Hyperlipidemia (Cholesterol)","Diabetes","Obesity"]},
+        uniqueFeatures:["HealthReturns — earn up to 100% of premium back via Active Dayz","Super Credit — up to 500% of SI as bonus","Chronic Care Day-1 in-patient cover for listed chronic conditions (optional)"],
+        addOns:{ consumables:{available:true,alias:"Claim Protect (inbuilt)"}, bonus:{available:true,alias:"Super Credit (inbuilt)"}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"once per policy year",forWhom:"adults 18+"}, maternity:{available:false,alias:""}, instantCover:{available:true,alias:"Chronic Care Day-1 (optional)"} }
       }}},
 
-    /* ---- structural placeholders for the rest of the panel (fill from /Policy wording) ---- */
-    star:{ name:"Star Health", logoText:"STAR", color:"#E11D48", plans:{ comprehensive:{ planName:"Star Comprehensive", brochureUrl:"https://www.google.com/search?q=Star+Comprehensive+brochure+pdf", networkUrl:"https://www.google.com/search?q=Star+Health+cashless+network+hospitals", sumInsured:["5L","25L","1Cr"], networkHospitals:"14,000+", claimSettlementRatio:"SAMPLE", roomRent:"Any room", coPay:"No", prePost:"60/90 days", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:2,thenBonus:0,capPct:100}, ncbText:"SAMPLE", instantCover:{available:true,name:"Buy-back PED",conditions:["BP","Diabetes"]}, uniqueFeatures:["SAMPLE — verify"], addOns:{ consumables:{available:true,alias:"SAMPLE"}, bonus:{available:true,alias:"SAMPLE"}, opd:{available:true,alias:"SAMPLE"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all adults"}, maternity:{available:false,alias:""}, instantCover:{available:true,alias:"SAMPLE"} } }}},
-    tata:{ name:"Tata AIG", logoText:"TATA", color:"#1E40AF", plans:{ medicareprem:{ planName:"Medicare Premier", brochureUrl:"https://www.google.com/search?q=Tata+AIG+Medicare+Premier+brochure+pdf", networkUrl:"https://www.google.com/search?q=Tata+AIG+cashless+network+hospitals", sumInsured:["5L","20L","1Cr"], networkHospitals:"SAMPLE", claimSettlementRatio:"SAMPLE", roomRent:"Any room", coPay:"No", prePost:"60/90 days", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:2,thenBonus:0,capPct:100}, ncbText:"SAMPLE", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["SAMPLE — verify"], addOns:{ consumables:{available:true,alias:"SAMPLE"}, bonus:{available:true,alias:"SAMPLE"}, opd:{available:true,alias:"SAMPLE"}, healthCheckup:{available:true,type:"addon",frequency:"every year",forWhom:"all adults"}, maternity:{available:true,alias:"SAMPLE"}, instantCover:{available:false,alias:""} } }}}
+    star:{ name:"Star Health", logoText:"STAR", color:"#E11D48", plans:{ comprehensive:{ planName:"Star Comprehensive", brochureUrl:"https://www.google.com/search?q=Star+Comprehensive+brochure+pdf", networkUrl:"https://www.google.com/search?q=Star+Health+cashless+network+hospitals", sumInsured:["5L","7.5L","10L","25L","50L","1Cr"], networkHospitals:"14,000+", claimSettlementRatio:"—", roomRent:"Single private AC room", coPay:"No (10% if entry age ≥ 61)", prePost:"60/90 days", dayCare:"Yes", ayush:"Yes (sub-limit ₹15k–₹30k by SI; Yoga/Naturopathy excluded)", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% per claim-free year up to 100% (100%/yr for SI ≥ ₹7.5L)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["100% automatic restoration usable even for the same illness already claimed","In-built OPD consultation, dental & ophthalmic, hospital cash & wellness discount","Optional buy-back reduces PED waiting from 36 to 12 months"], addOns:{ consumables:{available:false,alias:""}, bonus:{available:false,alias:""}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"every claim-free year",forWhom:"all insured"}, maternity:{available:true,alias:"Delivery & New Born (inbuilt, 24-mo wait)"}, instantCover:{available:false,alias:""} } }}},
+    tata:{ name:"Tata AIG", logoText:"TATA", color:"#1E40AF", plans:{ medicareprem:{ planName:"Medicare Premier", brochureUrl:"https://www.google.com/search?q=Tata+AIG+Medicare+Premier+brochure+pdf", networkUrl:"https://www.google.com/search?q=Tata+AIG+cashless+network+hospitals", sumInsured:["50L","75L","1Cr","2Cr","3Cr"], networkHospitals:"—", claimSettlementRatio:"—", roomRent:"No room-rent limit", coPay:"No", prePost:"60/90 days (200 days post for SI ≥ ₹75L)", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% cumulative bonus per claim-free year, up to 100% (reduces 50% on a claim)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["Home Care treatment & post-hospitalisation physiotherapy (SI ≥ ₹75L)","Global cover for planned hospitalisation + air ambulance","Maternity with girl-child benefit, delivery complications & first-year vaccinations"], addOns:{ consumables:{available:true,alias:"Consumables Benefit (inbuilt)"}, bonus:{available:true,alias:"Cumulative Bonus (inbuilt)"}, opd:{available:true,alias:"OPD Treatment (inbuilt, after 2 yrs)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"per policy / insured"}, maternity:{available:true,alias:"Maternity Cover (inbuilt, 3-yr wait)"}, instantCover:{available:false,alias:""} } }}}
   }
 };
 
@@ -762,7 +761,7 @@ function viewStep4(){
         </table>
       </div>
       <div class="grid grid-cols-2 gap-2 text-xs px-1">
-        <div><span style="color:var(--ew-slate)">Note:</span> rows marked SAMPLE need verification against the latest policy wordings.</div>
+        <div><span style="color:var(--ew-slate)">Note:</span> plan facts are taken from each insurer's official policy wording. Claim-settlement ratio & network counts (“—” where unknown) are not stated in wordings — verify against IRDAI / insurer disclosures.</div>
       </div>
 
       <!-- 10-YEAR BONUS PROJECTION -->

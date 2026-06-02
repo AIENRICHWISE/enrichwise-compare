@@ -66,8 +66,11 @@ The whole catalog (insurers, plans, features, add-ons) is one JSON object. Open 
 browser. To ship updated defaults to everyone, paste the JSON into the `SEED_DB` object near
 the top of the `<script>` in `index.html` and redeploy.
 
-> All seeded numbers are **SAMPLE** — verify against the latest policy wordings & IRDAI-approved
-> documents before sharing with a client.
+> **Data provenance:** the structural plan facts (room rent, co-pay, pre/post, restore, NCB,
+> AYUSH, day-care, instant cover, add-ons) are extracted from each insurer's **official policy
+> wording**. Two fields are *not* in policy wordings and are shown as `—` where unconfirmed:
+> **claim-settlement ratio** and **network-hospital count** — source these from IRDAI / insurer
+> disclosures. Always re-verify against the latest wordings before sharing with a client.
 
 ---
 
