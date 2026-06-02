@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Enrichwise · Insurance Comparison Tool</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ew-green-900:#0F4D2E;
+    --ew-green-800:#176039;
+    --ew-green-700:#1E7A4D;   /* primary */
+    --ew-green-600:#2A8B5A;
+    --ew-green-500:#3FA56C;
+    --ew-mint-200:#D8EFE2;
+    --ew-mint-100:#EAF6EF;
+    --ew-mint-50:#F4FAF7;
+    --ew-ink:#16241C;
+    --ew-slate:#5C6B63;
+    --ew-line:#E2EDE7;
+    --ew-gold:#B58A36;
+    --ew-rec:#1E7A4D;
+    --ew-notrec:#D14343;
+  }
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ew-ink);background:#F7FAF8;}
+  h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;letter-spacing:-0.01em;}
+  .ew-bg-grad{background:
+     radial-gradient(1200px 500px at 85% -10%, rgba(63,165,108,.12), transparent 60%),
+     radial-gradient(900px 400px at 0% 0%, rgba(30,122,77,.08), transparent 55%);}
+  .step-pane{animation:fadeUp .45s cubic-bezier(.22,.61,.36,1) both;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .stagger>*{animation:fadeUp .5s both;}
+  .stagger>*:nth-child(1){animation-delay:.04s}
+  .stagger>*:nth-child(2){animation-delay:.09s}
+  .stagger>*:nth-child(3){animation-delay:.14s}
+  .stagger>*:nth-child(4){animation-delay:.19s}
+  .stagger>*:nth-child(5){animation-delay:.24s}
+  .stagger>*:nth-child(6){animation-delay:.29s}
+  .card{background:#fff;border:1px solid var(--ew-line);border-radius:18px;box-shadow:0 1px 2px rgba(16,40,28,.04),0 12px 30px -18px rgba(16,40,28,.18);}
+  .field{border:1px solid var(--ew-line);border-radius:12px;padding:.7rem .9rem;width:100%;background:#fff;transition:.15s;font-size:.95rem;}
+  .field:focus{outline:none;border-color:var(--ew-green-500);box-shadow:0 0 0 4px rgba(63,165,108,.15);}
+  .btn{border-radius:999px;font-weight:600;transition:.18s;}
+  .btn-primary{background:var(--ew-green-700);color:#fff;}
+  .btn-primary:hover{background:var(--ew-green-800);transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(30,122,77,.6);}
+  .btn-ghost{background:#fff;border:1px solid var(--ew-line);color:var(--ew-ink);}
+  .btn-ghost:hover{border-color:var(--ew-green-500);color:var(--ew-green-800);}
+  .chip{border:1px solid var(--ew-line);border-radius:999px;padding:.4rem .85rem;font-size:.85rem;cursor:pointer;transition:.15s;background:#fff;user-select:none;}
+  .chip[data-on="1"]{background:var(--ew-green-700);color:#fff;border-color:var(--ew-green-700);}
+  .plan-card{cursor:pointer;transition:.18s;}
+  .plan-card[data-sel="1"]{border-color:var(--ew-green-600);box-shadow:0 0 0 3px rgba(42,139,90,.18),0 14px 30px -18px rgba(16,40,28,.3);}
+  .recbadge{background:linear-gradient(120deg,var(--ew-gold),#d8b15a);color:#3a2c08;}
+  .cmp-col-rec{background:linear-gradient(180deg,rgba(234,246,239,.9),rgba(244,250,247,.6));}
+  .pill-yes{color:var(--ew-green-700);font-weight:600;}
+  .pill-no{color:var(--ew-notrec);font-weight:600;}
+  ::-webkit-scrollbar{height:10px;width:10px}::-webkit-scrollbar-thumb{background:#cfe3d8;border-radius:8px}
+  .stepdot{transition:.3s;}
+  a.link{color:var(--ew-green-700);text-decoration:underline;text-underline-offset:2px;}
+  a.link:hover{color:var(--ew-green-900);}
+  @media print{
+    .no-print{display:none !important;}
+    body{background:#fff;}
+    .card{box-shadow:none;border-color:#d7e6dd;}
+    #app{max-width:100%!important;}
+  }
+</style>
+</head>
+<body class="ew-bg-grad min-h-screen">
+
+<!-- ===================== HEADER ===================== -->
+<header class="no-print sticky top-0 z-40 backdrop-blur bg-white/80 border-b" style="border-color:var(--ew-line)">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="h-9 w-9 rounded-xl grid place-items-center text-white font-bold" style="background:var(--ew-green-700)">E</div>
+      <div>
+        <div class="display text-lg font-semibold leading-none" style="color:var(--ew-green-900)">Enrichwise</div>
+        <div class="text-[11px] tracking-wide" style="color:var(--ew-slate)">INSURANCE COMPARISON DESK</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="openData()" class="btn btn-ghost px-3 py-1.5 text-sm">⚙︎ Manage policy data</button>
+      <button onclick="resetAll()" class="btn btn-ghost px-3 py-1.5 text-sm">Reset</button>
+    </div>
+  </div>
+  <!-- Stepper -->
+  <div class="max-w-6xl mx-auto px-5 pb-3">
+    <div id="stepper" class="flex items-center gap-2"></div>
+  </div>
+</header>
+
+<main id="app" class="max-w-6xl mx-auto px-5 py-7"></main>
+
+<footer class="no-print max-w-6xl mx-auto px-5 py-8 text-center text-xs" style="color:var(--ew-slate)">
+  Enrichwise Insurance Broking Services Pvt Ltd · This tool assists advisory only. All figures must be verified against the latest policy wordings & IRDAI-approved documents before sharing with a client.
+</footer>
+
+<!-- ===================== DATA MANAGER MODAL ===================== -->
+<div id="dataModal" class="no-print fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/40" onclick="closeData()"></div>
+  <div class="absolute inset-x-0 top-8 mx-auto max-w-3xl card p-5 max-h-[85vh] overflow-auto">
+    <div class="flex items-center justify-between mb-2">
+      <h3 class="text-xl">Policy data store <span class="text-xs font-normal align-middle" style="color:var(--ew-slate)">(the “backend” inside the file)</span></h3>
+      <button onclick="closeData()" class="btn btn-ghost px-3 py-1.5 text-sm">Close</button>
+    </div>
+    <p class="text-sm mb-3" style="color:var(--ew-slate)">
+      Every insurer, plan, feature and add-on lives in this JSON. Edit once here and it pre-fills everywhere.
+      Changes are saved to your browser (localStorage) when you run this file on your machine.
+    </p>
+    <textarea id="dataEditor" class="field font-mono text-xs" style="height:46vh" spellcheck="false"></textarea>
+    <div class="flex flex-wrap gap-2 mt-3">
+      <button onclick="saveData()" class="btn btn-primary px-4 py-2 text-sm">Save & apply</button>
+      <button onclick="loadSeedIntoEditor()" class="btn btn-ghost px-4 py-2 text-sm">Reload seed data</button>
+      <span id="dataMsg" class="text-sm self-center"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   1) POLICY DATA LAYER  ("internal backend" inside the file)
+   ------------------------------------------------------------
+   - insurers[].plans[] hold the comparable facts + per-plan add-ons
+   - addOnCatalog standardises add-on CATEGORIES across insurers,
+     storing the per-insurer NAME (alias) and a default reasoning,
+     so adding an add-on auto-fills details.
+   - Seeded from your two uploaded images + clearly-marked SAMPLE
+     rows. Replace SAMPLE values with verified policy-wording data.
+   ============================================================ */
+const SEED_DB = {
+  meta:{ updated:"2026-06-01", note:"SAMPLE/illustrative data seeded from uploaded images — verify against policy wordings." },
+
+  /* Standardised add-on categories. `aliases` = how each insurer names it. */
+  addOnCatalog:{
+    consumables:{ label:"Consumables Cover",
+      aliases:["Safeguard","Safeguard+","Claim Shield","Claim Protector","Non-Medical Items"],
+      defaultWhy:"Covers gloves, syringes, PPE & other non-payable items that are otherwise deducted at claim." },
+    maternity:{ label:"Maternity & New-born",
+      aliases:["Maternity Cover","Future Mommy","Joy / Joy Tomorrow","New Born Cover"],
+      defaultWhy:"Client is planning a family within the policy term; covers delivery + new-born expenses." },
+    bonus:{ label:"Bonus Booster",
+      aliases:["Power Booster","Cumulative Bonus Super","Booster+","No-Claim Bonus Super","Active Multiply"],
+      defaultWhy:"Accelerates the sum-insured growth year on year so cover keeps pace with medical inflation." },
+    opd:{ label:"OPD Cover",
+      aliases:["OPD Plus","OPD Care","Smart OPD","Day-to-day care"],
+      defaultWhy:"Client has frequent consultations / pharmacy spends; covers out-patient costs." },
+    healthCheckup:{ label:"Annual Health Check-up",
+      aliases:["Health Check Booster","Preventive Health Check","Wellness Check"],
+      defaultWhy:"Preventive screening — note whether in-built or add-on, how often, and for whom." },
+    instantCover:{ label:"Instant Cover · Lifestyle (ABCD)",
+      aliases:["Reduction in PED wait","Day-1 PED cover","Instant Cover","Pre-existing Buyout"],
+      defaultWhy:"Client already has lifestyle conditions (Asthma/BP/Cholesterol/Diabetes/Obesity); buys down the waiting period." }
+  },
+
+  insurers:{
+    care:{ name:"Care Health", logoText:"CARE", color:"#0E7C5A",
+      plans:{ supreme:{ planName:"Care Supreme", brochureUrl:"https://www.google.com/search?q=Care+Supreme+brochure+pdf", networkUrl:"https://www.google.com/search?q=Care+Health+cashless+network+hospitals+list",
+        sumInsured:["7L","10L","25L","1Cr"],
+        networkHospitals:"11,400+", claimSettlementRatio:"90%", roomRent:"Any room", coPay:"No",
+        prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
+        restore:{kind:"unlimited-same-diff"},
+        ncbModel:{firstBonus:150,firstYears:3,thenBonus:100,capPct:600},
+        ncbText:"150% for first 3 yrs & 100% next 3 yrs (up to 600%, max 60L)",
+        instantCover:{available:true, name:"Instant Cover", conditions:["BP","Diabetes","Asthma","Cholesterol"]},
+        uniqueFeatures:["Unlimited Care — one-time unlimited cover for your selected claim"],
+        addOns:{ consumables:{available:true,alias:"Claim Shield"}, bonus:{available:true,alias:"NCB Super"}, opd:{available:true,alias:"OPD Care"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all adults"}, maternity:{available:true,alias:"Maternity Cover"}, instantCover:{available:true,alias:"Instant Cover"} }
+      }}},
+
+    icici:{ name:"ICICI Lombard", logoText:"ICICI", color:"#A5161A",
+      plans:{ elevate:{ planName:"ICICI Elevate", brochureUrl:"https://www.google.com/search?q=ICICI+Elevate+brochure+pdf", networkUrl:"https://www.google.com/search?q=ICICI+Lombard+cashless+network+hospitals+list",
+        sumInsured:["10L","50L","1Cr","Unlimited"],
+        networkHospitals:"15,000+", claimSettlementRatio:"98.09%", roomRent:"Any room", coPay:"No",
+        prePost:"90/180 days", dayCare:"Yes", ayush:"Yes",
+        restore:{kind:"unlimited-same-diff"},
+        ncbModel:{firstBonus:100,firstYears:99,thenBonus:100,capPct:99900},
+        ncbText:"100% sum insured carried forward every year irrespective of claim",
+        instantCover:{available:true, name:"Instant Cover (Jump Start)", conditions:["BP","Diabetes","Asthma","Cholesterol","Obesity"]},
+        uniqueFeatures:["Infinite Care — one-time infinite claim amount for your selected claim"],
+        addOns:{ consumables:{available:true,alias:"Claim Protector"}, bonus:{available:true,alias:"Power Booster"}, opd:{available:true,alias:"OPD Plus"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all members"}, maternity:{available:true,alias:"Maternity"}, instantCover:{available:true,alias:"Jump Start"} }
+      }}},
+
+    niva:{ name:"Niva Bupa", logoText:"NIVA", color:"#E2761E",
+      plans:{ reassure2:{ planName:"ReAssure 2.0", brochureUrl:"https://www.google.com/search?q=Niva+Bupa+ReAssure+2.0+brochure+pdf", networkUrl:"https://www.google.com/search?q=Niva+Bupa+cashless+network+hospitals+list",
+        sumInsured:["5L","25L","1Cr"],
+        networkHospitals:"10,000+", claimSettlementRatio:"91%", roomRent:"Any room", coPay:"No",
+        prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
+        restore:{kind:"unlimited-diff-only"},
+        ncbModel:{firstBonus:0,firstYears:0,thenBonus:0,capPct:1000},
+        ncbText:"Available max up to 1000%",
+        instantCover:{available:true, name:"Instant Cover", conditions:["BP","Diabetes","Asthma","Cholesterol"]},
+        uniqueFeatures:["Age-Lock benefit — premium locked at entry age","No impact on premium if claim < ₹1,00,000"],
+        addOns:{ consumables:{available:true,alias:"Safeguard+"}, bonus:{available:true,alias:"Booster+"}, opd:{available:true,alias:"OPD Plus"}, healthCheckup:{available:true,type:"addon",frequency:"every year",forWhom:"all adults"}, maternity:{available:true,alias:"Maternity"}, instantCover:{available:true,alias:"Instant Cover"} }
+      }}},
+
+    hdfc:{ name:"HDFC Ergo", logoText:"HDFC", color:"#C8102E",
+      plans:{ optimasecure:{ planName:"Optima Secure+", brochureUrl:"https://www.google.com/search?q=HDFC+Ergo+Optima+Secure+brochure+pdf", networkUrl:"https://www.google.com/search?q=HDFC+Ergo+cashless+network+hospitals+list",
+        sumInsured:["5L","10L","2Cr"],
+        networkHospitals:"13,000+", claimSettlementRatio:"98%", roomRent:"Any room", coPay:"No",
+        prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
+        restore:{kind:"100pct"},
+        ncbModel:{firstBonus:10,firstYears:99,thenBonus:10,capPct:100},
+        ncbText:"Up to 10% every year, max up to 100%",
+        instantCover:{available:false, name:"", conditions:[]},
+        uniqueFeatures:["In-built health check-up for HbA1C & blood pressure","Secure / Plus / Protect benefits (2x–4x cover)"],
+        addOns:{ consumables:{available:true,alias:"Safeguard / Safeguard+"}, bonus:{available:true,alias:"Plus Benefit"}, opd:{available:true,alias:"OPD"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all adults"}, maternity:{available:true,alias:"My Health Maternity"}, instantCover:{available:false,alias:""} }
+      }}},
+
+    adityabirla:{ name:"Aditya Birla", logoText:"ABHI", color:"#C8102E",
+      plans:{ activonemax:{ planName:"Activ One MAX", brochureUrl:"https://www.google.com/search?q=Aditya+Birla+Activ+One+MAX+brochure+pdf", networkUrl:"https://www.google.com/search?q=Aditya+Birla+Health+cashless+network+hospitals+list",
+        sumInsured:["5L","25L","2Cr"],
+        networkHospitals:"12,000+", claimSettlementRatio:"96%", roomRent:"Any room", coPay:"No",
+        prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
+        restore:{kind:"unlimited-same-diff"},
+        ncbModel:{firstBonus:0,firstYears:0,thenBonus:0,capPct:0},
+        ncbText:"Super Credit / health returns (verify)",
+        instantCover:{available:true, name:"Lifestyle (ABCD)", conditions:["Asthma","BP","Cholesterol","Diabetes","Obesity"]},
+        uniqueFeatures:["HealthReturns up to 100% premium back","Chronic Management Programme (Day-1 for ABCD)"],
+        addOns:{ consumables:{available:true,alias:"Safeguard"}, bonus:{available:true,alias:"Super Credit"}, opd:{available:true,alias:"OPD"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all members"}, maternity:{available:true,alias:"Maternity"}, instantCover:{available:true,alias:"Chronic Care Day-1"} }
+      }}},
+
+    /* ---- structural placeholders for the rest of the panel (fill from /Policy wording) ---- */
+    star:{ name:"Star Health", logoText:"STAR", color:"#E11D48", plans:{ comprehensive:{ planName:"Star Comprehensive", brochureUrl:"https://www.google.com/search?q=Star+Comprehensive+brochure+pdf", networkUrl:"https://www.google.com/search?q=Star+Health+cashless+network+hospitals", sumInsured:["5L","25L","1Cr"], networkHospitals:"14,000+", claimSettlementRatio:"SAMPLE", roomRent:"Any room", coPay:"No", prePost:"60/90 days", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:2,thenBonus:0,capPct:100}, ncbText:"SAMPLE", instantCover:{available:true,name:"Buy-back PED",conditions:["BP","Diabetes"]}, uniqueFeatures:["SAMPLE — verify"], addOns:{ consumables:{available:true,alias:"SAMPLE"}, bonus:{available:true,alias:"SAMPLE"}, opd:{available:true,alias:"SAMPLE"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"all adults"}, maternity:{available:false,alias:""}, instantCover:{available:true,alias:"SAMPLE"} } }}},
+    tata:{ name:"Tata AIG", logoText:"TATA", color:"#1E40AF", plans:{ medicareprem:{ planName:"Medicare Premier", brochureUrl:"https://www.google.com/search?q=Tata+AIG+Medicare+Premier+brochure+pdf", networkUrl:"https://www.google.com/search?q=Tata+AIG+cashless+network+hospitals", sumInsured:["5L","20L","1Cr"], networkHospitals:"SAMPLE", claimSettlementRatio:"SAMPLE", roomRent:"Any room", coPay:"No", prePost:"60/90 days", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:2,thenBonus:0,capPct:100}, ncbText:"SAMPLE", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["SAMPLE — verify"], addOns:{ consumables:{available:true,alias:"SAMPLE"}, bonus:{available:true,alias:"SAMPLE"}, opd:{available:true,alias:"SAMPLE"}, healthCheckup:{available:true,type:"addon",frequency:"every year",forWhom:"all adults"}, maternity:{available:true,alias:"SAMPLE"}, instantCover:{available:false,alias:""} } }}}
+  }
+};
+
+/* ---- storage (guarded so it never breaks the in-page preview) ---- */
+function safeGet(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
+function safeSet(k,v){ try{localStorage.setItem(k,v);return true;}catch(e){return false;} }
+
+let DB;
+function loadDB(){
+  const saved = safeGet("ew_db");
+  if(saved){ try{ DB = JSON.parse(saved); return; }catch(e){} }
+  DB = JSON.parse(JSON.stringify(SEED_DB));
+}
+loadDB();
+
+/* ============================================================
+   2) APP STATE
+   ============================================================ */
+const state = {
+  step:1,
+  client:{ name:"", policyType:"", individualAge:"", members:[{name:"",age:""}], history:[], historyOther:"", caseType:"" },
+  selected:[],            // [{insurerKey, planKey}]
+  perPlan:{},             // key -> {addOns:{cat:{on,alias,why}}, premium}
+  recommendKey:"",        // "insurerKey::planKey"
+  sellPreference:""       // optional insurer the advisor wants to push
+};
+
+const STEPS = ["Client details","Plan selection","Add-ons & recommendation","Comparison & export"];
+const pk = (i,p)=> i+"::"+p;
+
+/* ============================================================
+   3) RENDER ROUTER
+   ============================================================ */
+const app = ()=>document.getElementById("app");
+function render(){
+  renderStepper();
+  const el = app();
+  el.innerHTML = "";
+  const pane = document.createElement("div");
+  pane.className = "step-pane";
+  if(state.step===1) pane.innerHTML = viewStep1();
+  if(state.step===2) pane.innerHTML = viewStep2();
+  if(state.step===3) pane.innerHTML = viewStep3();
+  if(state.step===4) pane.innerHTML = viewStep4();
+  el.appendChild(pane);
+  if(state.step===2) bindStep2();
+  if(state.step===3) bindStep3();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderStepper(){
+  const s = document.getElementById("stepper");
+  s.innerHTML = STEPS.map((t,i)=>{
+    const n=i+1, done=n<state.step, cur=n===state.step;
+    const dot = `<div class="stepdot h-7 w-7 grid place-items-center rounded-full text-xs font-bold ${cur?'text-white':done?'text-white':''}"
+        style="background:${cur?'var(--ew-green-700)':done?'var(--ew-green-500)':'#fff'};border:1px solid ${cur||done?'transparent':'var(--ew-line)'};color:${cur||done?'#fff':'var(--ew-slate)'}">${done?'✓':n}</div>`;
+    const label = `<span class="text-xs hidden sm:inline ${cur?'font-semibold':''}" style="color:${cur?'var(--ew-green-900)':'var(--ew-slate)'}">${t}</span>`;
+    const bar = i<STEPS.length-1 ? `<div class="flex-1 h-px mx-1" style="background:${done?'var(--ew-green-500)':'var(--ew-line)'}"></div>`:"";
+    return `<div class="flex items-center gap-2">${dot}${label}</div>${bar}`;
+  }).join("");
+}
+
+/* ============================================================
+   STEP 1 — CLIENT DETAILS
+   ============================================================ */
+function viewStep1(){
+  const c = state.client;
+  const histItems = ["Asthma","BP","Cholesterol","Diabetes","Others"];
+  return `
+  <div class="grid gap-5 stagger">
+    <div>
+      <div class="text-xs tracking-widest uppercase mb-1" style="color:var(--ew-green-600)">Step 1 of 4</div>
+      <h1 class="text-3xl">Client details</h1>
+      <p class="text-sm mt-1" style="color:var(--ew-slate)">Capture who we are protecting. Required fields are marked.</p>
+    </div>
+
+    <div class="card p-6 grid md:grid-cols-2 gap-5">
+      <div>
+        <label class="text-sm font-medium">Client name *</label>
+        <input id="f_name" class="field mt-1" value="${esc(c.name)}" placeholder="e.g. Mr. Kapil Jain"/>
+      </div>
+      <div>
+        <label class="text-sm font-medium">Policy type *</label>
+        <select id="f_ptype" class="field mt-1" onchange="onPolicyType(this.value)">
+          <option value="">Select…</option>
+          <option ${c.policyType==='Individual'?'selected':''}>Individual</option>
+          <option ${c.policyType==='Family Floater'?'selected':''}>Family Floater</option>
+        </select>
+      </div>
+
+      <div id="ageBlock" class="md:col-span-2">${ageBlock()}</div>
+
+      <div class="md:col-span-2">
+        <label class="text-sm font-medium">Medical history</label>
+        <div class="flex flex-wrap gap-2 mt-2">
+          ${histItems.map(h=>`<div class="chip" data-on="${c.history.includes(h)?1:0}" onclick="toggleHist('${h}')">${h}</div>`).join("")}
+        </div>
+        <div id="otherWrap" class="${c.history.includes('Others')?'':'hidden'} mt-3">
+          <label class="text-sm font-medium">Please specify other condition(s)</label>
+          <input id="f_other" class="field mt-1" value="${esc(c.historyOther)}" placeholder="e.g. Thyroid, Cardiac history"/>
+        </div>
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="text-sm font-medium">Case type *</label>
+        <div class="flex gap-2 mt-2">
+          <div class="chip" data-on="${c.caseType==='Fresh Policy'?1:0}" onclick="setCase('Fresh Policy')">Fresh Policy</div>
+          <div class="chip" data-on="${c.caseType==='Portability'?1:0}" onclick="setCase('Portability')">Portability</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="err1" class="text-sm" style="color:var(--ew-notrec)"></div>
+    <div class="flex justify-end">
+      <button onclick="next1()" class="btn btn-primary px-6 py-3">Continue to plans →</button>
+    </div>
+  </div>`;
+}
+function ageBlock(){
+  const c=state.client;
+  if(c.policyType==='Individual'){
+    return `<label class="text-sm font-medium">Age *</label>
+      <input id="f_age" type="number" min="0" max="120" class="field mt-1 md:w-1/3" value="${esc(c.individualAge)}" placeholder="Age in years"/>`;
+  }
+  if(c.policyType==='Family Floater'){
+    return `<label class="text-sm font-medium">Members & ages *</label>
+      <div id="members" class="grid gap-2 mt-2">
+        ${c.members.map((m,i)=>`
+          <div class="flex gap-2 items-center">
+            <input class="field" placeholder="Member ${i+1} name (optional)" value="${esc(m.name)}" onchange="setMember(${i},'name',this.value)"/>
+            <input class="field md:w-32" type="number" min="0" max="120" placeholder="Age" value="${esc(m.age)}" onchange="setMember(${i},'age',this.value)"/>
+            ${c.members.length>1?`<button onclick="rmMember(${i})" class="btn btn-ghost px-3 py-2 text-sm">✕</button>`:''}
+          </div>`).join("")}
+      </div>
+      <button onclick="addMember()" class="btn btn-ghost px-3 py-1.5 text-sm mt-2">+ Add member</button>`;
+  }
+  return `<p class="text-sm" style="color:var(--ew-slate)">Select a policy type to enter age(s).</p>`;
+}
+function onPolicyType(v){ readStep1(); state.client.policyType=v; render(); }
+function toggleHist(h){ readStep1(); const a=state.client.history; const i=a.indexOf(h); i>=0?a.splice(i,1):a.push(h); render(); }
+function setCase(v){ readStep1(); state.client.caseType=v; render(); }
+function setMember(i,k,v){ state.client.members[i][k]=v; }
+function addMember(){ readStep1(); state.client.members.push({name:"",age:""}); render(); }
+function rmMember(i){ readStep1(); state.client.members.splice(i,1); render(); }
+function readStep1(){
+  const c=state.client;
+  const g=id=>document.getElementById(id);
+  if(g("f_name")) c.name=g("f_name").value;
+  if(g("f_age")) c.individualAge=g("f_age").value;
+  if(g("f_other")) c.historyOther=g("f_other").value;
+}
+function next1(){
+  readStep1();
+  const c=state.client, errs=[];
+  if(!c.name.trim()) errs.push("Client name is required.");
+  if(!c.policyType) errs.push("Select a policy type.");
+  if(c.policyType==='Individual' && !String(c.individualAge).trim()) errs.push("Enter the client's age.");
+  if(c.policyType==='Family Floater' && !c.members.some(m=>String(m.age).trim())) errs.push("Enter at least one member's age.");
+  if(!c.caseType) errs.push("Select a case type (Fresh / Portability).");
+  if(c.history.includes('Others') && !c.historyOther.trim()) errs.push("Specify the 'Others' condition.");
+  const box=document.getElementById("err1");
+  if(errs.length){ box.innerHTML = errs.map(e=>"• "+e).join("<br>"); return; }
+  state.step=2; render();
+}
+
+/* ============================================================
+   STEP 2 — PLAN SELECTION (manual + simulated upload)
+   ============================================================ */
+function viewStep2(){
+  const insurers = Object.entries(DB.insurers);
+  const cards = insurers.map(([ik,ins])=>
+    Object.entries(ins.plans).map(([plk,pl])=>{
+      const key=pk(ik,plk); const sel=state.selected.some(s=>pk(s.insurerKey,s.planKey)===key);
+      return `<div class="card plan-card p-4" data-sel="${sel?1:0}" data-key="${key}" onclick="togglePlan('${ik}','${plk}')">
+        <div class="flex items-center justify-between">
+          <div class="h-9 px-2 min-w-9 rounded-lg grid place-items-center text-white text-xs font-bold" style="background:${ins.color}">${ins.logoText}</div>
+          <div class="h-5 w-5 rounded-md border grid place-items-center text-[11px] ${sel?'text-white':''}" style="background:${sel?'var(--ew-green-700)':'#fff'};border-color:${sel?'var(--ew-green-700)':'var(--ew-line)'}">${sel?'✓':''}</div>
+        </div>
+        <div class="mt-3 font-semibold leading-tight">${pl.planName}</div>
+        <div class="text-xs mt-0.5" style="color:var(--ew-slate)">${ins.name}</div>
+        <div class="text-xs mt-2" style="color:var(--ew-slate)">SI: ${pl.sumInsured.join(" · ")}</div>
+      </div>`;
+    }).join("")).join("");
+
+  return `
+  <div class="grid gap-5">
+    <div class="flex items-end justify-between flex-wrap gap-3">
+      <div>
+        <div class="text-xs tracking-widest uppercase mb-1" style="color:var(--ew-green-600)">Step 2 of 4</div>
+        <h1 class="text-3xl">Choose plans to compare</h1>
+        <p class="text-sm mt-1" style="color:var(--ew-slate)">Pick <b>2–5</b> plans manually, or upload quotes to auto-detect.</p>
+      </div>
+      <div class="flex gap-1 p-1 rounded-full" style="background:var(--ew-mint-100)">
+        <button id="tabA" onclick="setTab('A')" class="btn px-4 py-1.5 text-sm btn-primary">Manual selection</button>
+        <button id="tabB" onclick="setTab('B')" class="btn px-4 py-1.5 text-sm">Upload documents</button>
+      </div>
+    </div>
+
+    <div id="paneA">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 stagger">${cards}</div>
+      <p class="text-xs mt-3" style="color:var(--ew-slate)">Showing ${insurers.length} insurers from the data store. Add more via <b>⚙︎ Manage policy data</b>.</p>
+    </div>
+
+    <div id="paneB" class="hidden">
+      <div class="card p-6">
+        <label class="text-sm font-medium">Upload quotation / policy copy (PDF or image)</label>
+        <input id="uploader" type="file" accept=".pdf,image/*" multiple class="field mt-2"/>
+        <button onclick="simulateExtract()" class="btn btn-primary px-4 py-2 text-sm mt-3">Detect plan details</button>
+        <p class="text-xs mt-2" style="color:var(--ew-slate)">Simulation only — no file leaves your browser. Detected plans appear below for review.</p>
+        <div id="detected" class="mt-4 grid gap-2"></div>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between sticky bottom-3">
+      <div class="card px-4 py-2 text-sm"><span id="selCount">0</span> selected <span style="color:var(--ew-slate)">(need 2–5)</span></div>
+      <div class="flex gap-2">
+        <button onclick="back(1)" class="btn btn-ghost px-5 py-2.5">← Back</button>
+        <button id="next2" onclick="next2()" class="btn btn-primary px-6 py-2.5">Continue →</button>
+      </div>
+    </div>
+    <div id="err2" class="text-sm" style="color:var(--ew-notrec)"></div>
+  </div>`;
+}
+let tab="A";
+function setTab(t){ tab=t; bindStep2(); }
+function bindStep2(){
+  const A=document.getElementById("tabA"), B=document.getElementById("tabB");
+  const pA=document.getElementById("paneA"), pB=document.getElementById("paneB");
+  if(!A) return;
+  A.classList.toggle("btn-primary",tab==="A"); B.classList.toggle("btn-primary",tab==="B");
+  pA.classList.toggle("hidden",tab!=="A"); pB.classList.toggle("hidden",tab!=="B");
+  updateSelCount();
+}
+function togglePlan(ik,plk){
+  const key=pk(ik,plk); const idx=state.selected.findIndex(s=>pk(s.insurerKey,s.planKey)===key);
+  if(idx>=0) state.selected.splice(idx,1);
+  else { if(state.selected.length>=5){ flash2("You can compare at most 5 plans."); return; } state.selected.push({insurerKey:ik,planKey:plk}); }
+  const cardEl=document.querySelector(`[data-key="${key}"]`);
+  if(cardEl){ const on=idx<0?1:0; cardEl.setAttribute("data-sel",on); cardEl.querySelector(".h-5.w-5").innerHTML=on?'✓':''; cardEl.querySelector(".h-5.w-5").style.background=on?'var(--ew-green-700)':'#fff'; cardEl.querySelector(".h-5.w-5").style.color=on?'#fff':''; cardEl.querySelector(".h-5.w-5").style.borderColor=on?'var(--ew-green-700)':'var(--ew-line)'; }
+  updateSelCount();
+}
+function updateSelCount(){ const n=state.selected.length; const el=document.getElementById("selCount"); if(el) el.textContent=n; }
+function flash2(m){ const e=document.getElementById("err2"); if(e){ e.textContent=m; setTimeout(()=>e.textContent="",2500);} }
+function next2(){
+  const n=state.selected.length;
+  if(n<2||n>5){ flash2("Select between 2 and 5 plans to continue."); return; }
+  state.selected.forEach(s=>{ const k=pk(s.insurerKey,s.planKey); if(!state.perPlan[k]) state.perPlan[k]={addOns:{},premium:""}; });
+  state.step=3; render();
+}
+/* simulated extraction */
+function simulateExtract(){
+  const mock=[
+    {ik:"icici",plk:"elevate"},
+    {ik:"hdfc",plk:"optimasecure"}
+  ];
+  const wrap=document.getElementById("detected");
+  wrap.innerHTML = `<div class="text-sm font-medium">Detected plans (mock):</div>` + mock.map(m=>{
+    const ins=DB.insurers[m.ik]; const pl=ins.plans[m.plk]; const key=pk(m.ik,m.plk);
+    const sel=state.selected.some(s=>pk(s.insurerKey,s.planKey)===key);
+    return `<div class="flex items-center justify-between border rounded-xl p-3" style="border-color:var(--ew-line)">
+      <div><div class="font-medium">${pl.planName} · <span style="color:var(--ew-slate)">${ins.name}</span></div>
+      <div class="text-xs" style="color:var(--ew-slate)">Sum insured detected: ${pl.sumInsured[0]}</div></div>
+      <button onclick="togglePlan('${m.ik}','${m.plk}');simulateExtract()" class="btn ${sel?'btn-ghost':'btn-primary'} px-3 py-1.5 text-sm">${sel?'Added ✓':'Add'}</button>
+    </div>`;
+  }).join("") + `<p class="text-xs mt-1" style="color:var(--ew-slate)">Not detected correctly? Add the rest manually from the Manual tab, or skip.</p>`;
+  updateSelCount();
+}
+
+/* ============================================================
+   STEP 3 — ADD-ONS + RECOMMENDATION
+   ============================================================ */
+function viewStep3(){
+  const cats=Object.keys(DB.addOnCatalog);
+  const blocks = state.selected.map(s=>{
+    const ins=DB.insurers[s.insurerKey], pl=ins.plans[s.planKey], key=pk(s.insurerKey,s.planKey);
+    const st=state.perPlan[key]||(state.perPlan[key]={addOns:{},premium:""});
+    const rows = cats.map(cat=>{
+      const cdef=DB.addOnCatalog[cat];
+      const planAddon=(pl.addOns&&pl.addOns[cat])||{available:false};
+      const sel=st.addOns[cat]||{on:false,alias:"",why:""};
+      const alias = sel.alias || planAddon.alias || (cdef.aliases[0]||"");
+      const checkupNote = cat==='healthCheckup' && planAddon.available
+        ? ` · <span style="color:var(--ew-green-700)">${planAddon.type==='inbuilt'?'IN-BUILT':'ADD-ON'} · ${planAddon.frequency||''} · ${planAddon.forWhom||''}</span>` : '';
+      if(!planAddon.available && cat!=='healthCheckup'){
+        return `<div class="flex items-center gap-2 py-1.5 opacity-50 text-sm"><span class="w-40">${cdef.label}</span><span class="pill-no">Not offered</span></div>`;
+      }
+      return `<div class="py-2 border-t" style="border-color:var(--ew-line)">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" ${sel.on?'checked':''} onchange="setAddon('${key}','${cat}','on',this.checked)" class="h-4 w-4 accent-emerald-700"/>
+          <span class="text-sm font-medium">${cdef.label}</span>
+          <span class="text-xs" style="color:var(--ew-slate)">— insurer name: <b>${esc(alias)}</b>${checkupNote}</span>
+        </label>
+        <div class="${sel.on?'':'hidden'} pl-6 mt-1 grid sm:grid-cols-2 gap-2">
+          <input class="field text-xs" placeholder="Insurer's add-on name" value="${esc(alias)}" onchange="setAddon('${key}','${cat}','alias',this.value)"/>
+          <input class="field text-xs" placeholder="Why selected (one-liner)" value="${esc(sel.why||cdef.defaultWhy)}" onchange="setAddon('${key}','${cat}','why',this.value)"/>
+        </div>
+      </div>`;
+    }).join("");
+
+    return `<div class="card p-5">
+      <div class="flex items-center gap-2 mb-1">
+        <div class="h-8 px-2 rounded-lg grid place-items-center text-white text-xs font-bold" style="background:${ins.color}">${ins.logoText}</div>
+        <div><div class="font-semibold leading-tight">${pl.planName}</div><div class="text-xs" style="color:var(--ew-slate)">${ins.name}</div></div>
+      </div>
+      <div class="mt-2">${rows}</div>
+      <div class="mt-3 pt-3 border-t" style="border-color:var(--ew-line)">
+        <label class="text-sm font-medium">Premium (optional)</label>
+        <input class="field mt-1" placeholder="₹ annual premium" value="${esc(st.premium)}" onchange="setPremium('${key}',this.value)"/>
+      </div>
+    </div>`;
+  }).join("");
+
+  const recOptions = state.selected.map(s=>{
+    const ins=DB.insurers[s.insurerKey], pl=ins.plans[s.planKey], key=pk(s.insurerKey,s.planKey);
+    return `<option value="${key}" ${state.recommendKey===key?'selected':''}>${pl.planName} — ${ins.name}</option>`;
+  }).join("");
+
+  return `
+  <div class="grid gap-5">
+    <div>
+      <div class="text-xs tracking-widest uppercase mb-1" style="color:var(--ew-green-600)">Step 3 of 4</div>
+      <h1 class="text-3xl">Add-ons & recommendation</h1>
+      <p class="text-sm mt-1" style="color:var(--ew-slate)">Toggle add-ons per plan. Names & reasoning are pre-filled from the data store — edit as needed.</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4 stagger">${blocks}</div>
+
+    <div class="card p-5 grid md:grid-cols-2 gap-4">
+      <div>
+        <label class="text-sm font-medium">Recommend this plan to the client</label>
+        <select id="recSel" class="field mt-1" onchange="state.recommendKey=this.value">
+          <option value="">Let the tool decide (scoring)</option>${recOptions}
+        </select>
+      </div>
+      <div>
+        <label class="text-sm font-medium">Selling preference (optional)</label>
+        <input id="sellPref" class="field mt-1" value="${esc(state.sellPreference)}" placeholder="e.g. push Niva Bupa / ICICI" onchange="state.sellPreference=this.value"/>
+        <p class="text-xs mt-1" style="color:var(--ew-slate)">If set, the comparison highlights that insurer where it is competitive.</p>
+      </div>
+    </div>
+
+    <div class="flex justify-between">
+      <button onclick="back(2)" class="btn btn-ghost px-5 py-2.5">← Back</button>
+      <button onclick="state.step=4;render()" class="btn btn-primary px-6 py-2.5">Build comparison →</button>
+    </div>
+  </div>`;
+}
+function bindStep3(){}
+function setAddon(key,cat,field,val){
+  const st=state.perPlan[key]; if(!st.addOns[cat]) st.addOns[cat]={on:false,alias:"",why:""};
+  st.addOns[cat][field]=val;
+  if(field==='on') render();
+}
+function setPremium(key,v){ state.perPlan[key].premium=v; }
+
+/* ============================================================
+   STEP 4 — COMPARISON + RECOMMENDATION + EXPORT
+   ============================================================ */
+function restoreText(r){
+  if(!r) return "—";
+  if(r.kind==='unlimited-same-diff') return "Unlimited restoration for same or different illness";
+  if(r.kind==='unlimited-diff-only') return "Unlimited restoration for different illness";
+  if(r.kind==='100pct') return "100% restoration (once per policy year)";
+  return r.text||"—";
+}
+function projBonus(model,years=10){
+  // returns array of cumulative bonus % capped
+  const out=[]; let cum=0;
+  for(let y=1;y<=years;y++){
+    const add = y<=model.firstYears? model.firstBonus : model.thenBonus;
+    cum=Math.min(cum+add, model.capPct);
+    out.push(cum);
+  }
+  return out;
+}
+function clientAges(){
+  const c=state.client;
+  if(c.policyType==='Individual') return c.individualAge||"—";
+  return c.members.filter(m=>String(m.age).trim()).map(m=>(m.name?m.name+" ":"")+m.age).join(", ")||"—";
+}
+function computeScores(){
+  // simple transparent scoring
+  const res={};
+  state.selected.forEach(s=>{
+    const pl=DB.insurers[s.insurerKey].plans[s.planKey], key=pk(s.insurerKey,s.planKey);
+    let sc=0; const why=[];
+    const csr=parseFloat(String(pl.claimSettlementRatio).replace(/[^\d.]/g,''));
+    if(!isNaN(csr)){ sc+=csr; if(csr>=96) why.push("strong claim settlement ("+pl.claimSettlementRatio+")"); }
+    const net=parseInt(String(pl.networkHospitals).replace(/[^\d]/g,''))||0;
+    sc+= Math.min(net/1000,20); if(net>=13000) why.push("wide cashless network ("+pl.networkHospitals+")");
+    if(pl.restore&&pl.restore.kind&&pl.restore.kind.indexOf('unlimited')===0){ sc+=8; why.push("unlimited restoration"); }
+    if(pl.coPay&&pl.coPay.toLowerCase()==='no'){ sc+=4; why.push("no co-pay"); }
+    if(pl.instantCover&&pl.instantCover.available){ sc+=4; }
+    // medical-history fit: reward instant cover when client has lifestyle conditions
+    const hasLifestyle = state.client.history.some(h=>["Asthma","BP","Cholesterol","Diabetes"].includes(h));
+    if(hasLifestyle && pl.instantCover&&pl.instantCover.available){ sc+=10; why.push("instant cover for the client's existing conditions"); }
+    // selected add-ons add a little
+    const st=state.perPlan[key]; const nAdd=st?Object.values(st.addOns).filter(a=>a&&a.on).length:0; sc+=nAdd;
+    // selling preference nudge
+    if(state.sellPreference && DB.insurers[s.insurerKey].name.toLowerCase().includes(state.sellPreference.trim().toLowerCase())) sc+=6;
+    res[key]={score:Math.round(sc*10)/10, why};
+  });
+  return res;
+}
+function viewStep4(){
+  const c=state.client;
+  const scores=computeScores();
+  let recKey=state.recommendKey;
+  if(!recKey){ recKey=Object.entries(scores).sort((a,b)=>b[1].score-a[1].score)[0][0]; }
+  const cats=Object.keys(DB.addOnCatalog);
+
+  const cols = state.selected.map(s=>({...s,key:pk(s.insurerKey,s.planKey),ins:DB.insurers[s.insurerKey],pl:DB.insurers[s.insurerKey].plans[s.planKey]}));
+
+  const th = cols.map(col=>{
+    const rec=col.key===recKey;
+    return `<th class="p-3 align-top text-left ${rec?'cmp-col-rec':''}" style="min-width:200px">
+      <div class="flex items-center gap-2">
+        <div class="h-8 px-2 rounded-lg grid place-items-center text-white text-xs font-bold" style="background:${col.ins.color}">${col.ins.logoText}</div>
+        ${rec?'<span class="recbadge text-[10px] font-bold px-2 py-0.5 rounded-full">RECOMMENDED</span>':''}
+      </div>
+      <a class="link font-semibold block mt-2" href="${col.pl.brochureUrl}" target="_blank" rel="noopener">${col.pl.planName} ↗</a>
+      <div class="text-xs font-normal" style="color:var(--ew-slate)">${col.ins.name}</div>
+    </th>`;
+  }).join("");
+
+  const row=(label,fn,sub="")=>`<tr class="border-t" style="border-color:var(--ew-line)">
+      <td class="p-3 text-sm font-medium align-top" style="background:var(--ew-mint-50)">${label}${sub?`<div class="text-[11px] font-normal" style="color:var(--ew-slate)">${sub}</div>`:''}</td>
+      ${cols.map(col=>`<td class="p-3 text-sm align-top ${col.key===recKey?'cmp-col-rec':''}">${fn(col)}</td>`).join("")}
+    </tr>`;
+
+  const yn=v=>v&&v.toLowerCase&&v.toLowerCase()==='yes'?`<span class="pill-yes">Yes</span>`:(v&&v.toLowerCase&&v.toLowerCase()==='no'?`<span class="pill-no">No</span>`:esc(v||"—"));
+
+  // Add-on row: shows only the add-ons SELECTED for that plan with reasoning
+  const addonCell=col=>{
+    const st=state.perPlan[col.key]; if(!st) return "—";
+    const chosen=cats.filter(cat=>st.addOns[cat]&&st.addOns[cat].on);
+    if(!chosen.length) return `<span style="color:var(--ew-slate)">None selected</span>`;
+    return chosen.map(cat=>{
+      const a=st.addOns[cat], cdef=DB.addOnCatalog[cat];
+      const alias=a.alias||(col.pl.addOns[cat]&&col.pl.addOns[cat].alias)||cdef.label;
+      return `<div class="mb-1.5"><span class="font-medium" style="color:var(--ew-green-800)">${esc(alias)}</span>
+        <div class="text-[11px]" style="color:var(--ew-slate)">${esc(a.why||cdef.defaultWhy)}</div></div>`;
+    }).join("");
+  };
+
+  const checkupCell=col=>{
+    const a=col.pl.addOns&&col.pl.addOns.healthCheckup;
+    if(!a||!a.available) return "—";
+    return `${a.type==='inbuilt'?'<span class="pill-yes">In-built</span>':'<span style="color:var(--ew-gold);font-weight:600">Add-on</span>'} · ${esc(a.frequency||'')} · ${esc(a.forWhom||'')}`;
+  };
+
+  const instantCell=col=>{
+    const ic=col.pl.instantCover;
+    if(!ic||!ic.available) return `<span class="pill-no">Not available</span>`;
+    return `<span class="pill-yes">${esc(ic.name||'Yes')}</span><div class="text-[11px]" style="color:var(--ew-slate)">${ic.conditions.join(", ")}</div>`;
+  };
+
+  const bonusCell=col=>{
+    const proj=projBonus(col.pl.ncbModel||{firstBonus:0,firstYears:0,thenBonus:0,capPct:0});
+    const y5=proj[4], y10=proj[9];
+    return `<div class="text-[11px]" style="color:var(--ew-slate)">${esc(col.pl.ncbText||'')}</div>
+      <div class="text-xs mt-1">Yr5: <b>${y5}%</b> · Yr10: <b>${y10}%</b> of base SI</div>`;
+  };
+
+  const premiumCell=col=>{ const st=state.perPlan[col.key]; return st&&st.premium?`₹${esc(st.premium)}`:`<span style="color:var(--ew-slate)">—</span>`; };
+
+  // 10-year bonus mini-projection chart (text bars)
+  const bonusProjection = cols.map(col=>{
+    const proj=projBonus(col.pl.ncbModel||{firstBonus:0,firstYears:0,thenBonus:0,capPct:0});
+    const max=Math.max(...proj,100);
+    return `<div class="card p-4">
+      <div class="flex items-center gap-2 mb-2"><div class="h-7 px-2 rounded grid place-items-center text-white text-[10px] font-bold" style="background:${col.ins.color}">${col.ins.logoText}</div><div class="text-sm font-medium">${col.pl.planName}</div></div>
+      <div class="grid grid-cols-10 gap-1 items-end" style="height:90px">
+        ${proj.map((v,i)=>`<div class="flex flex-col items-center justify-end h-full" title="Yr ${i+1}: ${v}%">
+            <div class="w-full rounded-t" style="height:${Math.max(4,(v/max)*100)}%;background:var(--ew-green-500)"></div>
+          </div>`).join("")}
+      </div>
+      <div class="grid grid-cols-10 gap-1 text-[9px] text-center mt-1" style="color:var(--ew-slate)">${proj.map((v,i)=>`<div>${i+1}</div>`).join("")}</div>
+      <div class="text-[11px] mt-1" style="color:var(--ew-slate)">Cumulative no-claim bonus as % of base sum insured over 10 claim-free years (illustrative).</div>
+    </div>`;
+  }).join("");
+
+  const rec=DB.insurers[recKey.split("::")[0]].plans[recKey.split("::")[1]];
+  const recIns=DB.insurers[recKey.split("::")[0]];
+  const recWhy=scores[recKey].why;
+
+  return `
+  <div class="grid gap-5">
+    <div class="no-print flex items-center justify-between flex-wrap gap-2">
+      <div>
+        <div class="text-xs tracking-widest uppercase mb-1" style="color:var(--ew-green-600)">Step 4 of 4</div>
+        <h1 class="text-3xl">Comparison & recommendation</h1>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="back(3)" class="btn btn-ghost px-4 py-2 text-sm">← Edit</button>
+        <button onclick="exportJPG()" class="btn btn-ghost px-4 py-2 text-sm">⤓ Download JPG</button>
+        <button onclick="window.print()" class="btn btn-primary px-4 py-2 text-sm">⎙ Save as PDF</button>
+      </div>
+    </div>
+
+    <div id="report" class="grid gap-5 p-1">
+      <!-- SECTION 1: HEADER -->
+      <div class="card p-6" style="background:linear-gradient(120deg,var(--ew-green-900),var(--ew-green-700));color:#fff">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <div class="text-xs tracking-widest uppercase opacity-80">Enrichwise · Personalised comparison</div>
+            <h2 class="text-3xl mt-1" style="color:#fff">${esc(c.name)}</h2>
+          </div>
+          <div class="h-10 w-10 rounded-xl grid place-items-center font-bold" style="background:rgba(255,255,255,.15)">E</div>
+        </div>
+        <div class="grid sm:grid-cols-4 gap-3 mt-4 text-sm">
+          ${hdr("Policy type",c.policyType)}
+          ${hdr("Age(s)",clientAges())}
+          ${hdr("Case type",c.caseType)}
+          ${hdr("Medical history",(c.history.length?c.history.map(h=>h==='Others'?('Others: '+c.historyOther):h).join(", "):"None declared"))}
+        </div>
+      </div>
+
+      <!-- SECTION 3: COMPARISON TABLE -->
+      <div class="card overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead><tr><th class="p-3 text-left text-xs uppercase tracking-wide" style="color:var(--ew-slate);background:var(--ew-mint-100);min-width:170px">Parameter</th>${th}</tr></thead>
+          <tbody>
+            ${row("Unique feature",col=>col.pl.uniqueFeatures.map(f=>`<div class="mb-1">• ${esc(f)}</div>`).join(""))}
+            ${row("Claim settlement ratio",col=>`<b>${esc(col.pl.claimSettlementRatio)}</b>`)}
+            ${row("Instant coverage (lifestyle)",instantCell)}
+            ${row("Room rent",col=>esc(col.pl.roomRent))}
+            ${row("Pre / Post hospitalization",col=>esc(col.pl.prePost))}
+            ${row("Network hospitals",col=>`${esc(col.pl.networkHospitals)} · <a class="link" href="${col.pl.networkUrl}" target="_blank" rel="noopener">cashless list ↗</a>`)}
+            ${row("Co-pay",col=>yn(col.pl.coPay))}
+            ${row("Restore benefit",col=>restoreText(col.pl.restore))}
+            ${row("Day care",col=>yn(col.pl.dayCare))}
+            ${row("AYUSH",col=>yn(col.pl.ayush))}
+            ${row("Annual health check-up",checkupCell,"in-built vs add-on · frequency · for whom")}
+            ${row("Selected add-ons",addonCell,"name + why selected")}
+            ${row("No-claim bonus",bonusCell)}
+            ${row("Premium (annual)",premiumCell)}
+          </tbody>
+        </table>
+      </div>
+      <div class="grid grid-cols-2 gap-2 text-xs px-1">
+        <div><span style="color:var(--ew-slate)">Note:</span> rows marked SAMPLE need verification against the latest policy wordings.</div>
+      </div>
+
+      <!-- 10-YEAR BONUS PROJECTION -->
+      <div>
+        <h3 class="text-xl mb-2">No-claim bonus · 10-year projection</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-${Math.min(cols.length,3)} gap-3">${bonusProjection}</div>
+      </div>
+
+      <!-- SECTION 5: RECOMMENDATION -->
+      <div class="card p-6" style="border:1px solid var(--ew-green-500)">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="recbadge text-[10px] font-bold px-2 py-0.5 rounded-full">OUR RECOMMENDATION</span>
+        </div>
+        <h3 class="text-2xl">${esc(rec.planName)} <span class="text-base font-normal" style="color:var(--ew-slate)">— ${esc(recIns.name)}</span></h3>
+        <p class="text-sm mt-2" style="color:var(--ew-slate)">For ${esc(c.name)} (${esc(c.policyType)}, age ${clientAges()}${c.history.length?', history: '+c.history.join(", "):''}), this plan stands out because of ${recWhy.length?recWhy.join("; "):"its overall balance of cover, network and value"}.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          ${state.selected.map(s=>{const k=pk(s.insurerKey,s.planKey);const pl=DB.insurers[s.insurerKey].plans[s.planKey];return `<span class="chip" style="cursor:default" data-on="${k===recKey?1:0}">${esc(pl.planName)} · ${scores[k].score}</span>`}).join("")}
+        </div>
+        <p class="text-[11px] mt-3" style="color:var(--ew-slate)">Score is a transparent internal heuristic (claim ratio + network + restoration + co-pay + condition-fit + add-ons${state.sellPreference?' + selling preference':''}). It assists discussion; it is not financial advice.</p>
+      </div>
+
+      <div class="text-center text-[11px] py-2" style="color:var(--ew-slate)">Prepared by Enrichwise Insurance Broking Services Pvt Ltd · ${new Date().toLocaleDateString('en-IN')} · Verify all figures against IRDAI-approved policy documents.</div>
+    </div>
+  </div>`;
+}
+function hdr(k,v){ return `<div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.12)"><div class="text-[10px] uppercase tracking-wide opacity-80">${k}</div><div class="font-medium">${esc(v||"—")}</div></div>`; }
+
+/* ============================================================
+   EXPORT (JPG via html2canvas, PDF via print)
+   ============================================================ */
+function exportJPG(){
+  const node=document.getElementById("report");
+  if(!window.html2canvas){ alert("Image export needs internet (html2canvas). Use Save as PDF instead."); return; }
+  html2canvas(node,{scale:2,backgroundColor:"#F7FAF8",useCORS:true}).then(canvas=>{
+    const a=document.createElement("a");
+    a.download=`Enrichwise_${(state.client.name||'comparison').replace(/\s+/g,'_')}.jpg`;
+    a.href=canvas.toDataURL("image/jpeg",0.95); a.click();
+  }).catch(e=>alert("Export failed: "+e.message));
+}
+
+/* ============================================================
+   DATA MANAGER
+   ============================================================ */
+function openData(){ document.getElementById("dataEditor").value=JSON.stringify(DB,null,2); document.getElementById("dataMsg").textContent=""; document.getElementById("dataModal").classList.remove("hidden"); }
+function closeData(){ document.getElementById("dataModal").classList.add("hidden"); }
+function loadSeedIntoEditor(){ document.getElementById("dataEditor").value=JSON.stringify(SEED_DB,null,2); }
+function saveData(){
+  const msg=document.getElementById("dataMsg");
+  try{
+    const parsed=JSON.parse(document.getElementById("dataEditor").value);
+    if(!parsed.insurers||!parsed.addOnCatalog) throw new Error("Must include 'insurers' and 'addOnCatalog'.");
+    DB=parsed; const ok=safeSet("ew_db",JSON.stringify(DB));
+    msg.style.color="var(--ew-green-700)"; msg.textContent=ok?"Saved & applied ✓":"Applied (not persisted — storage blocked in preview)";
+    render();
+  }catch(e){ msg.style.color="var(--ew-notrec)"; msg.textContent="Invalid JSON: "+e.message; }
+}
+
+/* ============================================================
+   NAV / UTIL
+   ============================================================ */
+function back(n){ state.step=n; render(); }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function resetAll(){
+  if(!confirm("Clear this comparison and start over?")) return;
+  state.step=1; state.client={name:"",policyType:"",individualAge:"",members:[{name:"",age:""}],history:[],historyOther:"",caseType:""};
+  state.selected=[]; state.perPlan={}; state.recommendKey=""; state.sellPreference=""; render();
+}
+
+render();
+</script>
+</body>
+</html>
