@@ -1,52 +1,50 @@
-# Deploy on the existing AWS Lightsail box (tools.enrichwise.co.in)
+# How this is deployed at tools.enrichwise.co.in/insurance-compare/
 
-Serves the comparison tool as a **static file** under the same nginx server
-block as the other Enrichwise internal tools. **No extra AWS cost** — it rides
-on the Lightsail instance you already pay for, and needs no PM2 / Node process
-(it's one HTML file). It's internal-only (inherits the server's office-IP
-allowlist) and appears on the tools landing page under **Insurance Projects**.
+**No extra AWS cost** — it's a static file served by the nginx already running on
+the existing Lightsail box (the same box that runs the Kavach dashboard and the
+other internal tools). No S3 / CloudFront / Route 53, no PM2 / Node process.
 
-**Live at: https://tools.enrichwise.co.in/insurance-compare/**
+**Live (internal-only, office-IP allowlisted): https://tools.enrichwise.co.in/insurance-compare/**
 
-## Already deployed
+## Important: the box is GitOps-managed — don't edit it directly
 
-This was applied on 2026-06-02 via SSH (`ssh kavach`):
+The Lightsail box regenerates `/var/www/enrichwise-tools/` and its nginx config
+on every deploy, from the **`AIENRICHWISE/enrichwise-internal-tools`** repo
+(`deploy/deploy.sh`, triggered by GitHub Actions on push to `main`). It runs
+`rsync -av --delete static/ → /var/www/enrichwise-tools/`, so any file edited
+directly on the server is **wiped on the next deploy**. (That's exactly what
+happened on first attempt.)
 
-1. **Files** cloned to `/var/www/enrichwise-tools/insurance-compare/`.
-2. **nginx** — `deploy/nginx-insurance-compare.conf` inserted into
-   `/etc/nginx/sites-available/enrichwise-tools` (before the `location ~ /\.`
-   line), then `sudo nginx -t && sudo systemctl reload nginx`.
-3. **Landing page** — an "Insurance Projects" section + card added to
-   `/var/www/enrichwise-tools/index.html`.
+So the tool is **vendored into that repo**, where it survives deploys:
 
-Steps 2 & 3 are done by `deploy/apply_integration.py` (idempotent; backs up both
-files with a timestamped `.bak` first). Re-running is safe — it skips anything
-already present.
+- `static/insurance-compare/index.html` — a copy of this repo's `index.html`
+- `static/index.html` — has the "Insurance Projects" section + card
+- `deploy/nginx/enrichwise-tools.conf` — has the `location /insurance-compare/` block
 
-## Updating later (after pushing a change to GitHub)
+## Updating the live tool
 
-```bash
-ssh kavach 'cd /var/www/enrichwise-tools/insurance-compare && git pull'
-```
-
-Static files — the new version is live instantly (no build, no restart).
-
-## Reverting
-
-Each edit left a timestamped backup next to the original, e.g.:
+This repo (`enrichwise-compare`) is the canonical source / dev copy and also
+publishes to GitHub Pages. The Lightsail copy is the vendored one above. To push
+a change live on tools.enrichwise.co.in:
 
 ```bash
-# nginx
-sudo cp /etc/nginx/sites-available/enrichwise-tools.bak.<ts> /etc/nginx/sites-available/enrichwise-tools
-sudo nginx -t && sudo systemctl reload nginx
-# landing page
-sudo cp /var/www/enrichwise-tools/index.html.bak.<ts> /var/www/enrichwise-tools/index.html
+# 1. make + commit your change here, then copy the built file into the monorepo
+cp index.html <path-to>/enrichwise-internal-tools/static/insurance-compare/index.html
+
+# 2. commit + push the monorepo — GitHub Actions auto-deploys to Lightsail
+cd <path-to>/enrichwise-internal-tools
+git add static/insurance-compare/index.html
+git commit -m "Update insurance comparison tool"
+git push origin main
 ```
+
+GitHub Actions (`.github/workflows/deploy.yml`) SSHes into the box and runs
+`deploy.sh`, which rsyncs `static/` and validates+reloads nginx. Static file →
+live in well under a minute, no build.
 
 ## Notes
-- All data stays in the visitor's browser (localStorage) — nothing is written on
-  the server, so no DB / persistence / backups to manage.
-- Tailwind, html2canvas and Google Fonts load from public CDNs at runtime; the
-  box only serves the ~54 KB HTML.
-- Access is restricted to the office IP allowlist in the nginx server block
-  (same as Salesometer, FollowMeter, etc.).
+- Data stays in the visitor's browser (localStorage); nothing is written on the
+  server. No DB / persistence to manage.
+- Tailwind, html2canvas and Google Fonts load from public CDNs at runtime.
+- Access is limited to the office-IP allowlist in the nginx server block (same
+  as Salesometer, FollowMeter, etc.).
