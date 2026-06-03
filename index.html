@@ -166,8 +166,10 @@ const SEED_DB = {
         networkHospitals:"11,400+", claimSettlementRatio:"90%", roomRent:"No room-rent limit", coPay:"No",
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"unlimited-same-diff"},
-        ncbModel:{firstBonus:100,firstYears:99,thenBonus:100,capPct:500},
-        ncbText:"Base 50%/yr up to 100%; with Cumulative Bonus Super booster: 100%/yr up to 500% of SI (max cover 6× base)",
+        ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100},
+        ncbBooster:{firstBonus:100,firstYears:99,thenBonus:100,capPct:500},
+        ncbText:"50% of SI per claim-free year, up to 100%",
+        ncbBoosterText:"Cumulative Bonus Super: 100%/yr up to 500% of SI",
         instantCover:{available:true, name:"Instant Cover", conditions:["Diabetes","Hypertension (BP)","Hyperlipidemia (Cholesterol)","Asthma"]},
         uniqueFeatures:["Unlimited Automatic Recharge of base sum insured (unlimited times per year)","Unlimited Care (optional) — one claim with no annual SI limit, once in policy lifetime","Cumulative Bonus Super (optional) — up to 500% of SI"],
         addOns:{ consumables:{available:true,alias:"Claim Shield"}, bonus:{available:true,alias:"Cumulative Bonus Super"}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"every policy year",forWhom:"each insured (age-based test set)"}, maternity:{available:false,alias:""}, instantCover:{available:true,alias:"Instant Cover (PED wait waiver)"} }
@@ -179,8 +181,10 @@ const SEED_DB = {
         networkHospitals:"15,000+", claimSettlementRatio:"98.09%", roomRent:"Single private AC room", coPay:"No",
         prePost:"90/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"unlimited-same-diff"},
-        ncbModel:{firstBonus:100,firstYears:99,thenBonus:100,capPct:1000},
-        ncbText:"Base Loyalty Bonus 20%/yr (up to 100%); with Power Booster: 100%/yr toward Unlimited SI",
+        ncbModel:{firstBonus:20,firstYears:99,thenBonus:20,capPct:100},
+        ncbBooster:{firstBonus:100,firstYears:99,thenBonus:100,capPct:1000},
+        ncbText:"Loyalty Bonus 20% of SI/yr, up to 100%",
+        ncbBoosterText:"Power Booster: 100%/yr toward Unlimited SI",
         instantCover:{available:true, name:"Jumpstart", conditions:["Asthma","Diabetes","Hypertension (BP)","Hyperlipidemia (Cholesterol)","Obesity","Coronary Artery Disease"]},
         uniqueFeatures:["Reset Benefit — 100% of SI reinstated, unlimited times for any illness","Power Booster + Unlimited Sum Insured option","Inflation Protector — SI grows with CPI at each renewal"],
         addOns:{ consumables:{available:true,alias:"Claim Protector"}, bonus:{available:true,alias:"Power Booster"}, opd:{available:true,alias:"BeFit"}, healthCheckup:{available:true,type:"inbuilt",frequency:"once per policy year",forWhom:"adults 18+"}, maternity:{available:true,alias:"Maternity Benefit"}, instantCover:{available:true,alias:"Jumpstart"} }
@@ -193,7 +197,7 @@ const SEED_DB = {
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"unlimited-same-diff"},
         ncbModel:{firstBonus:100,firstYears:99,thenBonus:100,capPct:900},
-        ncbText:"Booster+ carries forward unused base SI, accumulating up to 10× base SI (Titanium+ variant)",
+        ncbText:"Booster+ (inbuilt) carries forward unused base SI, up to 10× base SI (Titanium+ variant)",
         instantCover:{available:false, name:"", conditions:[]},
         uniqueFeatures:["Lock the Clock (Age-Lock) — premium locked at entry age until a claim is paid","ReAssure Forever — unlimited reinstatement for life after the first paid claim","Booster+ Safeguard+ — carried-forward SI unaffected if yearly claims ≤ ₹1,00,000"],
         addOns:{ consumables:{available:true,alias:"Claim Safeguard / Safeguard+"}, bonus:{available:true,alias:"Booster+ (inbuilt carry-forward)"}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"once every policy year (from day 1)",forWhom:"each insured (cashless)"}, maternity:{available:false,alias:""}, instantCover:{available:false,alias:""} }
@@ -206,7 +210,7 @@ const SEED_DB = {
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"100pct"},
         ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100},
-        ncbText:"Plus Benefit — 50% of base SI added every year, up to 100% (claim-independent; traditional NCB not covered)",
+        ncbText:"Plus Benefit (inbuilt): 50% of base SI/yr, up to 100% (no traditional NCB)",
         instantCover:{available:false, name:"", conditions:[]},
         uniqueFeatures:["Secure Benefit — instant 100% extra cover over base SI","Plus Benefit — 50%/yr bonus up to 100%, regardless of claims","Protect Benefit — covers listed non-medical / consumable items"],
         addOns:{ consumables:{available:true,alias:"Protect Benefit (inbuilt)"}, bonus:{available:true,alias:"Plus Benefit (inbuilt)"}, opd:{available:true,alias:"Optima Wellbeing (add-on)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every policy year (after year 1)",forWhom:"insured covered the prior year"}, maternity:{available:true,alias:"Parenthood (add-on)"}, instantCover:{available:false,alias:""} }
@@ -219,7 +223,7 @@ const SEED_DB = {
         prePost:"90/180 days", dayCare:"Yes", ayush:"Yes",
         restore:{kind:"unlimited-same-diff"},
         ncbModel:{firstBonus:100,firstYears:99,thenBonus:100,capPct:500},
-        ncbText:"Super Credit — 100% of base SI every year (claim-independent), up to 500% of SI (max ₹3 Cr)",
+        ncbText:"Super Credit (inbuilt): 100% of base SI/yr, up to 500% of SI (max ₹3 Cr)",
         instantCover:{available:true, name:"Chronic Care — Day-1 (optional)", conditions:["Asthma","Hypertension (BP)","Hyperlipidemia (Cholesterol)","Diabetes","Obesity"]},
         uniqueFeatures:["HealthReturns — earn up to 100% of premium back via Active Dayz","Super Credit — up to 500% of SI as bonus","Chronic Care Day-1 in-patient cover for listed chronic conditions (optional)"],
         addOns:{ consumables:{available:true,alias:"Claim Protect (inbuilt)"}, bonus:{available:true,alias:"Super Credit (inbuilt)"}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"once per policy year",forWhom:"adults 18+"}, maternity:{available:false,alias:""}, instantCover:{available:true,alias:"Chronic Care Day-1 (optional)"} }
@@ -713,6 +717,17 @@ function formatINR(n){
   if(n>=1e5){ const v=n/1e5; return "₹"+(v%1===0?v:v.toFixed(1))+" L"; }
   return "₹"+Math.round(n).toLocaleString('en-IN');
 }
+// Which NCB model applies: the booster model only if the plan's bonus add-on is
+// actually selected on step 3 (inbuilt boosters have no ncbBooster, so their
+// ncbModel — the full inbuilt rate — always applies).
+function effectiveNcb(col){
+  if(col.pl.ncbBooster){
+    const st=state.perPlan[col.key];
+    const on=st&&st.addOns&&st.addOns.bonus&&st.addOns.bonus.on;
+    if(on) return col.pl.ncbBooster;
+  }
+  return col.pl.ncbModel||{firstBonus:0,firstYears:0,thenBonus:0,capPct:0};
+}
 // Inline-editable cell. Shows the (possibly edited) value; in editMode it's a
 // contenteditable span captured into state.planEdits (proposed-change metadata,
 // NOT the master DB).
@@ -795,10 +810,19 @@ function viewStep4(){
   };
 
   const bonusCell=col=>{
-    const proj=projBonus(col.pl.ncbModel||{firstBonus:0,firstYears:0,thenBonus:0,capPct:0});
+    const proj=projBonus(effectiveNcb(col));
     const base=siToNumber(col.si);
     const totalYr10 = base!=null ? base*(1+proj[9]/100) : null;
+    let boosterNote='';
+    if(col.pl.ncbBooster){
+      const st=state.perPlan[col.key];
+      const on=st&&st.addOns&&st.addOns.bonus&&st.addOns.bonus.on;
+      boosterNote = on
+        ? `<div class="text-[11px]" style="color:var(--ew-green-700)">✓ ${esc(col.pl.ncbBoosterText||'bonus booster')} — applied</div>`
+        : `<div class="text-[11px]" style="color:var(--ew-slate)">+ ${esc(col.pl.ncbBoosterText||'bonus booster')} — add-on, not selected</div>`;
+    }
     return `<div class="text-[11px]" style="color:var(--ew-slate)">${ed(col.key,'ncbText',esc(col.pl.ncbText||''))}</div>
+      ${boosterNote}
       <div class="text-xs mt-1">Up to <b>${proj[9]}%</b> bonus${base!=null?` · cover grows to <b>${formatINR(totalYr10)}</b> by yr 10 (on ${esc(col.si)})`:''}</div>`;
   };
 
@@ -806,7 +830,7 @@ function viewStep4(){
 
   // 10-year sum-insured growth chart (₹), based on the SI chosen on step 2.
   const bonusProjection = cols.map(col=>{
-    const proj=projBonus(col.pl.ncbModel||{firstBonus:0,firstYears:0,thenBonus:0,capPct:0});
+    const proj=projBonus(effectiveNcb(col));
     const base=siToNumber(col.si);
     const totals = base!=null ? proj.map(p=> base*(1+p/100)) : null;
     const maxT = totals ? Math.max(...totals) : Math.max(...proj,100);
