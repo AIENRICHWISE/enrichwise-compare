@@ -161,7 +161,7 @@ const SEED_DB = {
 
   insurers:{
     care:{ name:"Care Health", logoText:"CARE", color:"#0E7C5A",
-      plans:{ supreme:{ planName:"Care Supreme", brochureUrl:"https://www.google.com/search?q=Care+Supreme+brochure+pdf", networkUrl:"https://www.google.com/search?q=Care+Health+cashless+network+hospitals+list",
+      plans:{ supreme:{ planName:"Care Supreme", brochureUrl:"https://cms.careinsurance.com/cms/public/uploads/download_center/care-supreme---brochure.pdf", networkUrl:"https://www.google.com/search?q=Care+Health+cashless+network+hospitals+list",
         sumInsured:["5L","7L","10L","25L","1Cr"],
         networkHospitals:"11,400+", claimSettlementRatio:"90%", roomRent:"No room-rent limit", coPay:"No",
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
@@ -176,7 +176,7 @@ const SEED_DB = {
       }}},
 
     icici:{ name:"ICICI Lombard", logoText:"ICICI", color:"#A5161A",
-      plans:{ elevate:{ planName:"ICICI Elevate", brochureUrl:"https://www.google.com/search?q=ICICI+Elevate+brochure+pdf", networkUrl:"https://www.google.com/search?q=ICICI+Lombard+cashless+network+hospitals+list",
+      plans:{ elevate:{ planName:"ICICI Elevate", brochureUrl:"https://www.icicilombard.com/docs/default-source/default-document-library/elevate-brochure_final_4-6-24.pdf", networkUrl:"https://www.google.com/search?q=ICICI+Lombard+cashless+network+hospitals+list",
         sumInsured:["10L","50L","1Cr","Unlimited"],
         networkHospitals:"15,000+", claimSettlementRatio:"98.09%", roomRent:"Single private AC room", coPay:"No",
         prePost:"90/180 days", dayCare:"Yes", ayush:"Yes",
@@ -187,11 +187,11 @@ const SEED_DB = {
         ncbBoosterText:"Power Booster: 100%/yr toward Unlimited SI",
         instantCover:{available:true, name:"Jumpstart", conditions:["Asthma","Diabetes","Hypertension (BP)","Hyperlipidemia (Cholesterol)","Obesity","Coronary Artery Disease"]},
         uniqueFeatures:["Reset Benefit — 100% of SI reinstated, unlimited times for any illness","Power Booster + Unlimited Sum Insured option","Inflation Protector — SI grows with CPI at each renewal"],
-        addOns:{ consumables:{available:true,alias:"Claim Protector"}, bonus:{available:true,alias:"Power Booster"}, opd:{available:true,alias:"BeFit"}, healthCheckup:{available:true,type:"inbuilt",frequency:"once per policy year",forWhom:"adults 18+"}, maternity:{available:true,alias:"Maternity Benefit"}, instantCover:{available:true,alias:"Jumpstart"} }
+        addOns:{ consumables:{available:true,alias:"Claim Protector"}, bonus:{available:true,alias:"Power Booster"}, opd:{available:true,alias:"BeFit"}, healthCheckup:{available:true,type:"inbuilt",frequency:"once per policy year",forWhom:"adults 18+",amount:"₹5,000 per adult member"}, maternity:{available:true,alias:"Maternity Benefit"}, instantCover:{available:true,alias:"Jumpstart"} }
       }}},
 
     niva:{ name:"Niva Bupa", logoText:"NIVA", color:"#E2761E",
-      plans:{ reassure2:{ planName:"ReAssure 2.0", brochureUrl:"https://www.google.com/search?q=Niva+Bupa+ReAssure+2.0+brochure+pdf", networkUrl:"https://www.google.com/search?q=Niva+Bupa+cashless+network+hospitals+list",
+      plans:{ reassure2:{ planName:"ReAssure 2.0", brochureUrl:"https://otc.nivabupa.com/nivabupalogo/ReAssureBrochure2.0.pdf", networkUrl:"https://www.google.com/search?q=Niva+Bupa+cashless+network+hospitals+list",
         sumInsured:["5L","10L","25L","1Cr"],
         networkHospitals:"10,000+", claimSettlementRatio:"91%", roomRent:"No room-rent cap (any room; ICU up to base SI)", coPay:"No",
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
@@ -204,7 +204,7 @@ const SEED_DB = {
       }}},
 
     hdfc:{ name:"HDFC Ergo", logoText:"HDFC", color:"#C8102E",
-      plans:{ optimasecure:{ planName:"Optima Secure", brochureUrl:"https://www.google.com/search?q=HDFC+Ergo+Optima+Secure+brochure+pdf", networkUrl:"https://www.google.com/search?q=HDFC+Ergo+cashless+network+hospitals+list",
+      plans:{ optimasecure:{ planName:"Optima Secure", brochureUrl:"https://www.hdfcergo.com/docs/default-source/downloads/brochures/optima-secure-brochure.pdf", networkUrl:"https://www.google.com/search?q=HDFC+Ergo+cashless+network+hospitals+list",
         sumInsured:["5L","10L","15L","25L","50L","1Cr","2Cr"],
         networkHospitals:"13,000+", claimSettlementRatio:"98%", roomRent:"At actuals (no room-rent limit)", coPay:"No",
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
@@ -213,11 +213,11 @@ const SEED_DB = {
         ncbText:"Plus Benefit (inbuilt): 50% of base SI/yr, up to 100% (no traditional NCB)",
         instantCover:{available:false, name:"", conditions:[]},
         uniqueFeatures:["Secure Benefit — instant 100% extra cover over base SI","Plus Benefit — 50%/yr bonus up to 100%, regardless of claims","Protect Benefit — covers listed non-medical / consumable items"],
-        addOns:{ consumables:{available:true,alias:"Protect Benefit (inbuilt)"}, bonus:{available:true,alias:"Plus Benefit (inbuilt)"}, opd:{available:true,alias:"Optima Wellbeing (add-on)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every policy year (after year 1)",forWhom:"insured covered the prior year"}, maternity:{available:true,alias:"Parenthood (add-on)"}, instantCover:{available:false,alias:""} }
+        addOns:{ consumables:{available:true,alias:"Protect Benefit (inbuilt)"}, bonus:{available:true,alias:"Plus Benefit (inbuilt)"}, opd:{available:true,alias:"Optima Wellbeing (add-on)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every policy year (after year 1)",forWhom:"insured covered the prior year",amount:"₹1,500–₹8,000 by SI"}, maternity:{available:true,alias:"Parenthood (add-on)"}, instantCover:{available:false,alias:""} }
       }}},
 
     adityabirla:{ name:"Aditya Birla", logoText:"ABHI", color:"#C8102E",
-      plans:{ activonemax:{ planName:"Activ One MAX", brochureUrl:"https://www.google.com/search?q=Aditya+Birla+Activ+One+MAX+brochure+pdf", networkUrl:"https://www.google.com/search?q=Aditya+Birla+Health+cashless+network+hospitals+list",
+      plans:{ activonemax:{ planName:"Activ One MAX", brochureUrl:"https://www.adityabirlacapital.com/healthinsurance/assets/pdf/active-one/brochure.pdf", networkUrl:"https://www.google.com/search?q=Aditya+Birla+Health+cashless+network+hospitals+list",
         sumInsured:["5L","10L","25L","50L","1Cr","2Cr"],
         networkHospitals:"12,000+", claimSettlementRatio:"96%", roomRent:"Actuals up to SI (no room-rent cap)", coPay:"No",
         prePost:"90/180 days", dayCare:"Yes", ayush:"Yes",
@@ -229,8 +229,8 @@ const SEED_DB = {
         addOns:{ consumables:{available:true,alias:"Claim Protect (inbuilt)"}, bonus:{available:true,alias:"Super Credit (inbuilt)"}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"once per policy year",forWhom:"adults 18+"}, maternity:{available:false,alias:""}, instantCover:{available:true,alias:"Chronic Care Day-1 (optional)"} }
       }}},
 
-    star:{ name:"Star Health", logoText:"STAR", color:"#E11D48", plans:{ comprehensive:{ planName:"Star Comprehensive", brochureUrl:"https://www.google.com/search?q=Star+Comprehensive+brochure+pdf", networkUrl:"https://www.google.com/search?q=Star+Health+cashless+network+hospitals", sumInsured:["5L","7.5L","10L","25L","50L","1Cr"], networkHospitals:"14,000+", claimSettlementRatio:"—", roomRent:"Single private AC room", coPay:"No (10% if entry age ≥ 61)", prePost:"60/90 days", dayCare:"Yes", ayush:"Yes (sub-limit ₹15k–₹30k by SI; Yoga/Naturopathy excluded)", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% per claim-free year up to 100% (100%/yr for SI ≥ ₹7.5L)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["100% automatic restoration usable even for the same illness already claimed","In-built OPD consultation, dental & ophthalmic, hospital cash & wellness discount","Optional buy-back reduces PED waiting from 36 to 12 months"], addOns:{ consumables:{available:false,alias:""}, bonus:{available:false,alias:""}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"every claim-free year",forWhom:"all insured"}, maternity:{available:true,alias:"Delivery & New Born (inbuilt, 24-mo wait)"}, instantCover:{available:false,alias:""} } }}},
-    tata:{ name:"Tata AIG", logoText:"TATA", color:"#1E40AF", plans:{ medicareprem:{ planName:"Medicare Premier", brochureUrl:"https://www.google.com/search?q=Tata+AIG+Medicare+Premier+brochure+pdf", networkUrl:"https://www.google.com/search?q=Tata+AIG+cashless+network+hospitals", sumInsured:["50L","75L","1Cr","2Cr","3Cr"], networkHospitals:"—", claimSettlementRatio:"—", roomRent:"No room-rent limit", coPay:"No", prePost:"60/90 days (200 days post for SI ≥ ₹75L)", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% cumulative bonus per claim-free year, up to 100% (reduces 50% on a claim)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["Home Care treatment & post-hospitalisation physiotherapy (SI ≥ ₹75L)","Global cover for planned hospitalisation + air ambulance","Maternity with girl-child benefit, delivery complications & first-year vaccinations"], addOns:{ consumables:{available:true,alias:"Consumables Benefit (inbuilt)"}, bonus:{available:true,alias:"Cumulative Bonus (inbuilt)"}, opd:{available:true,alias:"OPD Treatment (inbuilt, after 2 yrs)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"per policy / insured"}, maternity:{available:true,alias:"Maternity Cover (inbuilt, 3-yr wait)"}, instantCover:{available:false,alias:""} } }}}
+    star:{ name:"Star Health", logoText:"STAR", color:"#E11D48", plans:{ comprehensive:{ planName:"Star Comprehensive", brochureUrl:"https://d28c6jni2fmamz.cloudfront.net/Brochure_Star_Comprehensive_Insurance_Policy_V_15_Web_633bcfcaaf.pdf", networkUrl:"https://www.google.com/search?q=Star+Health+cashless+network+hospitals", sumInsured:["5L","7.5L","10L","25L","50L","1Cr"], networkHospitals:"14,000+", claimSettlementRatio:"—", roomRent:"Single private AC room", coPay:"No (10% if entry age ≥ 61)", prePost:"60/90 days", dayCare:"Yes", ayush:"Yes (sub-limit ₹15k–₹30k by SI; Yoga/Naturopathy excluded)", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% per claim-free year up to 100% (100%/yr for SI ≥ ₹7.5L)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["100% automatic restoration usable even for the same illness already claimed","In-built OPD consultation, dental & ophthalmic, hospital cash & wellness discount","Optional buy-back reduces PED waiting from 36 to 12 months"], addOns:{ consumables:{available:false,alias:""}, bonus:{available:false,alias:""}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"every claim-free year",forWhom:"all insured"}, maternity:{available:true,alias:"Delivery & New Born (inbuilt, 24-mo wait)"}, instantCover:{available:false,alias:""} } }}},
+    tata:{ name:"Tata AIG", logoText:"TATA", color:"#1E40AF", plans:{ medicareprem:{ planName:"Medicare Premier", brochureUrl:"https://www.tataaig.com/s3/medicare_premier_brochure_afa84d68a1.pdf", networkUrl:"https://www.google.com/search?q=Tata+AIG+cashless+network+hospitals", sumInsured:["50L","75L","1Cr","2Cr","3Cr"], networkHospitals:"—", claimSettlementRatio:"—", roomRent:"No room-rent limit", coPay:"No", prePost:"60/90 days (200 days post for SI ≥ ₹75L)", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% cumulative bonus per claim-free year, up to 100% (reduces 50% on a claim)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["Home Care treatment & post-hospitalisation physiotherapy (SI ≥ ₹75L)","Global cover for planned hospitalisation + air ambulance","Maternity with girl-child benefit, delivery complications & first-year vaccinations"], addOns:{ consumables:{available:true,alias:"Consumables Benefit (inbuilt)"}, bonus:{available:true,alias:"Cumulative Bonus (inbuilt)"}, opd:{available:true,alias:"OPD Treatment (inbuilt, after 2 yrs)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"per policy / insured"}, maternity:{available:true,alias:"Maternity Cover (inbuilt, 3-yr wait)"}, instantCover:{available:false,alias:""} } }}}
   }
 };
 
@@ -675,7 +675,7 @@ function projBonus(model,years=10){
 function clientAges(){
   const c=state.client;
   if(c.policyType==='Individual') return c.individualAge||"—";
-  return c.members.filter(m=>String(m.age).trim()).map(m=>(m.name?m.name+" ":"")+m.age).join(", ")||"—";
+  return c.members.filter(m=>String(m.age).trim()).map(m=>m.age).join(", ")||"—";
 }
 function computeScores(){
   // simple transparent scoring
@@ -777,10 +777,21 @@ function viewStep4(){
     </th>`;
   }).join("");
 
-  const row=(label,fn,sub="")=>`<tr class="border-t" style="border-color:var(--ew-line)">
+  // A cell counts as "blank" when it has no real value (empty, —, None…). A row
+  // whose every plan cell is blank is dropped entirely (e.g. premium not filled).
+  const BLANKS=["","—","none selected","none declared","n/a"];
+  const isBlank=html=>{
+    const t=String(html).replace(/<[^>]*>/g,'').replace(/&[a-z]+;/gi,'').replace(/\s+/g,' ').trim().toLowerCase();
+    return t==="" || BLANKS.includes(t);
+  };
+  const row=(label,fn,sub="")=>{
+    const cells=cols.map(col=>fn(col));
+    if(cells.every(isBlank)) return "";   // hide rows with no data on any plan
+    return `<tr class="border-t" style="border-color:var(--ew-line)">
       <td class="p-3 text-sm font-medium align-top" style="background:var(--ew-mint-50)">${label}${sub?`<div class="text-[11px] font-normal" style="color:var(--ew-slate)">${sub}</div>`:''}</td>
-      ${cols.map(col=>`<td class="p-3 text-sm align-top ${col.key===recKey?'cmp-col-rec':''}">${fn(col)}</td>`).join("")}
+      ${cols.map((col,i)=>`<td class="p-3 text-sm align-top ${col.key===recKey?'cmp-col-rec':''}">${cells[i]}</td>`).join("")}
     </tr>`;
+  };
 
   const yn=v=>v&&v.toLowerCase&&v.toLowerCase()==='yes'?`<span class="pill-yes">Yes</span>`:(v&&v.toLowerCase&&v.toLowerCase()==='no'?`<span class="pill-no">No</span>`:esc(v||"—"));
 
@@ -800,7 +811,12 @@ function viewStep4(){
   const checkupCell=col=>{
     const a=col.pl.addOns&&col.pl.addOns.healthCheckup;
     if(!a||!a.available) return "—";
-    return `${a.type==='inbuilt'?'<span class="pill-yes">In-built</span>':'<span style="color:var(--ew-gold);font-weight:600">Add-on</span>'} · ${esc(a.frequency||'')} · ${esc(a.forWhom||'')}`;
+    const parts=[
+      a.type==='inbuilt'?'<span class="pill-yes">In-built</span>':'<span style="color:var(--ew-gold);font-weight:600">Add-on</span>',
+      esc(a.frequency||''), esc(a.forWhom||'')
+    ].filter(x=>x&&x.trim());
+    if(a.amount) parts.push('<b>'+esc(a.amount)+'</b>');
+    return parts.join(' · ');
   };
 
   const instantCell=col=>{
@@ -873,14 +889,7 @@ function viewStep4(){
         <p class="text-[11px] mt-3" style="color:var(--ew-slate)">Score is a transparent internal heuristic (claim ratio + network + restoration + co-pay + condition-fit + add-ons${state.sellPreference?' + selling preference':''}). It assists discussion; it is not financial advice.</p>
       </div>`;
   } else {
-    recBlock=`
-      <div class="card p-6" style="border:1px solid var(--ew-line)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background:var(--ew-mint-200);color:var(--ew-green-900)">NO SPECIFIC RECOMMENDATION</span>
-        </div>
-        <h3 class="text-2xl">Presented for the client's own decision</h3>
-        <p class="text-sm mt-2" style="color:var(--ew-slate)">All ${cols.length} plans are shown side by side without a single recommended pick, so ${esc(c.name||'the client')} can decide based on their own priorities. Your advisor can walk through the trade-offs.</p>
-      </div>`;
+    recBlock="";   // "Recommend none" → no recommendation section at all
   }
 
   return `
@@ -915,7 +924,7 @@ function viewStep4(){
           ${hdr("Policy type",c.policyType)}
           ${hdr("Age(s)",clientAges())}
           ${hdr("Case type",c.caseType)}
-          ${hdr("Medical history",(c.history.length?c.history.map(h=>h==='Others'?('Others: '+c.historyOther):h).join(", "):"None declared"))}
+          ${hdr("Medical history",(c.history.length?c.history.map(h=>h==='Others'?('Others: '+c.historyOther):h).join(", "):""))}
         </div>
       </div>
 
@@ -960,7 +969,7 @@ function viewStep4(){
     </div>
   </div>`;
 }
-function hdr(k,v){ return `<div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.12)"><div class="text-[10px] uppercase tracking-wide opacity-80">${k}</div><div class="font-medium">${esc(v||"—")}</div></div>`; }
+function hdr(k,v){ if(v==null||String(v).trim()===""||String(v).trim()==="—") return ""; return `<div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.12)"><div class="text-[10px] uppercase tracking-wide opacity-80">${k}</div><div class="font-medium">${esc(v)}</div></div>`; }
 
 /* ============================================================
    EXPORT (JPG via html2canvas, PDF via print)
