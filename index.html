@@ -790,7 +790,7 @@ const FIELD_LABELS = {
 };
 function loadServerOverrides(){
   try{
-    fetch(KAVACH_API+"/overrides",{headers:{Accept:"application/json"}})
+    fetch(KAVACH_API+"/overrides/",{headers:{Accept:"application/json"}})
       .then(r=> r&&r.ok ? r.json() : null)
       .then(d=>{ if(d&&d.overrides){ state.serverOverrides=d.overrides; if(state.step===4) render(); } })
       .catch(()=>{});
@@ -818,7 +818,7 @@ function submitForApproval(){
   if(by===null) return;
   const msg=document.getElementById("submitMsg");
   if(msg){ msg.textContent="Submitting…"; msg.style.color="var(--ew-slate)"; }
-  fetch(KAVACH_API+"/proposals",{
+  fetch(KAVACH_API+"/proposals/",{
     method:"POST", headers:{"Content-Type":"application/json"},
     body:JSON.stringify({submittedBy:by||"", clientName:state.client.name||"", changes})
   }).then(r=>r.ok?r.json():Promise.reject(r)).then(d=>{
