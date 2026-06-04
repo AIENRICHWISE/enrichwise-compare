@@ -256,6 +256,8 @@ const state = {
   perPlan:{},             // key -> {addOns:{cat:{on,alias,why}}, premium}
   defaultSI:"",           // sticky sum-insured shared across selected plans
   planEdits:{},           // "ik::plk" -> {field:newText} proposed inline edits (metadata, NOT master DB)
+  serverOverrides:{},     // "ik::plk" -> {field:approvedText} fetched from Kavach (admin-approved)
+  editBaseline:{},        // "ik::plk" -> {field:textSeenBeforeEdit} so a proposal carries old->new
   recommendKey:"",        // "insurerKey::planKey" | "__none__" (recommend none) | "" (auto-score)
   sellPreference:""       // optional insurer the advisor wants to push
 };
@@ -732,17 +734,34 @@ function effectiveNcb(col){
 // contenteditable span captured into state.planEdits (proposed-change metadata,
 // NOT the master DB).
 function ed(key,field,defaultHtml){
-  const o=state.planEdits[key]&&state.planEdits[key][field];
-  const edited=(o!=null&&o!=='');
-  const content=edited?esc(o):defaultHtml;
-  if(editMode) return `<span contenteditable="true" data-ek="${key}" data-ef="${field}" class="ew-edit${edited?' ew-edited':''}">${content}</span>`;
-  return edited?`<span class="ew-edited">${content}</span>`:content;
+  const local=state.planEdits[key]&&state.planEdits[key][field];
+  const server=state.serverOverrides[key]&&state.serverOverrides[key][field];
+  const hasLocal=(local!=null&&local!=='');
+  const hasServer=(server!=null&&server!=='');
+  const val=hasLocal?local:(hasServer?server:null);
+  if(editMode){
+    const content=(val!=null)?esc(val):defaultHtml;
+    return `<span contenteditable="true" data-ek="${key}" data-ef="${field}" class="ew-edit${hasLocal?' ew-edited':''}">${content}</span>`;
+  }
+  if(hasLocal) return `<span class="ew-edited">${esc(local)}</span>`;  // unsaved proposed edit (gold marker)
+  if(hasServer) return esc(server);                                    // admin-approved value — normal data
+  return defaultHtml;
 }
 function countEdits(){ let n=0; Object.values(state.planEdits).forEach(o=>n+=Object.keys(o||{}).length); return n; }
 function toggleEdit(){ editMode=!editMode; render(); }
 function bindStep4(){
   const rep=document.getElementById("report");
   if(!rep) return;
+  // Snapshot the value the advisor saw before their first edit of a cell, so the
+  // proposal can show old -> new to the admin.
+  rep.addEventListener("focusin", e=>{
+    const t=e.target;
+    if(t && t.getAttribute && t.getAttribute("data-ek")){
+      const k=t.getAttribute("data-ek"), f=t.getAttribute("data-ef");
+      if(!state.editBaseline[k]) state.editBaseline[k]={};
+      if(state.editBaseline[k][f]==null) state.editBaseline[k][f]=t.innerText.trim();
+    }
+  });
   rep.addEventListener("input", e=>{
     const t=e.target;
     if(t && t.getAttribute && t.getAttribute("data-ek")){
@@ -755,6 +774,59 @@ function bindStep4(){
   });
 }
 function printReport(){ if(editMode){ editMode=false; render(); } setTimeout(()=>window.print(),60); }
+
+/* ============================================================
+   APPROVAL WORKFLOW — talks to the Kavach app (same origin in prod).
+   GET  approved overrides -> applied via ed()
+   POST proposed edits     -> Nidhi reviews in /kavach/settings/insurance-compare
+   Fails silently off-network / on GitHub Pages (tool still works standalone).
+   ============================================================ */
+const KAVACH_API = "/kavach/api/insurance-compare";
+const FIELD_LABELS = {
+  uniqueFeatures:"Unique feature", claimSettlementRatio:"Claim settlement ratio",
+  instantCover:"Instant coverage", roomRent:"Room rent", prePost:"Pre / Post hospitalization",
+  networkHospitals:"Network hospitals", coPay:"Co-pay", restore:"Restore benefit",
+  dayCare:"Day care", ayush:"AYUSH", healthCheckup:"Annual health check-up", ncbText:"No-claim bonus"
+};
+function loadServerOverrides(){
+  try{
+    fetch(KAVACH_API+"/overrides",{headers:{Accept:"application/json"}})
+      .then(r=> r&&r.ok ? r.json() : null)
+      .then(d=>{ if(d&&d.overrides){ state.serverOverrides=d.overrides; if(state.step===4) render(); } })
+      .catch(()=>{});
+  }catch(e){}
+}
+function submitForApproval(){
+  const changes=[];
+  Object.keys(state.planEdits).forEach(key=>{
+    const [ik,plk]=key.split("::");
+    const pl=DB.insurers[ik]&&DB.insurers[ik].plans[plk];
+    const fields=state.planEdits[key];
+    Object.keys(fields).forEach(f=>{
+      const baseline=(state.editBaseline[key]&&state.editBaseline[key][f]);
+      const server=(state.serverOverrides[key]&&state.serverOverrides[key][f]);
+      changes.push({
+        insurerKey:ik, planKey:plk, planName: pl?pl.planName:plk,
+        field:f, label:FIELD_LABELS[f]||f,
+        oldValue:(baseline!=null?baseline:(server||"")),
+        newValue:fields[f]
+      });
+    });
+  });
+  if(!changes.length){ alert("No proposed edits yet. Click ✏️ Edit details and change a value first."); return; }
+  const by=prompt("Submit "+changes.length+" change(s) to Nidhi for approval.\n\nYour name or code (so she knows who proposed them):","");
+  if(by===null) return;
+  const msg=document.getElementById("submitMsg");
+  if(msg){ msg.textContent="Submitting…"; msg.style.color="var(--ew-slate)"; }
+  fetch(KAVACH_API+"/proposals",{
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({submittedBy:by||"", clientName:state.client.name||"", changes})
+  }).then(r=>r.ok?r.json():Promise.reject(r)).then(d=>{
+    if(msg){ msg.style.color="var(--ew-green-700)"; msg.textContent="✓ "+(d.submitted||changes.length)+" change(s) sent to Nidhi for approval."; }
+  }).catch(()=>{
+    if(msg){ msg.style.color="var(--ew-notrec)"; msg.textContent="Couldn't reach the approval service (are you on the office network?). Your edits are still saved on this chart."; }
+  });
+}
 function viewStep4(){
   const c=state.client;
   const scores=computeScores();
@@ -907,8 +979,15 @@ function viewStep4(){
       </div>
     </div>
     ${editMode?`<div class="no-print card p-3 text-sm" style="border-color:var(--ew-green-500);background:var(--ew-mint-50)">
-      ✏️ <b>Edit mode:</b> click any highlighted value in the table to change it. Edits are saved with this comparison as <b>proposed changes</b> (<span id="editCount">${countEdits()}</span> so far) and will route to admin approval before the master database updates — they don't change it directly. Use <b>Download JPG / Save as PDF</b> to export the edited chart.
-    </div>`:(countEdits()?`<div class="no-print text-xs" style="color:var(--ew-green-700)">${countEdits()} proposed edit(s) captured on this comparison · <button onclick="toggleEdit()" class="underline" style="color:var(--ew-green-700)">edit again</button></div>`:'')}
+      <div>✏️ <b>Edit mode:</b> click any highlighted value to change it. Edits are saved as <b>proposed changes</b> (<span id="editCount">${countEdits()}</span>) and don't change the master data until an admin approves them. Export reflects your edits.</div>
+      <div class="mt-2 flex items-center gap-2 flex-wrap">
+        <button onclick="submitForApproval()" class="btn btn-primary px-4 py-2 text-sm">Submit for Nidhi's approval →</button>
+        <span id="submitMsg" class="text-sm"></span>
+      </div>
+    </div>`:(countEdits()?`<div class="no-print card p-3 text-sm" style="border-color:var(--ew-green-500);background:var(--ew-mint-50)">
+      <div>${countEdits()} proposed edit(s) on this comparison. <button onclick="toggleEdit()" class="underline" style="color:var(--ew-green-700)">edit again</button></div>
+      <div class="mt-2 flex items-center gap-2 flex-wrap"><button onclick="submitForApproval()" class="btn btn-primary px-4 py-2 text-sm">Submit for Nidhi's approval →</button><span id="submitMsg" class="text-sm"></span></div>
+    </div>`:'')}
 
     <div id="report" class="grid gap-5 p-1">
       <!-- SECTION 1: HEADER -->
@@ -1014,6 +1093,7 @@ function resetAll(){
 }
 
 render();
+loadServerOverrides();   // pull admin-approved field values (no-op off-network)
 </script>
 </body>
 </html>
