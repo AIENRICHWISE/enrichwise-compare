@@ -743,11 +743,11 @@ function niceTicks(maxVal){
 }
 // Unified "Base cover vs. accumulated bonus" grouped+stacked SVG chart.
 function coverGrowthChart(cols, recKey){
-  const years=[0,2,4,6,8,10];
+  const years=[1,2,3,4,5,6,7,8,9,10];   // every year 1..10, no skipped years
   const plans=cols.map(col=>{
     const base=siToNumber(col.si);
     const proj=projBonus(effectiveNcb(col));
-    const cumAt=y=> y===0?0:proj[y-1];
+    const cumAt=y=> proj[y-1];
     return { col, base,
       totals: base!=null? years.map(y=> base*(1+cumAt(y)/100)) : null,
       final: base!=null? base*(1+proj[9]/100) : null,
@@ -761,9 +761,8 @@ function coverGrowthChart(cols, recKey){
   byFinal.forEach((p,i)=>{ p.shade=shades[i]; p.labelFill=(p.shade==='#6ee7b7'||p.shade==='#34d399')?'#047857':p.shade; });
   const maxVal=Math.max(...drawable.flatMap(p=>p.totals));
   const {ticks, top}=niceTicks(maxVal);
-  const target=ticks.length>1?ticks[ticks.length-2]:null;
 
-  const W=760,H=380,mL=58,mR=16,mT=30,mB=40;
+  const W=900,H=380,mL=58,mR=16,mT=30,mB=40;   // wider to fit 10 year-groups
   const plotW=W-mL-mR, plotH=H-mT-mB, baseY=mT+plotH;
   const yOf=v=> baseY-(v/top)*plotH;
   const groupW=plotW/years.length, n=drawable.length;
@@ -777,8 +776,6 @@ function coverGrowthChart(cols, recKey){
   let grid='';
   ticks.forEach(t=>{ const y=yOf(t); grid+=`<line x1="${mL}" y1="${y}" x2="${W-mR}" y2="${y}" stroke="#eef2f6"/><text x="${mL-8}" y="${y+3}" text-anchor="end" font-size="10" fill="#9aa5b1">${formatINRshort(t)}</text>`; });
   grid+=`<line x1="${mL}" y1="${baseY}" x2="${W-mR}" y2="${baseY}" stroke="#cbd5e1"/><text x="${mL-8}" y="${baseY+3}" text-anchor="end" font-size="10" fill="#9aa5b1">0</text>`;
-  let targetEl='';
-  if(target){ const y=yOf(target); targetEl=`<line x1="${mL}" y1="${y}" x2="${W-mR}" y2="${y}" stroke="#10b981" stroke-dasharray="4 4" stroke-opacity=".55"/><text x="${mL+5}" y="${y-4}" font-size="9" fill="#10b981" letter-spacing=".5">₹${formatINRshort(target)} TARGET</text>`; }
 
   let bars='', xlabels='';
   years.forEach((yr,gi)=>{
@@ -797,21 +794,21 @@ function coverGrowthChart(cols, recKey){
       }
       if(gi===years.length-1) bars+=`<text x="${x+barW/2}" y="${totalTopY-5}" text-anchor="middle" font-size="9.5" font-weight="700" fill="${p.labelFill}">${formatINRshort(p.final)}</text>`;
     });
-    xlabels+=`<text x="${mL+gi*groupW+groupW/2}" y="${baseY+16}" text-anchor="middle" font-size="10" fill="#5C6B63">${yr===0?'NOW':'Y'+yr}</text>`;
+    xlabels+=`<text x="${mL+gi*groupW+groupW/2}" y="${baseY+16}" text-anchor="middle" font-size="9.5" fill="#5C6B63">Y${yr}</text>`;
   });
 
-  const svg=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" font-family="'Plus Jakarta Sans',sans-serif">${grid}${targetEl}${bars}${xlabels}</svg>`;
+  const svg=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" font-family="'Plus Jakarta Sans',sans-serif">${grid}${bars}${xlabels}</svg>`;
   const sameBase=drawable.every(p=>p.base===drawable[0].base);
   const legend=`<div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 text-xs">
-    <span class="inline-flex items-center gap-1.5"><span style="width:11px;height:11px;border-radius:3px;background:#cbd5e1;display:inline-block"></span>Base cover${sameBase?' '+formatINR(drawable[0].base):' (sum insured)'}</span>
-    ${byFinal.map(p=>`<span class="inline-flex items-center gap-1.5"><span style="width:11px;height:11px;border-radius:3px;background:${p.shade};display:inline-block"></span>${esc(p.col.pl.planName)} · <b>${formatINR(p.final)}</b>${p.isRec?' <span class="recbadge text-[9px] font-bold px-1.5 py-0.5 rounded-full">RECOMMENDED</span>':''}</span>`).join("")}
+    <span class="inline-flex items-center gap-1.5"><span style="width:11px;height:11px;border-radius:3px;background:#cbd5e1;display:inline-block"></span>Base sum insured${sameBase?' '+formatINR(drawable[0].base):''}</span>
+    ${byFinal.map(p=>`<span class="inline-flex items-center gap-1.5"><span style="width:11px;height:11px;border-radius:3px;background:${p.shade};display:inline-block"></span>${esc(p.col.pl.planName)} · cover to <b>${formatINR(p.final)}</b></span>`).join("")}
   </div>`;
-  const desc=`Each plan's grey base is its sum insured; the green stacked on top is the accumulated no-claim bonus — the deeper the green, the more the cover grows. By year 10: ${byFinal.map(p=>esc(p.col.pl.planName)+' '+formatINR(p.final)).join(', ')}.`;
+  const desc=`By year 10: ${byFinal.map(p=>esc(p.col.pl.planName)+' '+formatINR(p.final)).join(', ')}.`;
   const skipNote=skipped.length?`<div class="text-[11px] mt-1" style="color:var(--ew-slate)">${skipped.map(p=>esc(p.col.pl.planName)).join(", ")}: Unlimited sum insured — not plotted to scale.</div>`:'';
   return `<div class="card p-5">
     <div class="text-[11px] tracking-widest uppercase mb-1" style="color:var(--ew-green-600)">Bar · stacked · ${drawable.length} plan${drawable.length>1?'s':''}</div>
-    <h3 class="text-xl">Base cover vs. accumulated bonus</h3>
-    <p class="text-xs mt-1 mb-3" style="color:var(--ew-slate)">${desc} Illustrative; includes the bonus-booster add-on only where selected.</p>
+    <h3 class="text-xl">Base sum insured + no-claim bonus · 10-year growth</h3>
+    <p class="text-xs mt-1 mb-3" style="color:var(--ew-slate)">Each bar = grey base sum insured + green accumulated <b>no-claim bonus</b> (an inbuilt cumulative/guaranteed bonus that grows every claim-free year). Deeper green = higher total cover. ${desc} Illustrative; includes the optional bonus-booster only where selected.</p>
     ${svg}
     ${legend}
     ${skipNote}
