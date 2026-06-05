@@ -58,7 +58,7 @@
   .pill-no{color:var(--ew-notrec);font-weight:600;}
   .ew-edit{outline:1px dashed var(--ew-green-500);outline-offset:1px;border-radius:4px;padding:0 3px;background:rgba(63,165,108,.06);cursor:text;}
   .ew-edit:focus{outline:2px solid var(--ew-green-600);background:#fff;}
-  .ew-edited{box-shadow:inset 3px 0 0 var(--ew-gold);}
+  .ew-edited{background:rgba(63,165,108,.16);}
   .barwrap{position:relative}
   .barval{font-size:9px;font-weight:700;color:var(--ew-green-800);white-space:nowrap}
   ::-webkit-scrollbar{height:10px;width:10px}::-webkit-scrollbar-thumb{background:#cfe3d8;border-radius:8px}
@@ -161,7 +161,7 @@ const SEED_DB = {
 
   insurers:{
     care:{ name:"Care Health", logoText:"CARE", color:"#0E7C5A",
-      plans:{ supreme:{ planName:"Care Supreme", brochureUrl:"https://cms.careinsurance.com/cms/public/uploads/download_center/care-supreme---brochure.pdf", networkUrl:"https://www.google.com/search?q=Care+Health+cashless+network+hospitals+list",
+      plans:{ supreme:{ planName:"Care Supreme", brochureUrl:"https://cms.careinsurance.com/cms/public/uploads/download_center/care-supreme---brochure.pdf?rv=0.92030800%201780663319", networkUrl:"https://www.google.com/search?q=Care+Health+cashless+network+hospitals+list",
         sumInsured:["5L","7L","10L","25L","1Cr"],
         networkHospitals:"11,400+", claimSettlementRatio:"90%", roomRent:"No room-rent limit", coPay:"No",
         prePost:"60/180 days", dayCare:"Yes", ayush:"Yes",
@@ -217,7 +217,7 @@ const SEED_DB = {
       }}},
 
     adityabirla:{ name:"Aditya Birla", logoText:"ABHI", color:"#C8102E",
-      plans:{ activonemax:{ planName:"Activ One MAX", brochureUrl:"https://www.adityabirlacapital.com/healthinsurance/assets/pdf/active-one/brochure.pdf", networkUrl:"https://www.google.com/search?q=Aditya+Birla+Health+cashless+network+hospitals+list",
+      plans:{ activonemax:{ planName:"Activ One MAX", brochureUrl:"https://www.adityabirlacapital.com/healthinsurance/assets/pdf/active-one/prospectus.pdf", networkUrl:"https://www.google.com/search?q=Aditya+Birla+Health+cashless+network+hospitals+list",
         sumInsured:["5L","10L","25L","50L","1Cr","2Cr"],
         networkHospitals:"12,000+", claimSettlementRatio:"96%", roomRent:"Actuals up to SI (no room-rent cap)", coPay:"No",
         prePost:"90/180 days", dayCare:"Yes", ayush:"Yes",
@@ -230,7 +230,7 @@ const SEED_DB = {
       }}},
 
     star:{ name:"Star Health", logoText:"STAR", color:"#E11D48", plans:{ comprehensive:{ planName:"Star Comprehensive", brochureUrl:"https://d28c6jni2fmamz.cloudfront.net/Brochure_Star_Comprehensive_Insurance_Policy_V_15_Web_633bcfcaaf.pdf", networkUrl:"https://www.google.com/search?q=Star+Health+cashless+network+hospitals", sumInsured:["5L","7.5L","10L","25L","50L","1Cr"], networkHospitals:"14,000+", claimSettlementRatio:"—", roomRent:"Single private AC room", coPay:"No (10% if entry age ≥ 61)", prePost:"60/90 days", dayCare:"Yes", ayush:"Yes (sub-limit ₹15k–₹30k by SI; Yoga/Naturopathy excluded)", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% per claim-free year up to 100% (100%/yr for SI ≥ ₹7.5L)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["100% automatic restoration usable even for the same illness already claimed","In-built OPD consultation, dental & ophthalmic, hospital cash & wellness discount","Optional buy-back reduces PED waiting from 36 to 12 months"], addOns:{ consumables:{available:false,alias:""}, bonus:{available:false,alias:""}, opd:{available:false,alias:""}, healthCheckup:{available:true,type:"inbuilt",frequency:"every claim-free year",forWhom:"all insured"}, maternity:{available:true,alias:"Delivery & New Born (inbuilt, 24-mo wait)"}, instantCover:{available:false,alias:""} } }}},
-    tata:{ name:"Tata AIG", logoText:"TATA", color:"#1E40AF", plans:{ medicareprem:{ planName:"Medicare Premier", brochureUrl:"https://www.tataaig.com/s3/medicare_premier_brochure_afa84d68a1.pdf", networkUrl:"https://www.google.com/search?q=Tata+AIG+cashless+network+hospitals", sumInsured:["50L","75L","1Cr","2Cr","3Cr"], networkHospitals:"—", claimSettlementRatio:"—", roomRent:"No room-rent limit", coPay:"No", prePost:"60/90 days (200 days post for SI ≥ ₹75L)", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% cumulative bonus per claim-free year, up to 100% (reduces 50% on a claim)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["Home Care treatment & post-hospitalisation physiotherapy (SI ≥ ₹75L)","Global cover for planned hospitalisation + air ambulance","Maternity with girl-child benefit, delivery complications & first-year vaccinations"], addOns:{ consumables:{available:true,alias:"Consumables Benefit (inbuilt)"}, bonus:{available:true,alias:"Cumulative Bonus (inbuilt)"}, opd:{available:true,alias:"OPD Treatment (inbuilt, after 2 yrs)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"per policy / insured"}, maternity:{available:true,alias:"Maternity Cover (inbuilt, 3-yr wait)"}, instantCover:{available:false,alias:""} } }}}
+    tata:{ name:"Tata AIG", logoText:"TATA", color:"#1E40AF", plans:{ medicareprem:{ planName:"Medicare Premier", brochureUrl:"https://ditto-partners.s3.ap-south-1.amazonaws.com/TATA+AIG/Medicare+Premier-Brochure.pdf", networkUrl:"https://www.google.com/search?q=Tata+AIG+cashless+network+hospitals", sumInsured:["50L","75L","1Cr","2Cr","3Cr"], networkHospitals:"—", claimSettlementRatio:"—", roomRent:"No room-rent limit", coPay:"No", prePost:"60/90 days (200 days post for SI ≥ ₹75L)", dayCare:"Yes", ayush:"Yes", restore:{kind:"100pct"}, ncbModel:{firstBonus:50,firstYears:99,thenBonus:50,capPct:100}, ncbText:"50% cumulative bonus per claim-free year, up to 100% (reduces 50% on a claim)", instantCover:{available:false,name:"",conditions:[]}, uniqueFeatures:["Home Care treatment & post-hospitalisation physiotherapy (SI ≥ ₹75L)","Global cover for planned hospitalisation + air ambulance","Maternity with girl-child benefit, delivery complications & first-year vaccinations"], addOns:{ consumables:{available:true,alias:"Consumables Benefit (inbuilt)"}, bonus:{available:true,alias:"Cumulative Bonus (inbuilt)"}, opd:{available:true,alias:"OPD Treatment (inbuilt, after 2 yrs)"}, healthCheckup:{available:true,type:"inbuilt",frequency:"every year",forWhom:"per policy / insured"}, maternity:{available:true,alias:"Maternity Cover (inbuilt, 3-yr wait)"}, instantCover:{available:false,alias:""} } }}}
   }
 };
 
@@ -848,7 +848,7 @@ function ed(key,field,defaultHtml){
     const content=(val!=null)?esc(val):defaultHtml;
     return `<span contenteditable="true" data-ek="${key}" data-ef="${field}" class="ew-edit${hasLocal?' ew-edited':''}">${content}</span>`;
   }
-  if(hasLocal) return `<span class="ew-edited">${esc(local)}</span>`;  // unsaved proposed edit (gold marker)
+  if(hasLocal) return esc(local);   // edited value shown plainly in the final chart — no marker line
   if(hasServer) return esc(server);                                    // admin-approved value — normal data
   return defaultHtml;
 }
