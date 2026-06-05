@@ -761,10 +761,15 @@ function coverGrowthChart(cols, recKey){
   byFinal.forEach((p,i)=>{ p.shade=shades[i]; p.labelFill=(p.shade==='#6ee7b7'||p.shade==='#34d399')?'#047857':p.shade; });
   const maxVal=Math.max(...drawable.flatMap(p=>p.totals));
   const {ticks, top}=niceTicks(maxVal);
+  // Non-zero y-axis floor (~half the smallest base SI, e.g. ₹5L for a ₹10L base)
+  // so the constant grey base doesn't eat the lower half — emphasises NCB growth.
+  const minBase=Math.min(...drawable.map(p=>p.base));
+  const floorSteps=[0,1e5,2e5,2.5e5,5e5,7.5e5,1e6,1.5e6,2e6,2.5e6,5e6,7.5e6,1e7];
+  let yMin=0; floorSteps.forEach(f=>{ if(f<=minBase*0.55 && f<minBase) yMin=f; });
 
   const W=900,H=380,mL=58,mR=16,mT=30,mB=40;   // wider to fit 10 year-groups
   const plotW=W-mL-mR, plotH=H-mT-mB, baseY=mT+plotH;
-  const yOf=v=> baseY-(v/top)*plotH;
+  const yOf=v=> baseY-((Math.max(v,yMin)-yMin)/(top-yMin))*plotH;
   const groupW=plotW/years.length, n=drawable.length;
   const innerPad=groupW*0.16, slot=groupW-innerPad*2;
   const barGap=Math.min(6,slot*0.12);
@@ -774,8 +779,8 @@ function coverGrowthChart(cols, recKey){
     return `<path d="M${x},${ty+h} L${x},${ty+rr} Q${x},${ty} ${x+rr},${ty} L${x+w-rr},${ty} Q${x+w},${ty} ${x+w},${ty+rr} L${x+w},${ty+h} Z" fill="${fill}"/>`; };
 
   let grid='';
-  ticks.forEach(t=>{ const y=yOf(t); grid+=`<line x1="${mL}" y1="${y}" x2="${W-mR}" y2="${y}" stroke="#eef2f6"/><text x="${mL-8}" y="${y+3}" text-anchor="end" font-size="10" fill="#9aa5b1">${formatINRshort(t)}</text>`; });
-  grid+=`<line x1="${mL}" y1="${baseY}" x2="${W-mR}" y2="${baseY}" stroke="#cbd5e1"/><text x="${mL-8}" y="${baseY+3}" text-anchor="end" font-size="10" fill="#9aa5b1">0</text>`;
+  ticks.filter(t=>t>yMin).forEach(t=>{ const y=yOf(t); grid+=`<line x1="${mL}" y1="${y}" x2="${W-mR}" y2="${y}" stroke="#eef2f6"/><text x="${mL-8}" y="${y+3}" text-anchor="end" font-size="10" fill="#9aa5b1">${formatINRshort(t)}</text>`; });
+  grid+=`<line x1="${mL}" y1="${baseY}" x2="${W-mR}" y2="${baseY}" stroke="#cbd5e1"/><text x="${mL-8}" y="${baseY+3}" text-anchor="end" font-size="10" fill="#9aa5b1">${yMin>0?formatINRshort(yMin):'0'}</text>`;
 
   let bars='', xlabels='';
   years.forEach((yr,gi)=>{
@@ -808,7 +813,7 @@ function coverGrowthChart(cols, recKey){
   return `<div class="card p-5">
     <div class="text-[11px] tracking-widest uppercase mb-1" style="color:var(--ew-green-600)">Bar · stacked · ${drawable.length} plan${drawable.length>1?'s':''}</div>
     <h3 class="text-xl">Base sum insured + no-claim bonus · 10-year growth</h3>
-    <p class="text-xs mt-1 mb-3" style="color:var(--ew-slate)">Each bar = grey base sum insured + green accumulated <b>no-claim bonus</b> (an inbuilt cumulative/guaranteed bonus that grows every claim-free year). Deeper green = higher total cover. ${desc} Illustrative; includes the optional bonus-booster only where selected.</p>
+    <p class="text-xs mt-1 mb-3" style="color:var(--ew-slate)">Each bar = grey base sum insured + green accumulated <b>no-claim bonus</b> (an inbuilt cumulative/guaranteed bonus that grows every claim-free year). Deeper green = higher total cover. ${desc}${yMin>0?` Y-axis starts at ${formatINR(yMin)} (not ₹0) to focus on the bonus growth.`:''} Illustrative; includes the optional bonus-booster only where selected.</p>
     ${svg}
     ${legend}
     ${skipNote}
