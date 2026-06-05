@@ -785,6 +785,7 @@ function coverGrowthChart(cols, recKey){
   let bars='', xlabels='';
   years.forEach((yr,gi)=>{
     const gx=mL+gi*groupW+innerPad;
+    const labelMap={};   // distinct cover value -> {sumX,count,topY} so identical plans share one label
     drawable.forEach((p,pi)=>{
       const x=gx+pi*(barW+barGap);
       const total=p.totals[gi];
@@ -797,8 +798,12 @@ function coverGrowthChart(cols, recKey){
       } else {
         bars+=topRR(x,baseTopY,barW,greyH,'#cbd5e1');
       }
-      if(gi===years.length-1) bars+=`<text x="${x+barW/2}" y="${totalTopY-5}" text-anchor="middle" font-size="9.5" font-weight="700" fill="${p.labelFill}">${formatINRshort(p.final)}</text>`;
+      const key=formatINRshort(total);
+      if(!labelMap[key]) labelMap[key]={sx:0,c:0,ty:totalTopY};
+      labelMap[key].sx+=x+barW/2; labelMap[key].c++; labelMap[key].ty=Math.min(labelMap[key].ty,totalTopY);
     });
+    // value label on every year (one per distinct cover amount in the group)
+    Object.keys(labelMap).forEach(key=>{ const m=labelMap[key]; bars+=`<text x="${m.sx/m.c}" y="${m.ty-4}" text-anchor="middle" font-size="8" font-weight="600" fill="#0f5132">${key}</text>`; });
     xlabels+=`<text x="${mL+gi*groupW+groupW/2}" y="${baseY+16}" text-anchor="middle" font-size="9.5" fill="#5C6B63">Y${yr}</text>`;
   });
 
