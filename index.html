@@ -528,7 +528,8 @@ function simulateExtract(){
    STEP 3 — ADD-ONS + RECOMMENDATION
    ============================================================ */
 function viewStep3(){
-  const cats=Object.keys(DB.addOnCatalog);
+  // Instant cover (lifestyle/ABCD) only applies when a medical history is declared.
+  const cats=Object.keys(DB.addOnCatalog).filter(c=> c!=='instantCover' || state.client.history.length>0);
   const blocks = state.selected.map(s=>{
     const ins=DB.insurers[s.insurerKey], pl=ins.plans[s.planKey], key=pk(s.insurerKey,s.planKey);
     const st=state.perPlan[key]||(state.perPlan[key]={addOns:{},premium:""});
@@ -615,6 +616,19 @@ function setPremium(key,v){ state.perPlan[key].premium=v; }
 /* ============================================================
    STEP 4 — COMPARISON + RECOMMENDATION + EXPORT
    ============================================================ */
+// Split a (possibly run-on) feature string into readable pointers.
+function splitBullets(text){
+  let t=String(text==null?"":text).trim(); if(!t) return [];
+  const M="@@SP@@";
+  t=t.replace(/\s*[•·▪]\s*/g,M).replace(/\s*[\r\n]+\s*/g,M).replace(/\s*;\s*/g,M)
+     .replace(/(?:^|\s)[a-e]\.\s+/g,M).replace(/\s+\|\s+/g,M)
+     .replace(/(?<=[a-z])\s+(?=[A-Z]{2,}(?:\s+[A-Z&]{2,})+)/g,M);
+  let parts=t.split(M).map(function(x){return x.replace(/\s+/g," ").trim();}).filter(Boolean);
+  if(parts.length<=1){
+    parts=t.split(M).join(" ").split(/(?:\.\s+(?=[A-Z])|\s+-\s+(?=[A-Z0-9]))/).map(function(x){return x.trim();}).filter(function(x){return x&&x.length>1;});
+  }
+  return parts.length?parts:[t];
+}
 function restoreText(r){
   if(!r) return "—";
   if(r.text) return esc(r.text);
@@ -1053,9 +1067,9 @@ function viewStep4(){
           <thead><tr><th class="p-3 text-left text-xs uppercase tracking-wide" style="color:var(--ew-slate);background:var(--ew-mint-100);min-width:170px">Parameter</th>${th}</tr></thead>
           <tbody>
             ${row("Sum insured (base)",col=>`<b>${esc(col.si||'—')}</b>`)}
-            ${row("Unique feature",col=>ed(col.key,'uniqueFeatures',col.pl.uniqueFeatures.map(f=>`<div class="mb-1">• ${esc(f)}</div>`).join("")))}
+            ${row("Unique feature",col=>ed(col.key,'uniqueFeatures',(col.pl.uniqueFeatures||[]).flatMap(f=>splitBullets(f)).map(f=>`<div class="mb-1 pl-3" style="text-indent:-0.75rem">• ${esc(f)}</div>`).join("")))}
             ${row("Claim settlement ratio",col=>ed(col.key,'claimSettlementRatio',`<b>${esc(col.pl.claimSettlementRatio)}</b>`))}
-            ${row("Instant coverage (lifestyle)",col=>ed(col.key,'instantCover',instantCell(col)))}
+            ${c.history.length?row("Instant coverage (lifestyle)",col=>ed(col.key,'instantCover',instantCell(col))):''}
             ${row("Room rent",col=>ed(col.key,'roomRent',esc(col.pl.roomRent)))}
             ${row("Pre / Post hospitalization",col=>ed(col.key,'prePost',esc(col.pl.prePost)))}
             ${row("Network hospitals",col=>`${ed(col.key,'networkHospitals',esc(col.pl.networkHospitals))} · <a class="link" href="${col.pl.networkUrl}" target="_blank" rel="noopener">cashless list ↗</a>`)}
