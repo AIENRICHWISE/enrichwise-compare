@@ -874,6 +874,25 @@ function loadServerOverrides(){
       .catch(()=>{});
   }catch(e){}
 }
+// Pull the master plan catalog from the Kavach backend (single source of truth,
+// managed at /kavach/insurance-db). On success it replaces the baked-in SEED_DB
+// and caches to localStorage so the next offline load is current. On any
+// failure (off-network / GitHub Pages mirror) the existing loadDB() fallback
+// (localStorage -> baked-in SEED_DB) stands, so the file still works offline.
+function loadServerCatalog(){
+  try{
+    fetch(KAVACH_API+"/catalog/?vertical=health",{headers:{Accept:"application/json"}})
+      .then(r=> r&&r.ok ? r.json() : null)
+      .then(d=>{
+        if(d && d.insurers && (d.planCount|0) > 0){
+          DB = { meta:d.meta||{}, addOnCatalog:d.addOnCatalog||{}, insurers:d.insurers };
+          safeSet("ew_db", JSON.stringify(DB));
+          render();
+        }
+      })
+      .catch(()=>{});
+  }catch(e){}
+}
 function submitForApproval(){
   const changes=[];
   Object.keys(state.planEdits).forEach(key=>{
@@ -1143,7 +1162,8 @@ function resetAll(){
 }
 
 render();
-loadServerOverrides();   // pull admin-approved field values (no-op off-network)
+loadServerCatalog();     // pull master catalog from Kavach backend (falls back to baked-in SEED_DB off-network)
+loadServerOverrides();   // legacy admin-approved overrides (no-op once catalog is authoritative)
 </script>
 </body>
 </html>
