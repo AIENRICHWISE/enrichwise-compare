@@ -962,7 +962,8 @@ function viewStep4(){
     </tr>`;
   };
 
-  const yn=v=>v&&v.toLowerCase&&v.toLowerCase()==='yes'?`<span class="pill-yes">Yes</span>`:(v&&v.toLowerCase&&v.toLowerCase()==='no'?`<span class="pill-no">No</span>`:esc(v||"—"));
+  /* Yes/No pill. Most rows read "Yes = good" (day care, AYUSH). Co-pay is inverted — "No co-pay" is the favourable answer — so it passes goodWhenYes=false. */
+  const yn=(v,goodWhenYes=true)=>{const t=v&&v.toLowerCase&&v.toLowerCase();if(t==='yes')return `<span class="${goodWhenYes?'pill-yes':'pill-no'}">Yes</span>`;if(t==='no')return `<span class="${goodWhenYes?'pill-no':'pill-yes'}">No</span>`;return esc(v||"—");};
 
   // Add-on row: shows only the add-ons SELECTED for that plan with reasoning
   const addonCell=col=>{
@@ -1092,7 +1093,7 @@ function viewStep4(){
             ${row("Room rent",col=>ed(col.key,'roomRent',esc(col.pl.roomRent)))}
             ${row("Pre / Post hospitalization",col=>ed(col.key,'prePost',esc(col.pl.prePost)))}
             ${row("Network hospitals",col=>`${ed(col.key,'networkHospitals',esc(col.pl.networkHospitals))} · <a class="link" href="${col.pl.networkUrl}" target="_blank" rel="noopener">cashless list ↗</a>`)}
-            ${row("Co-pay",col=>ed(col.key,'coPay',yn(col.pl.coPay)))}
+            ${row("Co-pay",col=>ed(col.key,'coPay',yn(col.pl.coPay,false)))}
             ${row("Restore benefit",col=>ed(col.key,'restore',restoreText(col.pl.restore)))}
             ${row("Day care",col=>ed(col.key,'dayCare',yn(col.pl.dayCare)))}
             ${row("AYUSH",col=>ed(col.key,'ayush',yn(col.pl.ayush)))}
