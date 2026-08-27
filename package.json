@@ -4,7 +4,8 @@
   "private": true,
   "description": "Enrichwise insurance comparison tool — single-page static dashboard (localStorage, no backend).",
   "scripts": {
-    "dev": "npx --yes serve .",
-    "start": "npx --yes serve ."
+    "dev": "node dev-server.js",
+    "dev:plain": "npx --yes serve .",
+    "start": "node dev-server.js"
   }
 }

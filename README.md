@@ -11,13 +11,23 @@ details, pick 2–5 plans, toggle add-ons, and export a branded, client-facing c
 
 ## Run locally
 
-Just open the file — double-click `index.html` in any browser. That's it.
-
-Or serve it (so the path looks like a real site):
-
 ```bash
-npm run dev      # → http://localhost:3000  (uses npx serve, no install needed)
+npm run dev      # → http://localhost:4310/insurance-compare/
 ```
+
+`dev-server.js` serves this folder **and** proxies `/kavach/*` to the live box, so
+the tool loads the real plan catalog from the Kavach backend. That matters: on a
+plain static server the catalog fetch fails and the tool falls back to the
+baked-in `SEED_DB` snapshot, so you would be testing against stale plan data
+without any visible sign of it.
+
+The proxy needs the office network (`tools.enrichwise.co.in` is IP-allowlisted).
+Off-network it degrades to the offline fallback. It is read-only — writes are
+blocked so local testing cannot file real change proposals into the approval
+queue.
+
+Two escape hatches: `npm run dev:plain` for the old `npx serve` behaviour, and
+double-clicking `index.html` still works for a quick look (offline data).
 
 ---
 
