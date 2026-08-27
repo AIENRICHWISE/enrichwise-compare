@@ -1017,6 +1017,26 @@ function viewStep4(){
   // Unified cover-growth chart: base sum insured vs. accumulated no-claim bonus.
   const coverChart = coverGrowthChart(cols, recKey);
 
+  /* Advisor-only cross-check: the RECOMMENDED badge follows the advisor pick,
+     not the score, so the two can disagree in front of the client. Flag the
+     divergence rather than overriding the pick. Rendered outside #report and
+     marked no-print, so it reaches neither the JPG nor the PDF export. */
+  let recNudge="";
+  if(state.recommendKey && state.recommendKey!=='__none__' && scores[state.recommendKey]){
+    const ranked=Object.entries(scores).sort((a,b)=>b[1].score-a[1].score);
+    const topKey=ranked[0][0], topScore=ranked[0][1].score, topWhy=ranked[0][1].why;
+    const mine=scores[state.recommendKey].score;
+    if(topKey!==state.recommendKey && topScore>mine){
+      const nameOf=k=>{const p=k.split("::");return DB.insurers[p[0]].plans[p[1]].planName;};
+      recNudge=`<div class="no-print card p-3 text-sm" style="border-color:var(--ew-gold);background:#FDF8EC">
+        <div>⚖️ <b>Heads up — your pick is not the top-scoring plan.</b> You recommended <b>${esc(nameOf(state.recommendKey))}</b> (score ${mine}), but <b>${esc(nameOf(topKey))}</b> scores <b>${topScore}</b>${topWhy.length?" — "+esc(topWhy.slice(0,3).join(", ")):""}.</div>
+        <div class="mt-2 flex items-center gap-2 flex-wrap">
+          <button onclick="state.recommendKey='${topKey}';render()" class="btn btn-primary px-4 py-2 text-sm">Recommend ${esc(nameOf(topKey))} instead</button>
+          <span style="color:var(--ew-slate)">Keep your pick if you have a reason — the client never sees this note.</span>
+        </div>
+      </div>`;
+    }
+  }
   let recBlock;
   if(recKey){
     const rec=DB.insurers[recKey.split("::")[0]].plans[recKey.split("::")[1]];
@@ -1063,6 +1083,7 @@ function viewStep4(){
       <div class="mt-2 flex items-center gap-2 flex-wrap"><button onclick="submitForApproval()" class="btn btn-primary px-4 py-2 text-sm">Submit for Nidhi's approval →</button><span id="submitMsg" class="text-sm"></span></div>
     </div>`:'')}
 
+    ${recNudge}
     <div id="report" class="grid gap-5 p-1">
       <!-- SECTION 1: HEADER -->
       <div class="card p-6" style="background:linear-gradient(120deg,var(--ew-green-900),var(--ew-green-700));color:#fff">
