@@ -672,7 +672,7 @@ function computeScores(){
     const st=state.perPlan[key]; const nAdd=st?Object.values(st.addOns).filter(a=>a&&a.on).length:0; sc+=nAdd;
     // selling preference nudge
     if(state.sellPreference && DB.insurers[s.insurerKey].name.toLowerCase().includes(state.sellPreference.trim().toLowerCase())) sc+=6;
-    res[key]={score:Math.round(sc*10)/10, why};
+    res[key]={score:Math.round(sc*10)/10, why, scored:!isNaN(csr)};
   });
   return res;
 }
@@ -927,9 +927,17 @@ function submitForApproval(){
 function viewStep4(){
   const c=state.client;
   const scores=computeScores();
+  /* A plan with no published claim-settlement ratio loses the single largest
+     scoring term (~85-96 of a typical ~120), so ranking it against plans that
+     have one buries it for a data-coverage reason rather than anything about
+     the plan. Rank only the scorable ones — unless no selected plan has a CSR,
+     in which case they are all missing the same term and stay comparable. */
+  const allUnscored=Object.values(scores).every(v=>!v.scored);
+  const comparable=k=>allUnscored||(scores[k]&&scores[k].scored);
+  const ranking=()=>Object.entries(scores).filter(e=>comparable(e[0])).sort((a,b)=>b[1].score-a[1].score);
   let recKey=state.recommendKey;
   if(recKey==='__none__'){ recKey=null; }
-  else if(!recKey){ recKey=Object.entries(scores).sort((a,b)=>b[1].score-a[1].score)[0][0]; }
+  else if(!recKey){ const r=ranking(); recKey=r.length?r[0][0]:null; }
   const cats=Object.keys(DB.addOnCatalog);
 
   const cols = state.selected.map(s=>({...s,key:pk(s.insurerKey,s.planKey),ins:DB.insurers[s.insurerKey],pl:DB.insurers[s.insurerKey].plans[s.planKey]}));
@@ -1022,8 +1030,8 @@ function viewStep4(){
      divergence rather than overriding the pick. Rendered outside #report and
      marked no-print, so it reaches neither the JPG nor the PDF export. */
   let recNudge="";
-  if(state.recommendKey && state.recommendKey!=='__none__' && scores[state.recommendKey]){
-    const ranked=Object.entries(scores).sort((a,b)=>b[1].score-a[1].score);
+  if(state.recommendKey && state.recommendKey!=='__none__' && scores[state.recommendKey] && comparable(state.recommendKey)){
+    const ranked=ranking();
     const topKey=ranked[0][0], topScore=ranked[0][1].score, topWhy=ranked[0][1].why;
     const mine=scores[state.recommendKey].score;
     if(topKey!==state.recommendKey && topScore>mine){
@@ -1050,9 +1058,9 @@ function viewStep4(){
         <h3 class="text-2xl">${esc(rec.planName)} <span class="text-base font-normal" style="color:var(--ew-slate)">— ${esc(recIns.name)}</span></h3>
         <p class="text-sm mt-2" style="color:var(--ew-slate)">For ${esc(c.name)} (${esc(c.policyType)}, age ${clientAges()}${c.history.length?', history: '+c.history.join(", "):''}), this plan stands out because of ${recWhy.length?recWhy.join("; "):"its overall balance of cover, network and value"}.</p>
         <div class="mt-3 flex flex-wrap gap-2">
-          ${state.selected.map(s=>{const k=pk(s.insurerKey,s.planKey);const pl=DB.insurers[s.insurerKey].plans[s.planKey];return `<span class="chip" style="cursor:default" data-on="${k===recKey?1:0}">${esc(pl.planName)} · ${scores[k].score}</span>`}).join("")}
+          ${state.selected.map(s=>{const k=pk(s.insurerKey,s.planKey);const pl=DB.insurers[s.insurerKey].plans[s.planKey];return `<span class="chip" style="cursor:default" data-on="${k===recKey?1:0}">${esc(pl.planName)} · ${comparable(k)?scores[k].score:'score n/a'}</span>`}).join("")}
         </div>
-        <p class="text-[11px] mt-3" style="color:var(--ew-slate)">Score is a transparent internal heuristic (claim ratio + network + restoration + co-pay + condition-fit + add-ons${state.sellPreference?' + selling preference':''}). It assists discussion; it is not financial advice.</p>
+        <p class="text-[11px] mt-3" style="color:var(--ew-slate)">Score is a transparent internal heuristic (claim ratio + network + restoration + co-pay + condition-fit + add-ons${state.sellPreference?' + selling preference':''}). It assists discussion; it is not financial advice.${Object.keys(scores).some(k=>!comparable(k))?' Plans with no published claim-settlement ratio are marked "score n/a" rather than ranked on the missing figure.':''}</p>
       </div>`;
   } else {
     recBlock="";   // "Recommend none" → no recommendation section at all
