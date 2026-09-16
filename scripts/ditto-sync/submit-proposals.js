@@ -16,6 +16,11 @@
  * matches and the field is eligible again. If an admin REJECTED a change, the
  * field stays skipped until you pass --resubmit.
  *
+ * --only limits a run to specific fields (comma-separated insurer::plan::field).
+ * Pair it with --resubmit to resend one rejected change without double-queuing
+ * everything else that is still pending:
+ *   node scripts/ditto-sync/submit-proposals.js --resubmit --only niva::re20::claimSettlementRatio --submit
+ *
  * Also refuses a catalog snapshot older than 6h (--force to override): a stale
  * snapshot re-proposes values that were approved since.
  */
@@ -26,6 +31,12 @@ const { KAVACH_API, PROVIDERS, readOut } = require("./lib");
 const SUBMIT = process.argv.includes("--submit");
 const RESUBMIT = process.argv.includes("--resubmit");
 const FORCE = process.argv.includes("--force");
+const ONLY = (() => {
+  const i = process.argv.indexOf("--only");
+  if (i < 0) return null;
+  if (!process.argv[i + 1] || process.argv[i + 1].startsWith("--")) { console.error("--only needs insurer::plan::field[,...]"); process.exit(1); }
+  return new Set(process.argv[i + 1].split(",").map((x) => x.trim()));
+})();
 const LEDGER = path.join(__dirname, "submitted.json");
 const MAX_AGE_H = 6;
 
@@ -54,12 +65,18 @@ for (const e of ledger.entries) lastSent.set(`${e.insurerKey}::${e.planKey}::${e
 const toSend = [], skipped = [];
 for (const p of built.proposals) {
   const k = `${p.insurerKey}::${p.planKey}::${p.field}`;
+  if (ONLY && !ONLY.has(k)) continue;
   const prev = lastSent.get(k);
   const maybePending = prev && prev.newValue !== liveValue(p.insurerKey, p.planKey, p.field);
   if (maybePending && !RESUBMIT) skipped.push({ k, prev });
   else toSend.push(p);
 }
 
+if (ONLY) {
+  const unknown = [...ONLY].filter((k) => !built.proposals.some((p) => `${p.insurerKey}::${p.planKey}::${p.field}` === k));
+  if (unknown.length) { console.error(`--only: not in current proposals: ${unknown.join(", ")}`); process.exit(1); }
+  console.log(`--only: ${[...ONLY].join(", ")}`);
+}
 console.log(`built ${built.proposals.length} · to send ${toSend.length} · skipped ${skipped.length} (already submitted, not yet live)`);
 if (skipped.length) {
   const byBatch = {};

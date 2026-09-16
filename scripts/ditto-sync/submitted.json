@@ -1064,6 +1064,14 @@
    "newValue": "89%",
    "batch": "ditto-2026-09-16",
    "submittedAt": "2026-09-16T09:20:46.093Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "re20",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16T11:13:45.264Z"
   }
  ]
 }

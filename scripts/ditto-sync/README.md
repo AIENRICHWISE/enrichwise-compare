@@ -59,7 +59,12 @@ happily pairs "Optima Select" with "Optima Secure"), add `"insurer::planKey": "/
 **Why the ledger exists:** there is no public endpoint for *pending* proposals. Rebuilding while
 a batch awaits approval regenerates the same changes, and submitting would double-queue them.
 Submit skips any field whose last submitted value doesn't yet match the live catalog. If an admin
-*rejected* a change, that field stays skipped until you pass `--resubmit`.
+*rejected* a change, that field stays skipped until you resend it — target it with `--only`, because
+`--resubmit` on its own also resends everything still pending:
+
+```bash
+npm run ditto:submit -- --resubmit --only niva::re20::claimSettlementRatio --submit
+```
 
 ## Gotchas
 
