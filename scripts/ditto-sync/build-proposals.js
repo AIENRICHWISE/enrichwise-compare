@@ -132,6 +132,14 @@ for (const [ik, ins] of Object.entries(snap.catalog.insurers)) {
       if (blank(pl[field])) add(field, text, "fill", match.path);
       else if (conflicts[field](pl[field], o)) add(field, text, "overwrite", match.path);
     }
+
+    // The tool badges any plan with a non-blank `discontinued` note and never
+    // auto-recommends it. One-way: approval cannot write an empty value, so if
+    // Ditto ever lists a plan as back on sale, clear the note in /kavach/insurance-db.
+    if (match.plan.discontinued === true && blank(pl.discontinued)) {
+      const asOf = new Date(ditto.fetchedAt).toLocaleDateString("en-GB", { month: "short", year: "numeric" });
+      add("discontinued", `Discontinued (per joinditto.in, ${asOf})`, "fill", match.path);
+    }
   }
 }
 

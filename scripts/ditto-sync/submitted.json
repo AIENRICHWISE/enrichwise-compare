@@ -1032,6 +1032,22 @@
    "newValue": "15,000+",
    "batch": "ditto-2026-09-16",
    "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activassureddiamond",
+   "field": "discontinued",
+   "newValue": "Discontinued (per joinditto.in, Sept 2026)",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16T09:06:45.823Z"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "surakshapolicy",
+   "field": "discontinued",
+   "newValue": "Discontinued (per joinditto.in, Sept 2026)",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16T09:06:45.860Z"
   }
  ]
 }

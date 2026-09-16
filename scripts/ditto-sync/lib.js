@@ -19,11 +19,12 @@ const PROVIDERS = {
 // (kavach settings/insurance-compare/actions.ts). Only these fields are strings
 // in the tool. Never propose restore, ncbModel, uniqueFeatures, sumInsured,
 // addOns or instantCover — the chart and scoring read those as objects.
-const SAFE_FIELDS = new Set(["claimSettlementRatio", "networkHospitals", "roomRent", "coPay", "prePost", "dayCare", "ayush"]);
+const SAFE_FIELDS = new Set(["claimSettlementRatio", "networkHospitals", "roomRent", "coPay", "prePost", "dayCare", "ayush", "discontinued"]);
 
 const LABELS = {
   claimSettlementRatio: "Claim settlement ratio", networkHospitals: "Network hospitals", roomRent: "Room rent",
   coPay: "Co-pay", prePost: "Pre / Post hospitalization", dayCare: "Day care", ayush: "AYUSH",
+  discontinued: "Discontinued",
 };
 
 const outPath = (name) => path.join(OUT, name);

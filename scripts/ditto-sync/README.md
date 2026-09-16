@@ -26,6 +26,7 @@ Run 2 → 5 in one sitting: submit refuses a catalog snapshot older than 6 hours
 | Claim settlement ratio | every plan of a mapped insurer | aligned to Ditto's insurer figure (3-year average) |
 | Network hospitals | every plan of a mapped insurer | aligned to Ditto's insurer figure |
 | Co-pay, room rent, pre/post, day care, AYUSH | plans in `matches.json` only | blanks filled; existing values overwritten **only** on a detected conflict |
+| Discontinued | plans in `matches.json` only | marked when Ditto lists the plan as discontinued — the tool then badges it, never auto-recommends it, and warns the advisor if picked |
 
 Deliberately **not** proposed:
 
@@ -69,5 +70,7 @@ Submit skips any field whose last submitted value doesn't yet match the live cat
   Next.js RSC payload (`self.__next_f.push` chunks), with insurer metrics as
   `"claimSettlement":89,"incurredClaims":"67%","network":"14000"`. If Ditto changes its page
   build, `fetch-ditto.js` is the only file to adjust. robots.txt allows `/health-insurance/*`.
-- Ditto flags some plans as `discontinued`; `ditto:check` reports them. The catalog has no
-  discontinued field, so that needs a manual decision.
+- **`discontinued` is one-way.** Approval can't write an empty value, so if Ditto ever lists a plan as
+  back on sale, clear the note by hand in `/kavach/insurance-db`. Don't *archive* discontinued plans
+  instead — archived plans vanish from the tool, and portability cases need to compare a client's
+  existing (often discontinued) policy.

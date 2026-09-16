@@ -53,6 +53,7 @@
   .plan-card{cursor:pointer;transition:.18s;}
   .plan-card[data-sel="1"]{border-color:var(--ew-green-600);box-shadow:0 0 0 3px rgba(42,139,90,.18),0 14px 30px -18px rgba(16,40,28,.3);}
   .recbadge{background:linear-gradient(120deg,var(--ew-gold),#d8b15a);color:#3a2c08;}
+  .discbadge{background:#FBEAEA;color:var(--ew-notrec);border:1px solid #F1C7C7;}
   .cmp-col-rec{background:linear-gradient(180deg,rgba(234,246,239,.9),rgba(244,250,247,.6));}
   .pill-yes{color:var(--ew-green-700);font-weight:600;}
   .pill-no{color:var(--ew-notrec);font-weight:600;}
@@ -381,6 +382,7 @@ function viewStep2(){
           <div class="h-5 w-5 rounded-md border grid place-items-center text-[11px] ${sel?'text-white':''}" style="background:${sel?'var(--ew-green-700)':'#fff'};border-color:${sel?'var(--ew-green-700)':'var(--ew-line)'}">${sel?'✓':''}</div>
         </div>
         <div class="mt-3 font-semibold leading-tight text-sm">${pl.planName}</div>
+        ${discBadge(pl,'mt-1')}
         <div class="text-xs mt-0.5" style="color:var(--ew-slate)">${ins.name}</div>
         ${sel ? `<div class="mt-2" onclick="event.stopPropagation()">
             <label class="text-[11px] block mb-0.5 font-medium" style="color:var(--ew-green-700)">Sum insured</label>
@@ -652,6 +654,13 @@ function clientAges(){
   if(c.policyType==='Individual') return c.individualAge||"—";
   return c.members.filter(m=>String(m.age).trim()).map(m=>m.age).join(", ")||"—";
 }
+/* Plans withdrawn from sale. data.discontinued holds a short source note
+   (e.g. "Discontinued (per joinditto.in, Sep 2026)"); blank = on sale. They stay
+   selectable — a portability case compares the client's existing policy, which
+   is exactly where discontinued plans turn up — but are badged, never
+   auto-recommended, and flagged to the advisor if picked. */
+function discontinuedNote(pl){ const v=pl&&pl.discontinued; const t=v==null?"":String(v).trim(); return t&&t!=="—"?t:""; }
+function discBadge(pl,extra){ const n=discontinuedNote(pl); return n?`<span class="discbadge inline-block text-[10px] font-bold px-2 py-0.5 rounded-full ${extra||''}" title="${esc(n)}">DISCONTINUED</span>`:""; }
 function computeScores(){
   // simple transparent scoring
   const res={};
@@ -934,7 +943,12 @@ function viewStep4(){
      in which case they are all missing the same term and stay comparable. */
   const allUnscored=Object.values(scores).every(v=>!v.scored);
   const comparable=k=>allUnscored||(scores[k]&&scores[k].scored);
-  const ranking=()=>Object.entries(scores).filter(e=>comparable(e[0])).sort((a,b)=>b[1].score-a[1].score);
+  const planOf=k=>{const p=k.split("::");return DB.insurers[p[0]].plans[p[1]];};
+  const ranking=()=>{
+    const r=Object.entries(scores).filter(e=>comparable(e[0]));
+    const onSale=r.filter(e=>!discontinuedNote(planOf(e[0])));
+    return (onSale.length?onSale:r).sort((a,b)=>b[1].score-a[1].score);
+  };
   let recKey=state.recommendKey;
   if(recKey==='__none__'){ recKey=null; }
   else if(!recKey){ const r=ranking(); recKey=r.length?r[0][0]:null; }
@@ -948,6 +962,7 @@ function viewStep4(){
       <div class="flex items-center gap-2">
         <div class="h-8 px-2 rounded-lg grid place-items-center text-white text-xs font-bold" style="background:${col.ins.color}">${col.ins.logoText}</div>
         ${rec?'<span class="recbadge text-[10px] font-bold px-2 py-0.5 rounded-full">RECOMMENDED</span>':''}
+        ${discBadge(col.pl)}
       </div>
       <a class="link font-semibold block mt-2" href="${col.pl.brochureUrl}" target="_blank" rel="noopener">${col.pl.planName} ↗</a>
       <div class="text-xs font-normal" style="color:var(--ew-slate)">${col.ins.name}</div>
@@ -1030,14 +1045,18 @@ function viewStep4(){
      divergence rather than overriding the pick. Rendered outside #report and
      marked no-print, so it reaches neither the JPG nor the PDF export. */
   let recNudge="";
-  if(state.recommendKey && state.recommendKey!=='__none__' && scores[state.recommendKey] && comparable(state.recommendKey)){
+  const pickNote=state.recommendKey&&state.recommendKey!=='__none__'&&scores[state.recommendKey]?discontinuedNote(planOf(state.recommendKey)):"";
+  if(state.recommendKey && state.recommendKey!=='__none__' && scores[state.recommendKey] && (comparable(state.recommendKey)||pickNote)){
     const ranked=ranking();
     const topKey=ranked[0][0], topScore=ranked[0][1].score, topWhy=ranked[0][1].why;
     const mine=scores[state.recommendKey].score;
-    if(topKey!==state.recommendKey && topScore>mine){
+    // Steer away from a discontinued pick only toward a plan that is on sale; if every
+    // option is discontinued, fall back to the ordinary score comparison.
+    const discNudge=!!pickNote&&!discontinuedNote(planOf(topKey));
+    if(topKey!==state.recommendKey && (discNudge || (comparable(state.recommendKey) && topScore>mine))){
       const nameOf=k=>{const p=k.split("::");return DB.insurers[p[0]].plans[p[1]].planName;};
       recNudge=`<div class="no-print card p-3 text-sm" style="border-color:var(--ew-gold);background:#FDF8EC">
-        <div>⚖️ <b>Heads up — your pick is not the top-scoring plan.</b> You recommended <b>${esc(nameOf(state.recommendKey))}</b> (score ${mine}), but <b>${esc(nameOf(topKey))}</b> scores <b>${topScore}</b>${topWhy.length?" — "+esc(topWhy.slice(0,3).join(", ")):""}.</div>
+        <div>⚖️ <b>Heads up — ${discNudge?'your pick is discontinued':'your pick is not the top-scoring plan'}.</b> You recommended <b>${esc(nameOf(state.recommendKey))}</b> (${discNudge?'no longer sold':'score '+mine}), but <b>${esc(nameOf(topKey))}</b> scores <b>${topScore}</b>${topWhy.length?" — "+esc(topWhy.slice(0,3).join(", ")):""}.</div>
         <div class="mt-2 flex items-center gap-2 flex-wrap">
           <button onclick="state.recommendKey='${topKey}';render()" class="btn btn-primary px-4 py-2 text-sm">Recommend ${esc(nameOf(topKey))} instead</button>
           <span style="color:var(--ew-slate)">Keep your pick if you have a reason — the client never sees this note.</span>
