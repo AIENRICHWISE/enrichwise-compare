@@ -73,6 +73,8 @@ git push -u origin main
 
 **Syncing from Ditto:** plan facts (CSR, network, co-pay, room rent, pre/post, day care, AYUSH) can be pulled from joinditto.in and queued for approval in Kavach — see [`scripts/ditto-sync/README.md`](scripts/ditto-sync/README.md).
 
+**Structured fields** (`ncbModel`, `restore`) can also go through approval — they travel as JSON and Kavach shape-checks them. `scripts/catalog-fixes/no-bonus-ncb-model.js` uses this to zero the bonus model of plans whose text says they have no bonus.
+
 
 The whole catalog (insurers, plans, features, add-ons) is one JSON object. Open the app →
 **⚙︎ Manage policy data** → edit the JSON → **Save & apply**. Changes persist in *your*

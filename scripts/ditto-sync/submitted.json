@@ -1072,6 +1072,62 @@
    "newValue": "93%",
    "batch": "ditto-2026-09-16",
    "submittedAt": "2026-09-16T11:13:45.264Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "superhealthtopup",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "ncb-no-bonus-2026-09-16",
+   "submittedAt": "2026-09-16T13:06:27.488Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "carefreedom",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "ncb-no-bonus-2026-09-16",
+   "submittedAt": "2026-09-16T13:06:27.488Z"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "ashakiran",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "ncb-no-bonus-2026-09-16",
+   "submittedAt": "2026-09-16T13:06:27.488Z"
+  },
+  {
+   "insurerKey": "oriental",
+   "planKey": "happyfamilyfloatersilver",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "ncb-no-bonus-2026-09-16",
+   "submittedAt": "2026-09-16T13:06:27.488Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "diabetessafe",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "ncb-no-bonus-2026-09-16",
+   "submittedAt": "2026-09-16T13:06:27.488Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "seniorcitizenredcarpet",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "ncb-no-bonus-2026-09-16",
+   "submittedAt": "2026-09-16T13:06:27.488Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "seniorcitizens",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "ncb-no-bonus-2026-09-16",
+   "submittedAt": "2026-09-16T13:06:27.488Z"
   }
  ]
 }
