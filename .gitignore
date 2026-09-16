@@ -4,3 +4,4 @@ node_modules/
 .netlify
 *.log
 shot.png
+scripts/ditto-sync/out/

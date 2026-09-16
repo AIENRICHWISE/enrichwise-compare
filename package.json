@@ -6,6 +6,11 @@
   "scripts": {
     "dev": "node dev-server.js",
     "dev:plain": "npx --yes serve .",
-    "start": "node dev-server.js"
+    "start": "node dev-server.js",
+    "ditto:fetch": "node scripts/ditto-sync/fetch-ditto.js",
+    "ditto:catalog": "node scripts/ditto-sync/fetch-catalog.js",
+    "ditto:check": "node scripts/ditto-sync/check-matches.js",
+    "ditto:build": "node scripts/ditto-sync/build-proposals.js",
+    "ditto:submit": "node scripts/ditto-sync/submit-proposals.js"
   }
 }

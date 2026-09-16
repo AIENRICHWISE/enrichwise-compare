@@ -71,6 +71,9 @@ git push -u origin main
 
 ## Editing policy data
 
+**Syncing from Ditto:** plan facts (CSR, network, co-pay, room rent, pre/post, day care, AYUSH) can be pulled from joinditto.in and queued for approval in Kavach — see [`scripts/ditto-sync/README.md`](scripts/ditto-sync/README.md).
+
+
 The whole catalog (insurers, plans, features, add-ons) is one JSON object. Open the app →
 **⚙︎ Manage policy data** → edit the JSON → **Save & apply**. Changes persist in *your*
 browser. To ship updated defaults to everyone, paste the JSON into the `SEED_DB` object near

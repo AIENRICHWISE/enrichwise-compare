@@ -1,0 +1,1037 @@
+{
+ "_readme": "Every change sent to the Kavach approval queue. submit-proposals.js skips a plan field while its last value here differs from the live catalog (possibly still pending). Commit after each --submit.",
+ "entries": [
+  {
+   "insurerKey": "iffcotokio",
+   "planKey": "familyhealthprotector",
+   "field": "coPay",
+   "newValue": "Optional 10%, 20% or 25% on each admissible claim; once opted it cannot be removed during the policy period",
+   "batch": "wordings-2026-09-03",
+   "submittedAt": "2026-09-03"
+  },
+  {
+   "insurerKey": "iffcotokio",
+   "planKey": "familyhealthprotector",
+   "field": "ayush",
+   "newValue": "Covered up to sum insured, including pre- and post-hospitalisation",
+   "batch": "wordings-2026-09-03",
+   "submittedAt": "2026-09-03"
+  },
+  {
+   "insurerKey": "national",
+   "planKey": "seniorcitizen",
+   "field": "coPay",
+   "newValue": "None mandatory by age; 18.5% if treated in Zone 1 on a Zone 2 premium; optional 10% or 20% for a premium discount; 10-25% on the pre-existing diabetes/hypertension optional cover for the first two years",
+   "batch": "wordings-2026-09-03",
+   "submittedAt": "2026-09-03"
+  },
+  {
+   "insurerKey": "acko",
+   "planKey": "platinumlite",
+   "field": "claimSettlementRatio",
+   "newValue": "96%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activassureddiamond",
+   "field": "networkHospitals",
+   "newValue": "16,500+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activhealth",
+   "field": "networkHospitals",
+   "newValue": "16,500+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activhealthplatinumessential",
+   "field": "networkHospitals",
+   "newValue": "16,500+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activonemax",
+   "field": "networkHospitals",
+   "newValue": "16,500+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activonevytl",
+   "field": "claimSettlementRatio",
+   "newValue": "96%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activonevytl",
+   "field": "networkHospitals",
+   "newValue": "16,500+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activyuva",
+   "field": "networkHospitals",
+   "newValue": "16,500+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activeonenxt",
+   "field": "networkHospitals",
+   "newValue": "16,500+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "superhealthtopup",
+   "field": "networkHospitals",
+   "newValue": "16,500+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "etouchii",
+   "field": "claimSettlementRatio",
+   "newValue": "96%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "etouchii",
+   "field": "networkHospitals",
+   "newValue": "12,600+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "healthguardgold",
+   "field": "claimSettlementRatio",
+   "newValue": "96%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "healthguardgold",
+   "field": "networkHospitals",
+   "newValue": "12,600+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "healthguardgold",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "healthguardgold",
+   "field": "dayCare",
+   "newValue": "Yes",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "healthguardgold",
+   "field": "ayush",
+   "newValue": "Yes, up to sum insured",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "myhealthcare",
+   "field": "claimSettlementRatio",
+   "newValue": "96%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "myhealthcare",
+   "field": "networkHospitals",
+   "newValue": "12,600+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "starpackage",
+   "field": "claimSettlementRatio",
+   "newValue": "96%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "bajaj",
+   "planKey": "starpackage",
+   "field": "networkHospitals",
+   "newValue": "12,600+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "care",
+   "field": "claimSettlementRatio",
+   "newValue": "95%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "careadvantage",
+   "field": "claimSettlementRatio",
+   "newValue": "95%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "carefreedom",
+   "field": "claimSettlementRatio",
+   "newValue": "95%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "careheart",
+   "field": "claimSettlementRatio",
+   "newValue": "95%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "shine",
+   "field": "claimSettlementRatio",
+   "newValue": "95%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "supreme",
+   "field": "claimSettlementRatio",
+   "newValue": "95%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "easyfloaterstandard",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "easyfloaterstandard",
+   "field": "networkHospitals",
+   "newValue": "16,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "optimarestore",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "optimarestore",
+   "field": "networkHospitals",
+   "newValue": "16,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "optimasecure",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "optimasecure",
+   "field": "networkHospitals",
+   "newValue": "16,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "select",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "select",
+   "field": "networkHospitals",
+   "newValue": "16,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "surakshapolicy",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "surakshapolicy",
+   "field": "networkHospitals",
+   "newValue": "16,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "activebooster",
+   "field": "claimSettlementRatio",
+   "newValue": "87%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "activebooster",
+   "field": "networkHospitals",
+   "newValue": "11,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "elevate",
+   "field": "claimSettlementRatio",
+   "newValue": "87%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "elevate",
+   "field": "networkHospitals",
+   "newValue": "11,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheild",
+   "field": "claimSettlementRatio",
+   "newValue": "87%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheild",
+   "field": "networkHospitals",
+   "newValue": "11,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheild360",
+   "field": "claimSettlementRatio",
+   "newValue": "87%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheild360",
+   "field": "networkHospitals",
+   "newValue": "11,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheildnew",
+   "field": "claimSettlementRatio",
+   "newValue": "87%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheildnew",
+   "field": "networkHospitals",
+   "newValue": "11,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "iffcotokio",
+   "planKey": "familyhealthprotector",
+   "field": "claimSettlementRatio",
+   "newValue": "87%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "iffcotokio",
+   "planKey": "familyhealthprotector",
+   "field": "networkHospitals",
+   "newValue": "8,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "enhancesupertopup",
+   "field": "claimSettlementRatio",
+   "newValue": "90%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "enhancesupertopup",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealth",
+   "field": "claimSettlementRatio",
+   "newValue": "90%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealth",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealthindia50lacs",
+   "field": "claimSettlementRatio",
+   "newValue": "90%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealthindia50lacs",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealthindia50lacs",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "primeprotect",
+   "field": "claimSettlementRatio",
+   "newValue": "90%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "primeprotect",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvaparam",
+   "field": "claimSettlementRatio",
+   "newValue": "90%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvaparam",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "claimSettlementRatio",
+   "newValue": "90%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "national",
+   "planKey": "seniorcitizen",
+   "field": "claimSettlementRatio",
+   "newValue": "94%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "national",
+   "planKey": "seniorcitizen",
+   "field": "networkHospitals",
+   "newValue": "5,300+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "ashakiran",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "ashakiran",
+   "field": "networkHospitals",
+   "newValue": "2,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "floatermediclaim",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "floatermediclaim",
+   "field": "networkHospitals",
+   "newValue": "2,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "floatermediclaim",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "goodhealthmediclaim",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "goodhealthmediclaim",
+   "field": "networkHospitals",
+   "newValue": "2,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "healthinfinity",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "healthinfinity",
+   "field": "networkHospitals",
+   "newValue": "2,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "mediclaim",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "mediclaim",
+   "field": "networkHospitals",
+   "newValue": "2,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "mediclaim",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "mediclaim",
+   "field": "dayCare",
+   "newValue": "Yes",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "mediclaim",
+   "field": "ayush",
+   "newValue": "Yes, up to sum insured",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "newfloatermediclaim",
+   "field": "claimSettlementRatio",
+   "newValue": "98%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "newfloatermediclaim",
+   "field": "networkHospitals",
+   "newValue": "2,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspire",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspirediamond",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspiregold",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspiregold",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "healthcompanion",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "healthrecharge",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "healthrecharge",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "re20",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "re30",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "reassure",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "reassure",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "reassure30black",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "oriental",
+   "planKey": "happyfamilyfloatersilver",
+   "field": "claimSettlementRatio",
+   "newValue": "93%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "oriental",
+   "planKey": "happyfamilyfloatersilver",
+   "field": "networkHospitals",
+   "newValue": "12,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "reliance",
+   "planKey": "healthgainpolicy",
+   "field": "claimSettlementRatio",
+   "newValue": "86%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "reliance",
+   "planKey": "healthgainpolicy",
+   "field": "networkHospitals",
+   "newValue": "10,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "reliance",
+   "planKey": "healthinfinity",
+   "field": "claimSettlementRatio",
+   "newValue": "86%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "reliance",
+   "planKey": "healthinfinity",
+   "field": "networkHospitals",
+   "newValue": "10,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "reliance",
+   "planKey": "healthinfinity",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "assure",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "assure",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "comprehensive",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "comprehensive",
+   "field": "coPay",
+   "newValue": "10% for insured aged 61+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "diabetessafe",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "diabetessafe",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "diabetessafe",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "familyhealthoptima",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "familyhealthoptima",
+   "field": "coPay",
+   "newValue": "20% for insured aged 61+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "healthassure",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "healthassure",
+   "field": "coPay",
+   "newValue": "10% for insured aged 61+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "seniorcitizenredcarpet",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "seniorcitizenredcarpet",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "seniorcitizens",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "seniorcitizens",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "starcomprehensive",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "starcomprehensive",
+   "field": "coPay",
+   "newValue": "10% for insured aged 61+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "superstar",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "superstar",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "youngstar",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "youngstar",
+   "field": "networkHospitals",
+   "newValue": "14,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "youngstar",
+   "field": "coPay",
+   "newValue": "No",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "youngstar",
+   "field": "prePost",
+   "newValue": "60/90 days",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "tata",
+   "planKey": "medicare",
+   "field": "networkHospitals",
+   "newValue": "12,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "tata",
+   "planKey": "medicarepremier",
+   "field": "networkHospitals",
+   "newValue": "12,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "universalsompo",
+   "planKey": "grouphealth",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  },
+  {
+   "insurerKey": "universalsompo",
+   "planKey": "grouphealth",
+   "field": "networkHospitals",
+   "newValue": "15,000+",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16"
+  }
+ ]
+}
