@@ -111,9 +111,11 @@ for (const [ik, ins] of Object.entries(snap.catalog.insurers)) {
         oldValue: blank(pl[field]) ? "—" : String(pl[field]), newValue, kind, source });
     };
 
-    // CSR stays a bare percentage: computeScores() strips non-digits before
-    // parseFloat, so "89% (3-yr avg)" would score as 893.
-    if (metrics.claimSettlement != null && nums(pl.claimSettlementRatio)[0] !== Number(metrics.claimSettlement)) {
+    // CSR must be exactly a bare percentage. Compared as a string, not by first
+    // number: "89% (3-year average)" matches Ditto numerically, but the tool's
+    // scoring (before the parse fix) read it as 893 and auto-recommended Tata AIG
+    // over every other plan.
+    if (metrics.claimSettlement != null && String(pl.claimSettlementRatio ?? "").trim() !== `${metrics.claimSettlement}%`) {
       add("claimSettlementRatio", `${metrics.claimSettlement}%`, blank(pl.claimSettlementRatio) ? "fill" : "align", `${provider} (insurer)`);
     }
     if (metrics.network != null) {

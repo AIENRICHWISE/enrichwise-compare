@@ -661,15 +661,19 @@ function clientAges(){
    auto-recommended, and flagged to the advisor if picked. */
 function discontinuedNote(pl){ const v=pl&&pl.discontinued; const t=v==null?"":String(v).trim(); return t&&t!=="—"?t:""; }
 function discBadge(pl,extra){ const n=discontinuedNote(pl); return n?`<span class="discbadge inline-block text-[10px] font-bold px-2 py-0.5 rounded-full ${extra||''}" title="${esc(n)}">DISCONTINUED</span>`:""; }
+/* First number in a display value, commas ignored ("11,400+" -> 11400).
+   The scorer used to strip every non-digit instead, so an annotated CSR like
+   "89% (3-year average)" read as 893 and outranked every other plan. */
+function firstNumber(v){ const m=String(v==null?"":v).replace(/,/g,"").match(/\d+(\.\d+)?/); return m?parseFloat(m[0]):NaN; }
 function computeScores(){
   // simple transparent scoring
   const res={};
   state.selected.forEach(s=>{
     const pl=DB.insurers[s.insurerKey].plans[s.planKey], key=pk(s.insurerKey,s.planKey);
     let sc=0; const why=[];
-    const csr=parseFloat(String(pl.claimSettlementRatio).replace(/[^\d.]/g,''));
+    const csrRaw=firstNumber(pl.claimSettlementRatio), csr=csrRaw<=100?csrRaw:NaN;
     if(!isNaN(csr)){ sc+=csr; if(csr>=96) why.push("strong claim settlement ("+pl.claimSettlementRatio+")"); }
-    const net=parseInt(String(pl.networkHospitals).replace(/[^\d]/g,''))||0;
+    const net=firstNumber(pl.networkHospitals)||0;
     sc+= Math.min(net/1000,20); if(net>=13000) why.push("wide cashless network ("+pl.networkHospitals+")");
     if(pl.restore&&pl.restore.kind&&pl.restore.kind.indexOf('unlimited')===0){ sc+=8; why.push("unlimited restoration"); }
     if(pl.coPay&&pl.coPay.toLowerCase()==='no'){ sc+=4; why.push("no co-pay"); }

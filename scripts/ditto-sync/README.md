@@ -63,8 +63,10 @@ Submit skips any field whose last submitted value doesn't yet match the live cat
 
 ## Gotchas
 
-- **CSR must stay a bare percentage** (`"89%"`). The tool's scoring strips non-digits before
-  `parseFloat`, so `"89% (3-yr avg)"` scores as 893.
+- **CSR is kept as a bare percentage** (`"89%"`), compared by exact string. Until Sept 2026 the
+  tool's scorer stripped every non-digit, so `"89% (3-year average)"` scored as 893 and Tata AIG
+  was auto-recommended over everything. The scorer now reads the first number, but keeping values
+  bare means an older cached copy of the tool can't be tripped either.
 - **Provenance goes in `submittedBy` / `clientName`.** The admin UI does not render `note`.
 - **How the data is reached:** each plan page embeds Ditto's structured plan object in the
   Next.js RSC payload (`self.__next_f.push` chunks), with insurer metrics as

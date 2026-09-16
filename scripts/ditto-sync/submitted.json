@@ -1048,6 +1048,22 @@
    "newValue": "Discontinued (per joinditto.in, Sept 2026)",
    "batch": "ditto-2026-09-16",
    "submittedAt": "2026-09-16T09:06:45.860Z"
+  },
+  {
+   "insurerKey": "tata",
+   "planKey": "medicare",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16T09:20:46.093Z"
+  },
+  {
+   "insurerKey": "tata",
+   "planKey": "medicarepremier",
+   "field": "claimSettlementRatio",
+   "newValue": "89%",
+   "batch": "ditto-2026-09-16",
+   "submittedAt": "2026-09-16T09:20:46.093Z"
   }
  ]
 }
