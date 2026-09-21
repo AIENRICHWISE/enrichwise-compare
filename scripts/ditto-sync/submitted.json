@@ -1128,6 +1128,54 @@
    "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
    "batch": "ncb-no-bonus-2026-09-16",
    "submittedAt": "2026-09-16T13:06:27.488Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "assure",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":25,\"firstYears\":99,\"thenBonus\":25,\"capPct\":100}",
+   "batch": "ncb-audit-2026-09-21",
+   "submittedAt": "2026-09-21T07:12:24.600Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "assure",
+   "field": "ncbText",
+   "newValue": "25% bonus per claim-free year (upto 100%)",
+   "batch": "ncb-audit-2026-09-21",
+   "submittedAt": "2026-09-21T07:12:24.600Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspiregold",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":300}",
+   "batch": "ncb-audit-2026-09-21",
+   "submittedAt": "2026-09-21T07:12:24.600Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspiregold",
+   "field": "ncbText",
+   "newValue": "Booster+ — carry forward unused base cover; total cover up to 2x–4x base by entry age",
+   "batch": "ncb-audit-2026-09-21",
+   "submittedAt": "2026-09-21T07:12:24.600Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspirediamond",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":500}",
+   "batch": "ncb-audit-2026-09-21",
+   "submittedAt": "2026-09-21T07:12:24.600Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspire",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":900}",
+   "batch": "ncb-audit-2026-09-21",
+   "submittedAt": "2026-09-21T07:12:24.600Z"
   }
  ]
 }
