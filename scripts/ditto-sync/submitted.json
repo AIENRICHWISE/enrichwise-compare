@@ -1192,6 +1192,350 @@
    "newValue": "Cumulative Bonus Super — +100% of base per claim-free year, up to 500% (6× total)",
    "batch": "ncb-audit-2026-09-21",
    "submittedAt": "2026-09-21T09:36:36.987Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activassureddiamond",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":50,\"firstYears\":99,\"thenBonus\":50,\"capPct\":100}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activassureddiamond",
+   "field": "ncbBoosterText",
+   "newValue": "Super Credit — +50% of base per claim-free year, up to 100% (2× total)",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activeonenxt",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activeonenxt",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":500}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activeonenxt",
+   "field": "ncbBoosterText",
+   "newValue": "Super Credit — +100% of base per claim-free year, up to 500% (6× total)",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "care",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":10,\"firstYears\":99,\"thenBonus\":10,\"capPct\":50}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "care",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":50,\"firstYears\":99,\"thenBonus\":50,\"capPct\":100}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "care",
+   "field": "ncbBoosterText",
+   "newValue": "Cumulative Bonus Super — +50% of base per claim-free year, up to 100% (2× total)",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "careadvantage",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":10,\"firstYears\":99,\"thenBonus\":10,\"capPct\":50}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "careadvantage",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":50,\"firstYears\":99,\"thenBonus\":50,\"capPct\":100}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "careadvantage",
+   "field": "ncbBoosterText",
+   "newValue": "Cumulative Bonus Super — +50% of base per claim-free year, up to 100% (2× total)",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "supreme",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":50,\"firstYears\":99,\"thenBonus\":50,\"capPct\":100}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheild360",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":50,\"firstYears\":99,\"thenBonus\":50,\"capPct\":100}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheild360",
+   "field": "ncbBoosterText",
+   "newValue": "Power Booster — +50% of base per claim-free year, up to 100% (2× total)",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "primeprotect",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":50,\"firstYears\":99,\"thenBonus\":50,\"capPct\":200}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "primeprotect",
+   "field": "ncbBoosterText",
+   "newValue": "Cumulative Bonus Booster — +50% of base per claim-free year, up to 200% (3× total)",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "superstar",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":2000}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "superstar",
+   "field": "ncbBoosterText",
+   "newValue": "Super Star Bonus — +100% of base per claim-free year, no upper limit",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activhealth",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Super Credit\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activhealthplatinumessential",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Super Credit\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activonemax",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Super Credit\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activonevytl",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Super Credit\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activyuva",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Super Credit\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "carefreedom",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus Super\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "careheart",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus Super\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "easyfloaterstandard",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Plus Benefit\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "optimarestore",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Plus Benefit\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "hdfc",
+   "planKey": "optimasecure",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Plus Benefit\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "iffcotokio",
+   "planKey": "familyhealthprotector",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "enhancesupertopup",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus Booster\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealthindia50lacs",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus Booster\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "national",
+   "planKey": "seniorcitizen",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "floatermediclaim",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "newindia",
+   "planKey": "mediclaim",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspirediamond",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Booster+\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "aspiregold",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Booster+\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "healthcompanion",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Booster+\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "niva",
+   "planKey": "reassure",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Booster+\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "oriental",
+   "planKey": "happyfamilyfloatersilver",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "reliance",
+   "planKey": "healthinfinity",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Guaranteed Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "comprehensive",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "starcomprehensive",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "tata",
+   "planKey": "medicare",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
+   "batch": "bonus-addons-2026-09-21",
+   "submittedAt": "2026-09-21T09:55:44.811Z"
   }
  ]
 }
