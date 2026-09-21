@@ -22,6 +22,10 @@
  *   node scripts/catalog-fixes/ncb-audit-2026-09.js            # dry run
  *   node scripts/catalog-fixes/ncb-audit-2026-09.js --submit
  *
+ * Boosters: the June refresh dropped every per-plan ncbBooster except ICICI
+ * Elevate's, so a ticked bonus add-on changed nothing. Care Supreme's is restored
+ * here (needs Kavach e1d071ac, which accepts ncbBooster as structured).
+ *
  * Same ledger (scripts/ditto-sync/submitted.json) and structured-approval
  * requirement (Kavach 4746c9f) as no-bonus-ncb-model.js.
  */
@@ -59,13 +63,23 @@ const GROUPS = [
         why: "own text \"up to 10x base\" = niva::re30's text, modelled 100%/yr cap 900%; Ditto's 10x Aspire variants say total up to 11x" },
     ],
   },
+  {
+    submittedBy: "Catalog fix script — bonus booster add-on (sourced)",
+    clientName: "Data correction: Care Supreme's Cumulative Bonus Super add-on was selectable but had no model, so ticking it did nothing — restores 6x (Ditto: +100%/yr, max 500%) · not a client comparison",
+    fixes: [
+      { key: "care::supreme", field: "ncbBooster", value: model(100, 500),
+        why: "Ditto add-on \"Cumulative Bonus Super\": percentIncrease 100, maxPercentIncrease 500 → 6x total; applies only when the add-on is ticked" },
+      { key: "care::supreme", field: "ncbBoosterText", value: "Cumulative Bonus Super — +100% of base per claim-free year, up to 500% (6× total)",
+        why: "label shown in the comparison table when the add-on is offered or applied" },
+    ],
+  },
 ];
 
 const canonical = (v) => (v && typeof v === "object"
   ? JSON.stringify({ firstBonus: v.firstBonus, firstYears: v.firstYears, thenBonus: v.thenBonus, capPct: v.capPct })
   : String(v ?? ""));
 const encode = (v) => (typeof v === "object" ? JSON.stringify(v) : v);
-const LABELS = { ncbModel: "No-claim bonus model", ncbText: "No-claim bonus" };
+const LABELS = { ncbModel: "No-claim bonus model", ncbText: "No-claim bonus", ncbBooster: "Bonus booster model (add-on)", ncbBoosterText: "Bonus booster (add-on)" };
 
 (async () => {
   const r = await fetch(`${KAVACH_API}/catalog/?vertical=health`, { headers: { accept: "application/json" } });

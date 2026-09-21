@@ -1176,6 +1176,22 @@
    "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":900}",
    "batch": "ncb-audit-2026-09-21",
    "submittedAt": "2026-09-21T07:12:24.600Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "supreme",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":500}",
+   "batch": "ncb-audit-2026-09-21",
+   "submittedAt": "2026-09-21T09:36:36.987Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "supreme",
+   "field": "ncbBoosterText",
+   "newValue": "Cumulative Bonus Super — +100% of base per claim-free year, up to 500% (6× total)",
+   "batch": "ncb-audit-2026-09-21",
+   "submittedAt": "2026-09-21T09:36:36.987Z"
   }
  ]
 }
