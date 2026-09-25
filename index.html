@@ -101,6 +101,7 @@
 
 <footer class="no-print max-w-6xl mx-auto px-5 py-8 text-center text-xs" style="color:var(--ew-slate)">
   Enrichwise Insurance Broking Services Pvt Ltd · This tool assists advisory only. All figures must be verified against the latest policy wordings & IRDAI-approved documents before sharing with a client.
+  <span id="buildStamp" class="opacity-60"></span>
 </footer>
 
 <!-- ===================== DATA MANAGER MODAL ===================== -->
@@ -239,20 +240,38 @@ function planSIOptions(ik,plk){
    3) RENDER ROUTER
    ============================================================ */
 const app = ()=>document.getElementById("app");
+// Build stamp: shown in the footer and in the error card, so a blank page can be
+// told apart from a tab still running yesterday's code.
+const BUILD = "2026-09-25b";
 function render(){
   renderStepper();
   const el = app();
   el.innerHTML = "";
   const pane = document.createElement("div");
   pane.className = "step-pane";
-  if(state.step===1) pane.innerHTML = viewStep1();
-  if(state.step===2) pane.innerHTML = viewStep2();
-  if(state.step===3) pane.innerHTML = viewStep3();
-  if(state.step===4) pane.innerHTML = viewStep4();
+  try{
+    if(state.step===1) pane.innerHTML = viewStep1();
+    if(state.step===2) pane.innerHTML = viewStep2();
+    if(state.step===3) pane.innerHTML = viewStep3();
+    if(state.step===4) pane.innerHTML = viewStep4();
+  }catch(e){
+    // A blank step tells the advisor nothing, so say what broke and where.
+    const plans=state.selected.map(s=>s.insurerKey+"::"+s.planKey).join(", ")||"none";
+    pane.innerHTML = `<div class="card p-5" style="border-color:var(--ew-notrec)">
+      <div class="font-semibold" style="color:var(--ew-notrec)">This step couldn't be drawn.</div>
+      <div class="text-sm mt-2">Reload the page first (Ctrl+F5) — you may be on an older version of the tool.
+      If it happens again, send this to the tech team:</div>
+      <pre class="text-[11px] mt-2 p-2 overflow-x-auto" style="background:var(--ew-mint-100);white-space:pre-wrap">step ${state.step} · build ${BUILD}
+plans: ${esc(plans)}
+${esc(String((e&&e.stack)||e))}</pre></div>`;
+    try{ console.error("[insurance-compare] step "+state.step+" failed", e); }catch(_){}
+  }
   el.appendChild(pane);
-  if(state.step===2) bindStep2();
-  if(state.step===3) bindStep3();
-  if(state.step===4) bindStep4();
+  try{
+    if(state.step===2) bindStep2();
+    if(state.step===3) bindStep3();
+    if(state.step===4) bindStep4();
+  }catch(e){ try{ console.error("[insurance-compare] bind failed", e); }catch(_){} }
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function renderStepper(){
@@ -1264,6 +1283,7 @@ function resetAll(){
 }
 
 render();
+try{ document.getElementById("buildStamp").textContent = " · build "+BUILD; }catch(e){}
 loadServerCatalog();     // pull master catalog from Kavach backend (falls back to baked-in SEED_DB off-network)
 loadServerOverrides();   // legacy admin-approved overrides (no-op once catalog is authoritative)
 </script>
