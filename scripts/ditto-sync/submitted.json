@@ -1640,6 +1640,38 @@
    "newValue": "[\"11x coverage in 11 years\",\"2x coverage from day 1\",\"Travel On/OFF — if an insured member is travelling abroad, the policy can be switched off for 15–90 days (15% travel credit at renewal)\"]",
    "batch": "list-shape-2026-09-25",
    "submittedAt": "2026-09-25T11:17:36.421Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "enhancesupertopup",
+   "field": "addOns.consumables",
+   "newValue": "{\"available\":true,\"type\":\"inbuilt\",\"alias\":\"Non-medical expenses cover\",\"note\":\"Annexure III items, up to ₹2 L, once in 3 policy years\"}",
+   "batch": "mc-consumables-2026-09-25",
+   "submittedAt": "2026-09-25T12:04:26.839Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "enhancesupertopup",
+   "field": "addOns.healthCheckup",
+   "newValue": "{\"available\":false}",
+   "batch": "mc-consumables-2026-09-25",
+   "submittedAt": "2026-09-25T12:04:26.839Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealth",
+   "field": "addOns.consumables",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Protector Benefit (Health 360 Shield)\",\"note\":\"68 non-medical items as per List I, up to ₹1 L\"}",
+   "batch": "mc-consumables-2026-09-25",
+   "submittedAt": "2026-09-25T12:04:26.839Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealthindia50lacs",
+   "field": "addOns.consumables",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Protector Benefit (Health 360 Shield)\",\"note\":\"68 non-medical items as per List I, up to ₹1 L\"}",
+   "batch": "mc-consumables-2026-09-25",
+   "submittedAt": "2026-09-25T12:04:26.839Z"
   }
  ]
 }
