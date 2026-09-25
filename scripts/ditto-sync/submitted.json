@@ -1672,6 +1672,38 @@
    "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Protector Benefit (Health 360 Shield)\",\"note\":\"68 non-medical items as per List I, up to ₹1 L\"}",
    "batch": "mc-consumables-2026-09-25",
    "submittedAt": "2026-09-25T12:04:26.839Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room Rent Modification\",\"note\":\"Lifts the room from single private A/C to any room category\"}",
+   "batch": "mc-room-2026-09-25",
+   "submittedAt": "2026-09-25T12:39:06.149Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvaparam",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room Rent Modification\",\"note\":\"Lifts the room from single private A/C to any room category\"}",
+   "batch": "mc-room-2026-09-25",
+   "submittedAt": "2026-09-25T12:39:06.149Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealth",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room Modifier\",\"note\":\"Lifts the room from single private A/C to any room category\"}",
+   "batch": "mc-room-2026-09-25",
+   "submittedAt": "2026-09-25T12:39:06.149Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "lifetimehealth",
+   "field": "roomRent",
+   "newValue": "Single private A/C room (any room category available with the Room Modifier add-on)",
+   "batch": "mc-room-2026-09-25",
+   "submittedAt": "2026-09-25T12:39:06.149Z"
   }
  ]
 }
