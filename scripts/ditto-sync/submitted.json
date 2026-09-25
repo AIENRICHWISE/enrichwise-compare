@@ -1536,6 +1536,110 @@
    "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus\"}",
    "batch": "bonus-addons-2026-09-21",
    "submittedAt": "2026-09-21T09:55:44.811Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "addOns.consumables",
+   "newValue": "{\"available\":true,\"alias\":\"Non-Medical Items & Durable Medical Equipment\"}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "addOns.healthCheckup",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Health Check Up\",\"frequency\":\"Annual, cashless at network providers\",\"forWhom\":\"Insured adults (not dependent children on a floater)\"}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":0,\"firstYears\":0,\"thenBonus\":0,\"capPct\":0}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "ncbBooster",
+   "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":1000}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "ncbBoosterText",
+   "newValue": "Gullak — +100% of base every year, even after a claim, up to 1000% (11× total)",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "ncbText",
+   "newValue": "Gullak (optional add-on): 100% increase per year irrespective of claims, max 1000%",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":true,\"alias\":\"Gullak (Guaranteed Cumulative Bonus)\"}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvahuttam",
+   "field": "addOns.instantCover",
+   "newValue": "{\"available\":true,\"alias\":\"Sarathi\"}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvaparam",
+   "field": "ncbModel",
+   "newValue": "{\"firstBonus\":100,\"firstYears\":99,\"thenBonus\":100,\"capPct\":1000}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvaparam",
+   "field": "ncbText",
+   "newValue": "Gullak (in-built): 100% increase per year irrespective of claims, max 1000%; plus up to 7.5% renewal discount if claim-free",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvaparam",
+   "field": "addOns.bonus",
+   "newValue": "{\"available\":false,\"alias\":\"Cumulative Bonus Booster\"}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "manipalcigna",
+   "planKey": "sarvaparam",
+   "field": "addOns.maternity",
+   "newValue": "{\"available\":false,\"alias\":\"Maternity\"}",
+   "batch": "sarvah-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:35.653Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activyuva",
+   "field": "uniqueFeatures",
+   "newValue": "[\"11x coverage in 11 years\",\"2x coverage from day 1\",\"Travel On/OFF — if an insured member is travelling abroad, the policy can be switched off for 15–90 days (15% travel credit at renewal)\"]",
+   "batch": "list-shape-2026-09-25",
+   "submittedAt": "2026-09-25T11:17:36.421Z"
   }
  ]
 }
