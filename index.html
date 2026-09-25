@@ -168,10 +168,37 @@ function safeGet(k){ try{return localStorage.getItem(k);}catch(e){return null;} 
 function safeSet(k,v){ try{localStorage.setItem(k,v);return true;}catch(e){return false;} }
 
 let DB;
+// A field that should be a list can arrive as a single string: the step-4 inline
+// editor submits "Unique feature" as text, and an approved edit is stored that
+// way. One such plan used to blank the whole comparison, so every list field is
+// coerced once here, wherever the catalog came from.
+const LIST_FIELDS = ["uniqueFeatures","sumInsured"];
+function asList(v){
+  if(Array.isArray(v)) return v.filter(x=>x!=null).map(String);
+  if(v==null||v==="") return [];
+  return [String(v)];
+}
+function normalizeDB(db){
+  const insurers=(db&&db.insurers)||{};
+  Object.keys(insurers).forEach(ik=>{
+    const plans=(insurers[ik]&&insurers[ik].plans)||{};
+    Object.keys(plans).forEach(plk=>{
+      const pl=plans[plk]; if(!pl||typeof pl!=="object") return;
+      LIST_FIELDS.forEach(f=>{ if(pl[f]!==undefined) pl[f]=asList(pl[f]); });
+      if(typeof pl.instantCover==="string"){
+        const t=pl.instantCover.trim();
+        pl.instantCover={available:!!t&&!/^(no|none|not available|not offered|—|-)\.?$/i.test(t),name:t,conditions:[]};
+      }
+      if(pl.instantCover&&typeof pl.instantCover==="object") pl.instantCover.conditions=asList(pl.instantCover.conditions);
+      if(!pl.addOns||typeof pl.addOns!=="object"||Array.isArray(pl.addOns)) pl.addOns={};
+    });
+  });
+  return db;
+}
 function loadDB(){
   const saved = safeGet("ew_db");
-  if(saved){ try{ DB = JSON.parse(saved); return; }catch(e){} }
-  DB = JSON.parse(JSON.stringify(SEED_DB));
+  if(saved){ try{ DB = normalizeDB(JSON.parse(saved)); return; }catch(e){} }
+  DB = normalizeDB(JSON.parse(JSON.stringify(SEED_DB)));
 }
 loadDB();
 
@@ -916,7 +943,7 @@ function loadServerCatalog(){
       .then(r=> r&&r.ok ? r.json() : null)
       .then(d=>{
         if(d && d.insurers && (d.planCount|0) > 0){
-          DB = { meta:d.meta||{}, addOnCatalog:d.addOnCatalog||{}, insurers:d.insurers };
+          DB = normalizeDB({ meta:d.meta||{}, addOnCatalog:d.addOnCatalog||{}, insurers:d.insurers });
           safeSet("ew_db", JSON.stringify(DB));
           render();
         }
@@ -1157,7 +1184,7 @@ function viewStep4(){
           <thead><tr><th class="p-3 text-left text-xs uppercase tracking-wide" style="color:var(--ew-slate);background:var(--ew-mint-100);min-width:170px">Parameter</th>${th}</tr></thead>
           <tbody>
             ${row("Sum insured (base)",col=>`<b>${esc(col.si||'—')}</b>`)}
-            ${row("Unique feature",col=>ed(col.key,'uniqueFeatures',(col.pl.uniqueFeatures||[]).flatMap(f=>splitBullets(f)).map(f=>`<div class="mb-1 pl-3" style="text-indent:-0.75rem">• ${esc(f)}</div>`).join("")))}
+            ${row("Unique feature",col=>ed(col.key,'uniqueFeatures',asList(col.pl.uniqueFeatures).flatMap(f=>splitBullets(f)).map(f=>`<div class="mb-1 pl-3" style="text-indent:-0.75rem">• ${esc(f)}</div>`).join("")))}
             ${row("Claim settlement ratio",col=>ed(col.key,'claimSettlementRatio',`<b>${esc(col.pl.claimSettlementRatio)}</b>`))}
             ${c.history.length?row("Instant coverage (lifestyle)",col=>ed(col.key,'instantCover',instantCell(col))):''}
             ${row("Room rent",col=>ed(col.key,'roomRent',esc(col.pl.roomRent)))}
