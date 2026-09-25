@@ -567,8 +567,11 @@ function viewStep3(){
       const planAddon=(pl.addOns&&pl.addOns[cat])||{available:false};
       const sel=st.addOns[cat]||{on:false,alias:"",why:""};
       const alias = sel.alias || planAddon.alias || "";   // plan-specific only; no misleading generic fallback
+      // Only say "add-on" where the plan's wording was actually checked. The June
+      // import marked 40 of 69 plans "inbuilt" by default, which is not true of
+      // most of them, so an unchecked plan says nothing either way.
       const checkupNote = cat==='healthCheckup' && planAddon.available
-        ? ` · <span style="color:var(--ew-green-700)">${planAddon.type==='inbuilt'?'IN-BUILT':'ADD-ON'} · ${planAddon.frequency||''} · ${planAddon.forWhom||''}</span>` : '';
+        ? ` · <span style="color:var(--ew-green-700)">${planAddon.type==='addon'?'ADD-ON · ':''}${[planAddon.frequency,planAddon.forWhom].filter(Boolean).join(' · ')||'check the policy wording'}</span>` : '';
       if(!planAddon.available && cat!=='healthCheckup'){
         return `<div class="flex items-center gap-2 py-1.5 opacity-50 text-sm"><span class="w-40">${cdef.label}</span><span class="pill-no">Not offered</span></div>`;
       }
@@ -1054,9 +1057,10 @@ function viewStep4(){
     const a=col.pl.addOns&&col.pl.addOns.healthCheckup;
     if(!a||!a.available) return "—";
     const parts=[
-      a.type==='inbuilt'?'<span class="pill-yes">In-built</span>':'<span style="color:var(--ew-gold);font-weight:600">Add-on</span>',
+      a.type==='addon'?'<span style="color:var(--ew-gold);font-weight:600">Add-on</span>':'',
       esc(a.frequency||''), esc(a.forWhom||'')
     ].filter(x=>x&&x.trim());
+    if(!parts.length) return '<span class="pill-yes">Offered</span>';
     if(a.amount) parts.push('<b>'+esc(a.amount)+'</b>');
     return parts.join(' · ');
   };
@@ -1194,7 +1198,7 @@ function viewStep4(){
             ${row("Restore benefit",col=>ed(col.key,'restore',restoreText(col.pl.restore)))}
             ${row("Day care",col=>ed(col.key,'dayCare',yn(col.pl.dayCare)))}
             ${row("AYUSH",col=>ed(col.key,'ayush',yn(col.pl.ayush)))}
-            ${row("Annual health check-up",col=>ed(col.key,'healthCheckup',checkupCell(col)),"in-built vs add-on · frequency · for whom")}
+            ${row("Annual health check-up",col=>ed(col.key,'healthCheckup',checkupCell(col)),"frequency · for whom · confirm in-built vs add-on in the policy wording")}
             ${row("Selected add-ons",addonCell,"name + why selected")}
             ${row("No-claim bonus",bonusCell)}
             ${row("Premium (annual)",premiumCell)}
