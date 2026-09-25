@@ -591,8 +591,15 @@ function viewStep3(){
       // most of them, so an unchecked plan says nothing either way.
       const checkupNote = cat==='healthCheckup' && planAddon.available
         ? ` · <span style="color:var(--ew-green-700)">${planAddon.type==='addon'?'ADD-ON · ':''}${[planAddon.frequency,planAddon.forWhom].filter(Boolean).join(' · ')||'check the policy wording'}</span>` : '';
-      if(!planAddon.available && cat!=='healthCheckup'){
+      if(!planAddon.available){
         return `<div class="flex items-center gap-2 py-1.5 opacity-50 text-sm"><span class="w-40">${cdef.label}</span><span class="pill-no">Not offered</span></div>`;
+      }
+      // Built into the plan: not a choice the advisor makes, so no checkbox.
+      // The check-up keeps its checkbox — its detail line carries the wording.
+      if(planAddon.type==='inbuilt' && cat!=='healthCheckup'){
+        return `<div class="flex items-center gap-2 py-1.5 text-sm border-t" style="border-color:var(--ew-line)">
+          <span class="w-40">${cdef.label}</span><span class="pill-yes">In-built</span>
+          <span class="text-xs" style="color:var(--ew-slate)">${[alias&&('insurer name: <b>'+esc(alias)+'</b>'),esc(planAddon.note||'')].filter(Boolean).join(' · ')}</span></div>`;
       }
       return `<div class="py-2 border-t" style="border-color:var(--ew-line)">
         <label class="flex items-center gap-2 cursor-pointer">
@@ -1062,9 +1069,14 @@ function viewStep4(){
   // Add-on row: shows only the add-ons SELECTED for that plan with reasoning
   const addonCell=col=>{
     const st=state.perPlan[col.key]; if(!st) return "—";
+    // Benefits already in the plan are worth showing the client, marked as such.
+    const builtIn=cats.filter(cat=>cat!=='healthCheckup'&&col.pl.addOns[cat]&&col.pl.addOns[cat].available&&col.pl.addOns[cat].type==='inbuilt')
+      .map(cat=>{const pa=col.pl.addOns[cat];
+        return `<div class="mb-1.5"><span class="font-medium" style="color:var(--ew-green-800)">${esc(pa.alias||DB.addOnCatalog[cat].label)}</span>
+          <span class="pill-yes">In-built</span>${pa.note?`<div class="text-[11px]" style="color:var(--ew-slate)">${esc(pa.note)}</div>`:''}</div>`;}).join("");
     const chosen=cats.filter(cat=>st.addOns[cat]&&st.addOns[cat].on);
-    if(!chosen.length) return `<span style="color:var(--ew-slate)">None selected</span>`;
-    return chosen.map(cat=>{
+    if(!chosen.length) return builtIn||`<span style="color:var(--ew-slate)">None selected</span>`;
+    return builtIn+chosen.map(cat=>{
       const a=st.addOns[cat], cdef=DB.addOnCatalog[cat];
       const alias=a.alias||(col.pl.addOns[cat]&&col.pl.addOns[cat].alias)||cdef.label;
       return `<div class="mb-1.5"><span class="font-medium" style="color:var(--ew-green-800)">${esc(alias)}</span>
