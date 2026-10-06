@@ -245,7 +245,7 @@ function planSIOptions(ik,plk){
 const app = ()=>document.getElementById("app");
 // Build stamp: shown in the footer and in the error card, so a blank page can be
 // told apart from a tab still running yesterday's code.
-const BUILD = "2026-09-25b";
+const BUILD = "2026-10-06";
 function render(){
   renderStepper();
   const el = app();
@@ -909,7 +909,9 @@ function effectiveNcb(col){
 // NOT the master DB).
 function ed(key,field,defaultHtml){
   const local=state.planEdits[key]&&state.planEdits[key][field];
-  const server=state.serverOverrides[key]&&state.serverOverrides[key][field];
+  // state.serverOverrides is kept only as the "value before this edit" for a
+  // proposal; it is no longer displayed. See loadServerOverrides().
+  const server=null;
   const hasLocal=(local!=null&&local!=='');
   const hasServer=(server!=null&&server!=='');
   const val=hasLocal?local:(hasServer?server:null);
@@ -962,11 +964,18 @@ const FIELD_LABELS = {
   networkHospitals:"Network hospitals", coPay:"Co-pay", restore:"Restore benefit",
   dayCare:"Day care", ayush:"AYUSH", healthCheckup:"Annual health check-up", ncbText:"No-claim bonus"
 };
+// Legacy layer, retired as a display source. /overrides/ replays every approved
+// proposal's raw newValue, and ed() used to prefer it over the catalog. Approval
+// now writes the value into the catalog itself, so the override was at best a
+// duplicate and at worst stale — one plan's chart showed a bonus line that had
+// been corrected months earlier, and structured values printed as raw JSON. The
+// catalog is the single source of truth for display; the fetched values are
+// still used as the "before" value when an advisor proposes an edit.
 function loadServerOverrides(){
   try{
     fetch(KAVACH_API+"/overrides/",{headers:{Accept:"application/json"}})
       .then(r=> r&&r.ok ? r.json() : null)
-      .then(d=>{ if(d&&d.overrides){ state.serverOverrides=d.overrides; if(state.step===4) render(); } })
+      .then(d=>{ if(d&&d.overrides) state.serverOverrides=d.overrides; })
       .catch(()=>{});
   }catch(e){}
 }
