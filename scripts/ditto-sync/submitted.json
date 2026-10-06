@@ -1704,6 +1704,134 @@
    "newValue": "Single private A/C room (any room category available with the Room Modifier add-on)",
    "batch": "mc-room-2026-09-25",
    "submittedAt": "2026-09-25T12:39:06.149Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activassureddiamond",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room rent modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activhealth",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room rent modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activhealthplatinumessential",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room Modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activonemax",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room rent modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activonevytl",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room rent modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activyuva",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room rent modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activeonenxt",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room Rent Modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "adityabirla",
+   "planKey": "activeonenxt",
+   "field": "addOns.healthCheckup",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Annual health check-up\",\"frequency\":\"Paid add-on only (Annual Health Checkup)\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "care",
+   "planKey": "careadvantage",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room Modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "elevate",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room rent modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "elevate",
+   "field": "addOns.healthCheckup",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Annual health check-up\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "icici",
+   "planKey": "healthsheild360",
+   "field": "addOns.healthCheckup",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Annual health check-up\",\"frequency\":\"Not in base plan; available as add-on\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "iffcotokio",
+   "planKey": "familyhealthprotector",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room Rent Waiver\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "reliance",
+   "planKey": "healthinfinity",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room rent modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "superstar",
+   "field": "addOns.roomUpgrade",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Room rent modifier\",\"note\":\"Lifts the room category the base plan allows\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
+  },
+  {
+   "insurerKey": "star",
+   "planKey": "superstar",
+   "field": "addOns.healthCheckup",
+   "newValue": "{\"available\":true,\"type\":\"addon\",\"alias\":\"Annual health check-up\"}",
+   "batch": "ditto-addons-2026-10-06",
+   "submittedAt": "2026-10-06T05:03:10.172Z"
   }
  ]
 }
